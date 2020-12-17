@@ -45,13 +45,12 @@ export const Profile = styled.div`
         #right {
             margin-left: 10px;
             width: 100%;
-            button {
-                background: transparent;
+
+            .button {
                 height: 27px;
                 color: white;
                 display: flex;
                 align-items: center;
-                border: 1px solid transparent;
                 padding-left: 5px;
 
                 #username {
@@ -70,25 +69,15 @@ export const Profile = styled.div`
                     color: #b9dde7;
                 }
             }
-
-            button:hover {
-                border: 1px solid whitesmoke;
-                border-radius: 5px;
-            }
-
             #sub-nick {
-                padding: 5px;
-                margin-bottom: 10px;
-                color: #b9dde7;
-                border: none;
-                background: transparent;
                 width: 90%;
-                font-size: 7pt;
-                border: 1px solid transparent;
-
-                &:hover {
-                    border: 1px solid whitesmoke;
-                    border-radius: 5px;
+                input {
+                    padding: 5px 0px 5px 0px;
+                    color: #b9dde7;
+                    background: transparent;
+                    width: 100%;
+                    font-size: 7pt;
+                    border: 1px transparent;
                 }
             }
         }
@@ -107,13 +96,7 @@ export const Navbar = styled.div`
 
     #left {
         height: 100%;
-        button {
-            border: none;
-            background: transparent;
-            padding: 5px;
-
-            height: 100%;
-
+        .button {
             img {
                 height: 100%;
             }
@@ -122,13 +105,7 @@ export const Navbar = styled.div`
 
     #right {
         height: 100%;
-        button {
-            border: none;
-            background: transparent;
-            padding: 5px;
-
-            height: 100%;
-
+        .button {
             img {
                 height: 100%;
             }

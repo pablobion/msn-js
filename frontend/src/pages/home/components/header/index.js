@@ -15,6 +15,10 @@ import navbarColors from "./assets/navbar/navbar-colors.png";
 import navbarMail from "./assets/navbar/navbar-mail.png";
 import navbarContacts from "./assets/navbar/navbar-contacts.png";
 
+//components
+
+import AeroButton from "../../../components/aeroButton/index";
+
 const header = () => {
     return (
         <>
@@ -31,32 +35,33 @@ const header = () => {
                         </div>
                     </div>
                     <div id="right">
-                        <button>
+                        <AeroButton className="button">
                             <p id="username">Pablo Bion</p>
                             <small>(Ocupado)</small>
                             <img src={SmallArrowWhite} alt="" />
-                        </button>
-                        <input id="sub-nick"></input>
+                        </AeroButton>
+                        <AeroButton id="sub-nick">
+                            <input></input>
+                        </AeroButton>
                     </div>
                 </div>
             </Profile>
             <Navbar>
                 <div id="left">
-                    <button>
+                    <AeroButton className="button">
                         <img src={navbarMail} alt="" />
-                    </button>
-                    <button>
+                    </AeroButton>
+                    <AeroButton className="button">
                         <img src={navbarContacts} alt="" />
-                    </button>
-                    <button>
+                    </AeroButton>
+                    <AeroButton className="button">
                         <img src={navbarNews} alt="" />
-                    </button>
+                    </AeroButton>
                 </div>
                 <div id="right">
-                    <button>
+                    <AeroButton className="button">
                         <img src={navbarColors} alt="" />
-                        <img src={SmallArrowWhite} alt="" id="arrow" />
-                    </button>
+                    </AeroButton>
                 </div>
             </Navbar>
         </>
