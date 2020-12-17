@@ -5,6 +5,7 @@ import { Container } from "./styles";
 //components
 import Header from "./components/header/index";
 import SideBar from "./components/sidebar";
+import Contacts from "./components/contacts";
 
 const home = () => {
     return (
@@ -12,8 +13,10 @@ const home = () => {
             <div>
                 <Header />
             </div>
-
-            <SideBar />
+            <div id="contacts-div">
+                <SideBar />
+                <Contacts />
+            </div>
         </Container>
     );
 };
