@@ -132,6 +132,10 @@ export const Navbar = styled.div`
             img {
                 height: 100%;
             }
+
+            #arrow {
+                width: 10px;
+            }
         }
     }
 `;

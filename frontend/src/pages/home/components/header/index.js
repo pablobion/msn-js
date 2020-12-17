@@ -55,6 +55,7 @@ const header = () => {
                 <div id="right">
                     <button>
                         <img src={navbarColors} alt="" />
+                        <img src={SmallArrowWhite} alt="" id="arrow" />
                     </button>
                 </div>
             </Navbar>
