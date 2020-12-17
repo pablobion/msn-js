@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Profile = styled.div`
     padding: 10px;
     height: 100px;
     background-image: url("https://github.com/pablobion/msn-js/blob/master/frontend/src/pages/home/components/header/assets/background-large.png?raw=true");
@@ -52,9 +52,9 @@ export const Container = styled.div`
                 display: flex;
                 align-items: center;
                 border: 1px solid transparent;
-                padding: 5px;
+                padding-left: 5px;
 
-                p {
+                #username {
                     font-weight: 550;
                     font-size: 14px;
                 }
@@ -77,12 +77,60 @@ export const Container = styled.div`
             }
 
             #sub-nick {
-                padding-left: 5px;
+                padding: 5px;
+                margin-bottom: 10px;
                 color: #b9dde7;
                 border: none;
                 background: transparent;
                 width: 90%;
-                font-size: 9pt;
+                font-size: 7pt;
+                border: 1px solid transparent;
+
+                &:hover {
+                    border: 1px solid whitesmoke;
+                    border-radius: 5px;
+                }
+            }
+        }
+    }
+`;
+
+export const Navbar = styled.div`
+    background-image: url("https://raw.githubusercontent.com/AndroidWG/WLMOnline/master/assets/background/msgres_navbar.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 30px;
+    padding-left: 10px;
+    padding-right: 5px;
+    display: flex;
+    justify-content: space-between;
+
+    #left {
+        height: 100%;
+        button {
+            border: none;
+            background: transparent;
+            padding: 5px;
+
+            height: 100%;
+
+            img {
+                height: 100%;
+            }
+        }
+    }
+
+    #right {
+        height: 100%;
+        button {
+            border: none;
+            background: transparent;
+            padding: 5px;
+
+            height: 100%;
+
+            img {
+                height: 100%;
             }
         }
     }

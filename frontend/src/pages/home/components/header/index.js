@@ -1,18 +1,24 @@
 import React from "react";
 
-import { Container } from "./styles";
+import { Profile, Navbar } from "./styles";
 
-//images
+//images profile
 import Logo from "./assets/live-logo.png";
 import TitleText from "./assets/title-text.png";
 import BorderPhoto from "./assets/border-photo.png";
 import SmallArrowWhite from "./assets/small-arrow.svg";
 import Avatar from "./assets/avatar2.jpg";
 
+//images navbar
+import navbarNews from "./assets/navbar/navbar-news.png";
+import navbarColors from "./assets/navbar/navbar-colors.png";
+import navbarMail from "./assets/navbar/navbar-mail.png";
+import navbarContacts from "./assets/navbar/navbar-contacts.png";
+
 const header = () => {
     return (
         <>
-            <Container>
+            <Profile>
                 <div id="nav">
                     <img src={Logo} alt="" />
                     <img src={TitleText} alt="" />
@@ -26,14 +32,32 @@ const header = () => {
                     </div>
                     <div id="right">
                         <button>
-                            <p>Pablo Bion</p>
+                            <p id="username">Pablo Bion</p>
                             <small>(Ocupado)</small>
                             <img src={SmallArrowWhite} alt="" />
                         </button>
                         <input id="sub-nick"></input>
                     </div>
                 </div>
-            </Container>
+            </Profile>
+            <Navbar>
+                <div id="left">
+                    <button>
+                        <img src={navbarMail} alt="" />
+                    </button>
+                    <button>
+                        <img src={navbarContacts} alt="" />
+                    </button>
+                    <button>
+                        <img src={navbarNews} alt="" />
+                    </button>
+                </div>
+                <div id="right">
+                    <button>
+                        <img src={navbarColors} alt="" />
+                    </button>
+                </div>
+            </Navbar>
         </>
     );
 };
