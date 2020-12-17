@@ -1,8 +1,15 @@
+import React, { useState } from "react";
+import { Container } from "./styles";
+import GlobalStyle from "./styles/global";
+//pages
+import Home from "./pages/home/index";
+
 function App() {
     return (
-        <div className="App">
-            <header className="App-header"></header>
-        </div>
+        <Container>
+            <Home />
+            <GlobalStyle />
+        </Container>
     );
 }
 
