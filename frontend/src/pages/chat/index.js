@@ -1,13 +1,16 @@
-import React from 'react';
+import React from "react";
 
-import { Container } from './styles';
+import { Container } from "./styles";
+
+//componenets
+import Header from "./components/header/index";
 
 const chat = () => {
-  return (
-    <Container>
-      <h1>chat</h1>
-    </Container>
-  );
+    return (
+        <Container>
+            <Header />
+        </Container>
+    );
 };
 
 export default chat;

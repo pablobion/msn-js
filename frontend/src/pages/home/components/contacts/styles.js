@@ -34,8 +34,12 @@ export const Container = styled.div`
     #contacts-list {
         padding: 5px;
 
-        details summary::-webkit-details-marker {
+        .contacts-group-list summary::-webkit-details-marker {
             display: none;
+        }
+        summary {
+            font-size: 12px;
+            font-weight: bold;
         }
 
         summary:after {
@@ -46,12 +50,16 @@ export const Container = styled.div`
             height: 20px;
             width: 15px;
             content: " ";
-            margin-top: 5px;
+            margin-top: 2px;
         }
 
-        details[open] summary:after {
+        .contacts-group-list[open] summary:after {
             background: url(${arrowDown});
             background-repeat: no-repeat;
+        }
+
+        #contacts-group-list-contacts {
+            margin-left: 20px;
         }
     }
 `;

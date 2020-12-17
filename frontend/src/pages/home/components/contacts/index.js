@@ -11,6 +11,7 @@ import sortContacts from "./assets/sort-contacts.png";
 
 //components
 import AeroButton from "../../../components/aeroButton/index";
+import Contact from "./components/contact/index";
 
 const contacts = () => {
     return (
@@ -28,9 +29,13 @@ const contacts = () => {
                 </AeroButton>
             </div>
             <div id="contacts-list">
-                <details>
-                    <summary>Open me!</summary>
-                    <h1>dds</h1>
+                <details className="contacts-group-list">
+                    <summary>Online (1)</summary>
+                    <div id="contacts-group-list-contacts">
+                        <Contact onClick={() => alert("oi")} status="busy"></Contact>
+                        <Contact onClick={() => alert("oi")} status="online"></Contact>
+                        <Contact onClick={() => alert("oi")} status="away"></Contact>
+                    </div>
                 </details>
             </div>
         </Container>
