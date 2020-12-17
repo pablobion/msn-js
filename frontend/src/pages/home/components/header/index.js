@@ -6,22 +6,32 @@ import { Container } from "./styles";
 import Logo from "./assets/live-logo.png";
 import TitleText from "./assets/title-text.png";
 import BorderPhoto from "./assets/border-photo.png";
-import Background from "./assets/background-large.png";
+import SmallArrowWhite from "./assets/small-arrow.svg";
+import Avatar from "./assets/avatar2.jpg";
 
 const header = () => {
     return (
         <>
             <Container>
-                {/* <img src={Background} alt="" id="background" /> */}
                 <div id="nav">
                     <img src={Logo} alt="" />
                     <img src={TitleText} alt="" />
                 </div>
                 <div id="profile">
                     <div id="left">
-                        <img src={BorderPhoto} alt="" />
+                        <img src={BorderPhoto} alt="" id="border-avatar" />
+                        <div id="avatar-div">
+                            <img src={Avatar} alt="" id="avatar" />
+                        </div>
                     </div>
-                    <div id="right"></div>
+                    <div id="right">
+                        <button>
+                            <p>Pablo Bion</p>
+                            <small>(Ocupado)</small>
+                            <img src={SmallArrowWhite} alt="" />
+                        </button>
+                        <input id="sub-nick"></input>
+                    </div>
                 </div>
             </Container>
         </>

@@ -4,5 +4,5 @@ export const Container = styled.div`
     border: 1px solid lightgray;
 
     height: 90vh;
-    width: 60vw;
+    width: 40vw;
 `;
