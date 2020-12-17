@@ -19,6 +19,7 @@ export const Profile = styled.div`
         display: flex;
         align-items: center;
         height: 80px;
+
         #left {
             display: flex;
             align-items: center;
@@ -71,13 +72,20 @@ export const Profile = styled.div`
             }
             #sub-nick {
                 width: 90%;
+                padding: 0px;
+                margin-bottom: 10px;
                 input {
-                    padding: 5px 0px 5px 0px;
                     color: #b9dde7;
                     background: transparent;
                     width: 100%;
                     font-size: 7pt;
                     border: 1px transparent;
+                    height: 100%;
+                    padding: 5px;
+                    &:focus {
+                        background: white;
+                        color: black;
+                    }
                 }
             }
         }
@@ -93,6 +101,8 @@ export const Navbar = styled.div`
     padding-right: 5px;
     display: flex;
     justify-content: space-between;
+    box-shadow: 0px 1px 2px #00000077;
+    margin-bottom: 3px;
 
     #left {
         height: 100%;
