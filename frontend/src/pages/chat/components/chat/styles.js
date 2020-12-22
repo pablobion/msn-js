@@ -32,7 +32,7 @@ export const Container = styled.div`
     font-size: 6px;
     color: gray;
     overflow: auto;
-    height: 25%;
+    height: 40%;
     padding: 5px;
     resize: none;
     margin-bottom: 10px;

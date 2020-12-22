@@ -8,8 +8,9 @@ export const Container = styled.div`
     font-size: 6px;
     color: gray;
     overflow: auto;
-    height: 60%;
+    height: 150%;
     padding: 5px;
+    resize: vertical;
 
     #chat-textmessage {
         margin-left: 10px;

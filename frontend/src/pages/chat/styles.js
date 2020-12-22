@@ -6,9 +6,11 @@ export const Container = styled.div`
     border: 1px solid;
     display: flex;
     flex-direction: column;
+    max-width: 50vw;
 
     #multi-chats {
         height: 30px;
+        min-height: 30px;
     }
 
     #chat-top {
@@ -21,6 +23,7 @@ export const Container = styled.div`
         height: 100%;
         background-color: rgb(236, 246, 249);
         display: flex;
+        max-height: 83.7%;
         #chat-conversation-left {
             width: 78%;
             display: flex;
