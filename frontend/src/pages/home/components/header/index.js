@@ -5,7 +5,6 @@ import { Profile, Navbar } from "./styles";
 //images profile
 import Logo from "./assets/live-logo.png";
 import TitleText from "./assets/title-text.png";
-import BorderPhoto from "./assets/border-photo.png";
 import SmallArrowWhite from "./assets/small-arrow.svg";
 import Avatar from "./assets/avatar2.jpg";
 
@@ -16,8 +15,8 @@ import navbarMail from "./assets/navbar/navbar-mail.png";
 import navbarContacts from "./assets/navbar/navbar-contacts.png";
 
 //components
-
 import AeroButton from "../../../components/aeroButton/index";
+import Borderavatar from "../../../components/modalBorder/index";
 
 const header = () => {
     return (
@@ -29,10 +28,7 @@ const header = () => {
                 </div>
                 <div id="profile">
                     <div id="left">
-                        <img src={BorderPhoto} alt="" id="border-avatar" />
-                        <div id="avatar-div">
-                            <img src={Avatar} alt="" id="avatar" />
-                        </div>
+                        <Borderavatar avatar={Avatar}></Borderavatar>
                     </div>
                     <div id="right">
                         <AeroButton className="button">

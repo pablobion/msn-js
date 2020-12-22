@@ -21,27 +21,6 @@ export const Profile = styled.div`
         height: 80px;
 
         #left {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            #border-avatar {
-                z-index: 0;
-            }
-
-            #avatar-div {
-                position: absolute;
-                margin-left: -4px;
-                margin-top: -4px;
-                width: 47px;
-                height: 47px;
-                overflow: hidden;
-                border-radius: 2px;
-
-                img {
-                    width: 48px;
-                }
-            }
         }
         #right {
             margin-left: 10px;

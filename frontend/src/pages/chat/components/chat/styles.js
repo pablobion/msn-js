@@ -52,10 +52,16 @@ export const Sender = styled.div`
         background-image: linear-gradient(rgb(224, 240, 248), rgb(176, 224, 248));
         border: thin solid rgb(72, 120, 160);
         color: rgb(49, 21, 99);
-        box-shadow: inset 0 0 1px rgb(40, 208, 248);
+        box-shadow: inset 0 0 2px rgb(40, 208, 248);
 
         &:hover {
-            background: none;
+            box-shadow: inset 0 0 2px transparent;
+            cursor: pointer;
+        }
+
+        &:active {
+            background-image: linear-gradient(rgb(224, 240, 248), rgb(176, 224, 248));
+            box-shadow: inset 1px 1px 2px gray;
         }
     }
 `;
