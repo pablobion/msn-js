@@ -8,6 +8,7 @@ export const Container = styled.div`
     flex: 1;
     height: 100%;
     background: white;
+    border: thin solid #bed6e0;
     #search-contacts {
         padding: 5px;
         width: 100%;

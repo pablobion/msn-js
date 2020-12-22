@@ -7,6 +7,10 @@ import Header from "./components/header/index";
 import SideBar from "./components/sidebar";
 import Contacts from "./components/contacts";
 
+//images
+
+import ad from "./assets/ad.png";
+
 const home = () => {
     return (
         <Container>
@@ -16,6 +20,9 @@ const home = () => {
             <div id="contacts-div">
                 <SideBar />
                 <Contacts />
+            </div>
+            <div id="ad-div">
+                <img src={ad} alt="" />
             </div>
         </Container>
     );

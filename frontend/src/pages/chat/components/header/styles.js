@@ -8,7 +8,7 @@ export const Container = styled.div`
     background-image: url(${backgroundHeader});
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    height: 115%;
+    height: 100%;
     box-shadow: 0px 1px 5px #00000077;
 
     #div-username-subnick-chat {
@@ -37,9 +37,5 @@ export const Container = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
-        #left {
-        }
-        #right {
-        }
     }
 `;

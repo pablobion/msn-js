@@ -7,10 +7,18 @@ export const Container = styled.div`
     border: thin solid #707070;
     border-radius: 7px;
     box-shadow: 0 0 5px #00000050;
+    display: flex;
+    flex-direction: column;
 
     #contacts-div {
         height: 60%;
-        border: 1px solid;
         display: flex;
+    }
+
+    #ad-div {
+        display: flex;
+        height: 20%;
+        align-items: center;
+        justify-content: center;
     }
 `;

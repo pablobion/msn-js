@@ -6,14 +6,15 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     height: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
 
     .button {
         border-bottom: 1px solid lightgray;
-        border-right: 1px solid lightgray;
         border-radius: 0px;
 
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
         padding-top: 5px;
 
         img {
