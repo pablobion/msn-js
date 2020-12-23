@@ -18,7 +18,7 @@ socket.on("connect", () => console.log("[IO] Connect => A new connection has bee
 
 function App() {
     useEffect(() => {
-        socket.emit("chat message", "ss");
+        // socket.emit("chat message", "ss");
 
         const login = (async () => {
             const settings = {
@@ -30,7 +30,7 @@ function App() {
                 },
             };
             try {
-                const response = await fetch(`http://${configs.ipServer}:3333/`, settings);
+                const response = await fetch(`https://cors-anywhere.herokuapp.com/https://${configs.ipServer}/`, settings);
                 const data = await response.json();
                 console.log(data);
             } catch (error) {

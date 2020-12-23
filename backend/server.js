@@ -9,7 +9,7 @@ const io = require("socket.io")(server);
 
 app.post("/", (req, res) => {
     console.log("oiiiii");
-    res.send({ mobile: "kkk" });
+    res.json({ mobile: "kkk" });
 });
 
 io.on("connection", (socket) => {
