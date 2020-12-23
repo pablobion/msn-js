@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Container } from "./styles";
 import GlobalStyle from "./styles/global";
 
+import io from "socket.io-client";
+
 //pages
 import Home from "./pages/home/index";
 import Chat from "./pages/chat/index";
@@ -9,9 +11,14 @@ import Chat from "./pages/chat/index";
 //configs
 import { config } from "./configs/config_connections";
 
+const configs = config();
+
+const socket = io(`http://${configs.ipServer}:${configs.portServer}`);
+socket.on("connect", () => console.log("[IO] Connect => A new connection has been established"));
+
 function App() {
     useEffect(() => {
-        let configs = config();
+        socket.emit("chat message", "ss");
 
         const login = (async () => {
             const settings = {
@@ -30,7 +37,7 @@ function App() {
                 console.log(error);
             }
         })();
-    });
+    }, []);
 
     return (
         <Container>
