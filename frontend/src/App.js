@@ -24,13 +24,14 @@ function App() {
             const settings = {
                 method: "POST",
                 body: JSON.stringify({ name: "pablo" }),
+                mode: "no-cors",
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json",
                 },
             };
             try {
-                const response = await fetch(`https://cors-anywhere.herokuapp.com/https://${configs.ipServer}/`, settings);
+                const response = await fetch(`http://${configs.ipServer}/`, settings);
                 const data = await response.json();
                 console.log(data);
             } catch (error) {

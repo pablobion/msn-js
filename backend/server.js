@@ -10,23 +10,23 @@ const port = process.env.PORT || 3333;
 
 const io = require("socket.io")(server);
 
-app.post("/", (req, res) => {
+app.get("/", (req, res) => {
     console.log("oiiiii");
-    res.json({ mobile: "kkk" });
+    res.send("Olá mundo");
 });
 
-io.on("connection", (socket) => {
-    console.log("a user connected");
+// io.on("connection", (socket) => {
+//     console.log("a user connected");
 
-    socket.on("chat message", (msg) => {
-        console.log("message: " + msg);
-        console.log(socket.id);
-    });
+//     socket.on("chat message", (msg) => {
+//         console.log("message: " + msg);
+//         console.log(socket.id);
+//     });
 
-    socket.on("disconnect", () => {
-        console.log("user disconnected");
-    });
-});
+//     socket.on("disconnect", () => {
+//         console.log("user disconnected");
+//     });
+// });
 
 server.listen(port, () => {
     console.log(`listening on *:${port}`);
