@@ -11,8 +11,11 @@ const port = process.env.PORT || 3333;
 const io = require("socket.io")(server);
 
 app.get("/", (req, res) => {
-    console.log("oiiiii");
     res.send("Olá mundo");
+});
+
+app.post("/teste", (req, res) => {
+    res.send("Olá mundo teste post ok");
 });
 
 // io.on("connection", (socket) => {
