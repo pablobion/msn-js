@@ -14,7 +14,7 @@ import { config } from "./configs/config_connections";
 const configs = config();
 
 const socket = io(`http://${configs.ipServer}:${configs.portServer}`);
-socket.on("connect", () => console.log("[IO] Connect => A new connection has been established"));
+socket.on("connect", () => console.log(`[IO] Connect => A new connection has been established ${socket.id}`));
 
 function App() {
     useEffect(() => {
@@ -31,7 +31,7 @@ function App() {
                 },
             };
             try {
-                const response = await fetch(`http://${configs.ipServer}/`, settings);
+                const response = await fetch(`http://${configs.ipServer}:${configs.portServer}/teste`, settings);
                 const data = await response.json();
                 console.log(data);
             } catch (error) {

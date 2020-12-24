@@ -1,7 +1,8 @@
 const config = () => {
     return {
-        ipServer: "msn-js.herokuapp.com",
-        portServer: "3333",
+        ipServer: "127.0.0.1",
+        // ipServer: "msn-js.herokuapp.com",
+        portServer: "80",
     };
 };
 
