@@ -2,42 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Container } from "./styles";
 import GlobalStyle from "./styles/global";
 
-import io from "socket.io-client";
+import { socket } from "./configs/socket_export";
 
 //pages
 import Home from "./pages/home/index";
 import Chat from "./pages/chat/index";
 
-//configs
-import { config } from "./configs/config_connections";
-
-const configs = config();
-
-const socket = io(`http://${configs.ipServer}:${configs.portServer}`);
-socket.on("connect", () => console.log(`[IO] Connect => A new connection has been established ${socket.id}`));
-
 function App() {
     useEffect(() => {
-        // socket.emit("chat message", "ss");
+        socket.emit("chat message", "oi");
 
-        const login = (async () => {
-            const settings = {
-                method: "POST",
-                body: JSON.stringify({ name: "pablo" }),
-                mode: "no-cors",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-            };
-            try {
-                const response = await fetch(`http://${configs.ipServer}:${configs.portServer}/teste`, settings);
-                const data = await response.json();
-                console.log(data);
-            } catch (error) {
-                console.log(error);
-            }
-        })();
+        socket.on("socketsConnected", (data) => {
+            console.log(data);
+        });
     }, []);
 
     return (

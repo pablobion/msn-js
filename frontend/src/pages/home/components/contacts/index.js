@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { Container } from "./styles";
 
@@ -13,7 +13,17 @@ import sortContacts from "./assets/sort-contacts.png";
 import AeroButton from "../../../components/aeroButton/index";
 import Contact from "./components/contact/index";
 
-const contacts = () => {
+import { socket } from "../../../../configs/socket_export";
+
+const Contacts = () => {
+    const [contactsOnline, setContactsOnline] = useState();
+
+    useEffect(() => {
+        socket.on("socketsConnected", (data) => {
+            setContactsOnline(data.length);
+        });
+    }, []);
+
     return (
         <Container>
             <div id="search-contacts">
@@ -30,7 +40,7 @@ const contacts = () => {
             </div>
             <div id="contacts-list">
                 <details className="contacts-group-list">
-                    <summary>Online (1)</summary>
+                    <summary>Online ({contactsOnline})</summary>
                     <div id="contacts-group-list-contacts">
                         <Contact onClick={() => alert("oi")} status="busy"></Contact>
                         <Contact onClick={() => alert("oi")} status="online"></Contact>
@@ -42,4 +52,4 @@ const contacts = () => {
     );
 };
 
-export default contacts;
+export default Contacts;

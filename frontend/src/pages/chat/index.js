@@ -7,11 +7,17 @@ import Header from "./components/header/index";
 import ChatText from "./components/chatText/index";
 import Chat from "./components/chat/index";
 import Persons from "./components/persons/index";
+import MultiChats from "./components/multiChats/index";
 
 const chat = () => {
     return (
         <Container>
-            <div id="multi-chats"></div>
+            <div id="multi-chats">
+                <MultiChats />
+                <MultiChats />
+                <MultiChats />
+                <MultiChats />
+            </div>
             <div id="chat-top">
                 <Header />
             </div>

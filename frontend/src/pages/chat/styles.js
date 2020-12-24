@@ -11,6 +11,8 @@ export const Container = styled.div`
     #multi-chats {
         height: 30px;
         min-height: 30px;
+        display: flex;
+        overflow: auto;
     }
 
     #chat-top {
