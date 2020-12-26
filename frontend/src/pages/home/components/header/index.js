@@ -3,8 +3,6 @@ import React from "react";
 import { Profile, Navbar } from "./styles";
 
 //images profile
-import Logo from "./assets/live-logo.png";
-import TitleText from "./assets/title-text.png";
 import SmallArrowWhite from "./assets/small-arrow.svg";
 import Avatar from "./assets/avatar2.jpg";
 
@@ -17,15 +15,13 @@ import navbarContacts from "./assets/navbar/navbar-contacts.png";
 //components
 import AeroButton from "../../../components/aeroButton/index";
 import Borderavatar from "../../../components/modalBorder/index";
+import NavBar from "../../../components/navbar/index";
 
 const header = () => {
     return (
         <>
             <Profile>
-                <div id="nav">
-                    <img src={Logo} alt="" />
-                    <img src={TitleText} alt="" />
-                </div>
+                <NavBar />
                 <div id="profile">
                     <div id="left">
                         <Borderavatar avatar={Avatar}></Borderavatar>

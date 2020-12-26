@@ -7,6 +7,7 @@ import { socket } from "./configs/socket_export";
 //pages
 import Home from "./pages/home/index";
 import Chat from "./pages/chat/index";
+import Login from "./pages/login/index";
 
 function App() {
     useEffect(() => {
@@ -19,8 +20,9 @@ function App() {
 
     return (
         <Container>
-            <Home />
-            <Chat />
+            {/* <Home />
+            <Chat /> */}
+            <Login />
             <GlobalStyle />
         </Container>
     );
