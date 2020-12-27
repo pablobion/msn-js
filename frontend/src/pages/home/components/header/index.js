@@ -24,7 +24,7 @@ const header = () => {
                 <NavBar />
                 <div id="profile">
                     <div id="left">
-                        <Borderavatar avatar={Avatar}></Borderavatar>
+                        <Borderavatar avatar={Avatar} size="32" status="online"></Borderavatar>
                     </div>
                     <div id="right">
                         <AeroButton className="button">

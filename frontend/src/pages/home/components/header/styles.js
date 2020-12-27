@@ -21,6 +21,7 @@ export const Profile = styled.div`
         height: 80px;
 
         #left {
+            margin-bottom: 15px;
         }
         #right {
             margin-left: 10px;

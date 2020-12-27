@@ -16,7 +16,7 @@ const modalBorder = (props) => {
 
     switch (props.size) {
         case "32":
-            size = 80;
+            size = 70;
             break;
         case "64":
             size = 100;

@@ -20,9 +20,9 @@ function App() {
 
     return (
         <Container>
-            {/* <Home />
-            <Chat /> */}
-            <Login />
+            <Home />
+            <Chat />
+            {/* <Login /> */}
             <GlobalStyle />
         </Container>
     );
