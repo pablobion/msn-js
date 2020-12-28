@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Container } from "./styles";
 
@@ -15,17 +15,11 @@ const chat = () => {
             <div id="multi-chats">
                 <MultiChats />
                 <MultiChats />
-                <MultiChats />
-                <MultiChats />
-                <MultiChats />
-                <MultiChats />
-                <MultiChats />
-                <MultiChats />
             </div>
             <div id="chat-top">
                 <Header />
             </div>
-            <div id="chat-conversation">
+            <div id="chat-conversation" className="draggable">
                 <div id="chat-conversation-left">
                     <ChatText />
                     <Chat />

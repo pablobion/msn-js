@@ -17,10 +17,13 @@ import { socket } from "../../../../configs/socket_export";
 
 const Contacts = () => {
     const [contactsOnline, setContactsOnline] = useState();
+    const [countContactsOnline, setCountContactsOnline] = useState();
 
     useEffect(() => {
         socket.on("socketsConnected", (data) => {
-            setContactsOnline(data.length);
+            setCountContactsOnline(data.length);
+            setContactsOnline(data);
+            console.log(contactsOnline);
         });
     }, []);
 
@@ -40,11 +43,11 @@ const Contacts = () => {
             </div>
             <div id="contacts-list">
                 <details className="contacts-group-list">
-                    <summary>Online ({contactsOnline})</summary>
+                    <summary>Online ({countContactsOnline})</summary>
                     <div id="contacts-group-list-contacts">
-                        <Contact onClick={() => alert("oi")} status="busy"></Contact>
-                        <Contact onClick={() => alert("oi")} status="online"></Contact>
-                        <Contact onClick={() => alert("oi")} status="away"></Contact>
+                        {contactsOnline.map((elem) => (
+                            <Contact username={elem.username} status={elem.status} subnick={elem.subnick} />
+                        ))}
                     </div>
                 </details>
             </div>

@@ -8,6 +8,7 @@ import { socket } from "./configs/socket_export";
 import Home from "./pages/home/index";
 import Chat from "./pages/chat/index";
 import Login from "./pages/login/index";
+import Teste from "./pages/justatest/index";
 
 function App() {
     useEffect(() => {
@@ -23,6 +24,7 @@ function App() {
             <Home />
             <Chat />
             {/* <Login /> */}
+            {/* <Teste /> */}
             <GlobalStyle />
         </Container>
     );

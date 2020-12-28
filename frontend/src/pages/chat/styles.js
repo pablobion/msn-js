@@ -47,6 +47,7 @@ export const Container = styled.div`
         background-color: rgb(236, 246, 249);
         display: flex;
         max-height: 83.7%;
+        position: relative;
         #chat-conversation-left {
             width: 78%;
             display: flex;

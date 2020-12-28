@@ -34,8 +34,8 @@ const contact = (props) => {
             <AeroButton id="button">
                 <img src={status} alt="" />
             </AeroButton>
-            {props.username ? <p id="contact-username">{props.username} - </p> : <p id="contact-username">Sem nome - </p>}
-            {props.subnick ? <p id="contact-subnick">{props.subnick}</p> : <p id="contact-subnick"></p>}
+            {props.username && <p id="contact-username">{props.username}</p>}
+            {props.subnick ? <p id="contact-subnick">- {props.subnick}</p> : <p id="contact-subnick"></p>}
         </Container>
     );
 };

@@ -31,7 +31,7 @@ app.get("/statusall", (req, res) => {
 io.on("connection", (socket) => {
     console.log("a user connected");
 
-    socketsConnected.push(socket.id);
+    socketsConnected.push({ socketid: socket.id, username: "pablo", status: "busy", subnick: "sla" });
     console.log(socketsConnected);
 
     socket.on("chat message", (msg) => {
@@ -42,13 +42,11 @@ io.on("connection", (socket) => {
     io.emit("socketsConnected", socketsConnected);
 
     socket.on("disconnect", () => {
-        io.emit("socketsConnected", socketsConnected);
-        const index = socketsConnected.indexOf(socket.id);
-        if (index !== -1) {
-            socketsConnected.splice(index, 1);
-        }
-        console.log("user disconnected");
-        console.log(socketsConnected);
+        socketsConnected.forEach((elem, index) => {
+            if (elem.socketid === socket.id) {
+                if (index !== -1) socketsConnected.splice(index, 1);
+            }
+        });
     });
 });
 
