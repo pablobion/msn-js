@@ -51,6 +51,7 @@ export const Sender = styled.div`
         padding: 2px 10px;
         background-image: linear-gradient(rgb(224, 240, 248), rgb(176, 224, 248));
         border: thin solid rgb(72, 120, 160);
+
         color: rgb(49, 21, 99);
         box-shadow: inset 0 0 2px rgb(40, 208, 248);
 

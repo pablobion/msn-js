@@ -13,6 +13,27 @@ export const Container = styled.div`
         min-height: 30px;
         display: flex;
         overflow: auto;
+        padding-top: 2px;
+        background-color: rgb(205, 240, 246);
+
+        ::-webkit-scrollbar {
+            height: 5px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
     }
 
     #chat-top {

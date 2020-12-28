@@ -17,6 +17,10 @@ const chat = () => {
                 <MultiChats />
                 <MultiChats />
                 <MultiChats />
+                <MultiChats />
+                <MultiChats />
+                <MultiChats />
+                <MultiChats />
             </div>
             <div id="chat-top">
                 <Header />
