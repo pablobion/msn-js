@@ -9,12 +9,18 @@ import Chat from "./components/chat/index";
 import Persons from "./components/persons/index";
 import MultiChats from "./components/multiChats/index";
 
-const chat = () => {
+//context
+import { useUser } from "../context/allusers";
+
+const ChatUser = () => {
+    const { userChats } = useUser();
+
     return (
         <Container>
             <div id="multi-chats">
-                <MultiChats />
-                <MultiChats />
+                {userChats && userChats.map((elem) => <MultiChats />)}
+                {/* <MultiChats />
+                <MultiChats /> */}
             </div>
             <div id="chat-top">
                 <Header />
@@ -32,4 +38,4 @@ const chat = () => {
     );
 };
 
-export default chat;
+export default ChatUser;

@@ -7,12 +7,18 @@ const UserContext = createContext();
 export default function UserProvider({ children }) {
     const [contactsOnline, setContactsOnline] = useState();
     const [countContactsOnline, setCountContactsOnline] = useState();
+    const [userChats, setUserChats] = useState();
 
     useEffect(() => {
         socket.on("socketsConnected", (data) => {
             setCountContactsOnline(data.length - 1);
             setContactsOnline(data);
+
             console.log(contactsOnline);
+        });
+
+        socket.on("refresh multi chats", (data) => {
+            setUserChats(data);
         });
     }, []);
 
@@ -21,6 +27,7 @@ export default function UserProvider({ children }) {
             value={{
                 contactsOnline,
                 countContactsOnline,
+                userChats,
             }}
         >
             {children}
@@ -32,7 +39,7 @@ export function useUser() {
     const context = useContext(UserContext);
     if (!context) throw new Error("useCount must be used within a CountProvider");
 
-    const { contactsOnline, countContactsOnline } = context;
+    const { contactsOnline, countContactsOnline, userChats } = context;
 
-    return { contactsOnline, countContactsOnline };
+    return { contactsOnline, countContactsOnline, userChats };
 }

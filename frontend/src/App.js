@@ -10,7 +10,7 @@ import Chat from "./pages/chat/index";
 import Login from "./pages/login/index";
 
 //context
-import UserProvider from "../src/pages/context/user";
+import UserProvider from "./pages/context/allusers";
 
 function App() {
     // useEffect(() => {

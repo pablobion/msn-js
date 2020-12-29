@@ -43,18 +43,15 @@ io.on("connection", (socket) => {
         let indexperson = socketsConnected.findIndex((elem) => elem.socketid === data);
         let indexuser = socketsConnected.findIndex((elem) => elem.socketid === socket.id);
 
-        if (!socket.id === data) {
-            socketsConnected[indexperson].chats = [...socketsConnected[indexperson].chats, socket.id]; //adicionando o socket id da pessoa no array de chats da outra pessoa que foi clicada
-        }
-        if (socket.id === data) {
-            socketsConnected[indexuser].chats = [...socketsConnected[indexuser].chats, data]; //adicionando a pessoa no seu array de chat
-        }
+        if (socketsConnected[indexperson].chats) socketsConnected[indexperson].chats = [...socketsConnected[indexperson].chats, socket.id]; //adicionando o socket id da pessoa no array de chats da outra pessoa que foi clicada
+        if (socketsConnected[indexuser].chats) socketsConnected[indexuser].chats = [...socketsConnected[indexuser].chats, data]; //adicionando a pessoa no seu array de chat
 
         socketsConnected[indexperson].chats = Array.from(new Set(socketsConnected[indexperson].chats)); //verificando e removendo caso ja exista o id na lista
         socketsConnected[indexuser].chats = Array.from(new Set(socketsConnected[indexuser].chats)); //verificando e removendo caso ja exista o id na lista
 
-        console.log(socketsConnected[indexuser].chats + " | " + socketsConnected[indexperson].chats);
-        // console.log("Open chat: " + data + " | ");
+        io.emit("refresh multi chats", socketsConnected[indexuser].chats);
+
+        // console.log(socketsConnected[indexperson].chats);
     });
 
     socket.on("disconnect", () => {

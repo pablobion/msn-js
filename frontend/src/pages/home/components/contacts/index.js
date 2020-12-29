@@ -12,7 +12,7 @@ import AeroButton from "../../../components/aeroButton/index";
 import Contact from "./components/contact/index";
 
 //context
-import { useUser } from "../../../context/user";
+import { useUser } from "../../../context/allusers";
 import { socket } from "../../../../configs/socket_export";
 
 const Contacts = () => {
