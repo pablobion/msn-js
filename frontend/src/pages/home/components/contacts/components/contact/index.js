@@ -11,6 +11,9 @@ import away from "./assets/away.png";
 //components
 import AeroButton from "../../../../../components/aeroButton/index";
 
+//configs
+import { socket } from "../../../../../../configs/socket_export";
+
 const Contact = (props) => {
     let status;
     switch (props.status) {
@@ -29,17 +32,18 @@ const Contact = (props) => {
         default:
     }
 
-    const handleCustomClick = () => {
-        alert("ssssssssssssssssssssssssssssss");
+    const handleCustomClick = (socketid_contact) => {
+        console.log(socketid_contact);
+        socket.emit("click on chat", socketid_contact);
     };
 
     return (
         <Container>
-            <AeroButton id="button" onCustomClick={handleCustomClick}>
+            <AeroButton id="button" onCustomClick={(e) => handleCustomClick(props.socketid)}>
                 <img src={status} alt="" />
+                {props.username && <p id="contact-username">{props.username}</p>}
+                {props.subnick ? <p id="contact-subnick">- {props.subnick}</p> : <p id="contact-subnick"></p>}
             </AeroButton>
-            {props.username && <p id="contact-username">{props.username}</p>}
-            {props.subnick ? <p id="contact-subnick">- {props.subnick}</p> : <p id="contact-subnick"></p>}
         </Container>
     );
 };

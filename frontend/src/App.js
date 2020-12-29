@@ -13,13 +13,13 @@ import Login from "./pages/login/index";
 import UserProvider from "../src/pages/context/user";
 
 function App() {
-    useEffect(() => {
-        socket.emit("chat message", "oi");
+    // useEffect(() => {
+    //     socket.emit("chat message", "oi");
 
-        socket.on("socketsConnected", (data) => {
-            console.log(data);
-        });
-    }, []);
+    //     socket.on("socketsConnected", (data) => {
+    //         console.log(data);
+    //     });
+    // }, []);
 
     return (
         <UserProvider>

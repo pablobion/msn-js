@@ -13,6 +13,7 @@ import Contact from "./components/contact/index";
 
 //context
 import { useUser } from "../../../context/user";
+import { socket } from "../../../../configs/socket_export";
 
 const Contacts = () => {
     const { contactsOnline, countContactsOnline } = useUser();
@@ -35,7 +36,12 @@ const Contacts = () => {
                 <details className="contacts-group-list">
                     <summary>Online ({countContactsOnline})</summary>
                     <div id="contacts-group-list-contacts">
-                        {contactsOnline && contactsOnline.map((elem) => <Contact username={elem.username} status={elem.status} subnick={elem.subnick} />)}
+                        {contactsOnline &&
+                            contactsOnline.map((elem) => {
+                                if (socket.id !== elem.socketid) {
+                                    return <Contact username={elem.username} status={elem.status} subnick={elem.subnick} socketid={elem.socketid} />;
+                                }
+                            })}
                     </div>
                 </details>
             </div>

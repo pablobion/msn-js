@@ -29,17 +29,33 @@ app.get("/statusall", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-    console.log("a user connected");
+    console.log("a user connected: " + socket.id);
 
-    socketsConnected.push({ socketid: socket.id, username: socket.id, status: "busy", subnick: "sla" });
-    console.log(socketsConnected);
+    socketsConnected.push({ socketid: socket.id, username: socket.id, status: "busy", subnick: "sla", chats: [] });
+
+    io.emit("socketsConnected", socketsConnected); // sending to the client
 
     socket.on("chat message", (msg) => {
         console.log("message: " + msg);
     });
 
-    // sending to the client
-    io.emit("socketsConnected", socketsConnected);
+    socket.on("click on chat", (data) => {
+        let indexperson = socketsConnected.findIndex((elem) => elem.socketid === data);
+        let indexuser = socketsConnected.findIndex((elem) => elem.socketid === socket.id);
+
+        if (!socket.id === data) {
+            socketsConnected[indexperson].chats = [...socketsConnected[indexperson].chats, socket.id]; //adicionando o socket id da pessoa no array de chats da outra pessoa que foi clicada
+        }
+        if (socket.id === data) {
+            socketsConnected[indexuser].chats = [...socketsConnected[indexuser].chats, data]; //adicionando a pessoa no seu array de chat
+        }
+
+        socketsConnected[indexperson].chats = Array.from(new Set(socketsConnected[indexperson].chats)); //verificando e removendo caso ja exista o id na lista
+        socketsConnected[indexuser].chats = Array.from(new Set(socketsConnected[indexuser].chats)); //verificando e removendo caso ja exista o id na lista
+
+        console.log(socketsConnected[indexuser].chats + " | " + socketsConnected[indexperson].chats);
+        // console.log("Open chat: " + data + " | ");
+    });
 
     socket.on("disconnect", () => {
         socketsConnected.forEach((elem, index) => {
