@@ -8,7 +8,9 @@ import { socket } from "./configs/socket_export";
 import Home from "./pages/home/index";
 import Chat from "./pages/chat/index";
 import Login from "./pages/login/index";
-import Teste from "./pages/justatest/index";
+
+//context
+import UserProvider from "../src/pages/context/user";
 
 function App() {
     useEffect(() => {
@@ -20,13 +22,14 @@ function App() {
     }, []);
 
     return (
-        <Container>
-            <Home />
-            <Chat />
-            {/* <Login /> */}
-            {/* <Teste /> */}
-            <GlobalStyle />
-        </Container>
+        <UserProvider>
+            <Container>
+                <Home />
+                <Chat />
+                {/* <Login /> */}
+                <GlobalStyle />
+            </Container>
+        </UserProvider>
     );
 }
 

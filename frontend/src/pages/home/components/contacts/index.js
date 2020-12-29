@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import { Container } from "./styles";
 
-//icons
+//icons and images
 import { BiSearch } from "react-icons/bi";
-
-//images
 import addcontact from "./assets/add-contact.png";
 import sortContacts from "./assets/sort-contacts.png";
 
@@ -13,19 +11,11 @@ import sortContacts from "./assets/sort-contacts.png";
 import AeroButton from "../../../components/aeroButton/index";
 import Contact from "./components/contact/index";
 
-import { socket } from "../../../../configs/socket_export";
+//context
+import { useUser } from "../../../context/user";
 
 const Contacts = () => {
-    const [contactsOnline, setContactsOnline] = useState();
-    const [countContactsOnline, setCountContactsOnline] = useState();
-
-    useEffect(() => {
-        socket.on("socketsConnected", (data) => {
-            setCountContactsOnline(data.length);
-            setContactsOnline(data);
-            console.log(contactsOnline);
-        });
-    }, []);
+    const { contactsOnline, countContactsOnline } = useUser();
 
     return (
         <Container>
@@ -45,9 +35,7 @@ const Contacts = () => {
                 <details className="contacts-group-list">
                     <summary>Online ({countContactsOnline})</summary>
                     <div id="contacts-group-list-contacts">
-                        {contactsOnline.map((elem) => (
-                            <Contact username={elem.username} status={elem.status} subnick={elem.subnick} />
-                        ))}
+                        {contactsOnline && contactsOnline.map((elem) => <Contact username={elem.username} status={elem.status} subnick={elem.subnick} />)}
                     </div>
                 </details>
             </div>

@@ -2,12 +2,12 @@ import React from "react";
 
 import { Button } from "./styles";
 
-const aeroButton = (props) => {
+const AeroButton = ({ children, id, className, onCustomClick }) => {
     return (
-        <Button id={props.id} className={props.className}>
-            {props.children}
+        <Button id={id} className={className} onClick={onCustomClick}>
+            {children}
         </Button>
     );
 };
 
-export default aeroButton;
+export default AeroButton;

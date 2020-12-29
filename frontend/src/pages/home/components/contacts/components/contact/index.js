@@ -11,7 +11,7 @@ import away from "./assets/away.png";
 //components
 import AeroButton from "../../../../../components/aeroButton/index";
 
-const contact = (props) => {
+const Contact = (props) => {
     let status;
     switch (props.status) {
         case "online":
@@ -29,9 +29,13 @@ const contact = (props) => {
         default:
     }
 
+    const handleCustomClick = () => {
+        alert("ssssssssssssssssssssssssssssss");
+    };
+
     return (
         <Container>
-            <AeroButton id="button">
+            <AeroButton id="button" onCustomClick={handleCustomClick}>
                 <img src={status} alt="" />
             </AeroButton>
             {props.username && <p id="contact-username">{props.username}</p>}
@@ -40,4 +44,4 @@ const contact = (props) => {
     );
 };
 
-export default contact;
+export default Contact;
