@@ -30,4 +30,8 @@ export const Container = styled.button`
         height: 15px;
         width: 15px;
     }
+
+    #user-status-offline {
+        color: tomato;
+    }
 `;

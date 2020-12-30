@@ -17,11 +17,7 @@ const ChatUser = () => {
 
     return (
         <Container>
-            <div id="multi-chats">
-                {userChats && userChats.map((elem) => <MultiChats />)}
-                {/* <MultiChats />
-                <MultiChats /> */}
-            </div>
+            <div id="multi-chats">{userChats && userChats.map((socketid) => <MultiChats key={socketid} id={socketid} />)}</div>
             <div id="chat-top">
                 <Header />
             </div>

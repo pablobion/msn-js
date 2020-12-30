@@ -22,12 +22,18 @@ export default function UserProvider({ children }) {
         });
     }, []);
 
+    const getPerson = (socketid) => {
+        let person = contactsOnline.find((elem) => elem.socketid === socketid);
+        return person;
+    };
+
     return (
         <UserContext.Provider
             value={{
                 contactsOnline,
                 countContactsOnline,
                 userChats,
+                getPerson,
             }}
         >
             {children}
@@ -39,7 +45,7 @@ export function useUser() {
     const context = useContext(UserContext);
     if (!context) throw new Error("useCount must be used within a CountProvider");
 
-    const { contactsOnline, countContactsOnline, userChats } = context;
+    const { contactsOnline, countContactsOnline, userChats, getPerson } = context;
 
-    return { contactsOnline, countContactsOnline, userChats };
+    return { contactsOnline, countContactsOnline, userChats, getPerson };
 }

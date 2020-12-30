@@ -33,7 +33,6 @@ const Contact = (props) => {
     }
 
     const handleCustomClick = (socketid_contact) => {
-        console.log(socketid_contact);
         socket.emit("click on chat", socketid_contact);
     };
 

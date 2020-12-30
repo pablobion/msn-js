@@ -49,9 +49,21 @@ io.on("connection", (socket) => {
         socketsConnected[indexperson].chats = Array.from(new Set(socketsConnected[indexperson].chats)); //verificando e removendo caso ja exista o id na lista
         socketsConnected[indexuser].chats = Array.from(new Set(socketsConnected[indexuser].chats)); //verificando e removendo caso ja exista o id na lista
 
-        io.emit("refresh multi chats", socketsConnected[indexuser].chats);
+        io.to(socket.id).emit("refresh multi chats", socketsConnected[indexuser].chats);
+        // io.to(data).emit("refresh multi chats", socketsConnected[indexperson].chats);
 
         // console.log(socketsConnected[indexperson].chats);
+    });
+
+    socket.on("close chat", (data) => {
+        let indexuser = socketsConnected.findIndex((elem) => elem.socketid === socket.id);
+        socketsConnected[indexuser].chats.forEach((elem, index) => {
+            if (elem === data) {
+                if (index !== -1) {
+                    console.log("tentando retirar chat");
+                }
+            }
+        });
     });
 
     socket.on("disconnect", () => {
