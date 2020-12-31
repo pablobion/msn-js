@@ -40,6 +40,10 @@ export const Container = styled.div`
     #header-chat-area {
         border: 1px solid;
     }
+
+    textarea {
+        border: none;
+    }
 `;
 
 export const Sender = styled.div`

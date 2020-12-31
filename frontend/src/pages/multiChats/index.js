@@ -6,7 +6,7 @@ import { Container } from "./styles";
 import balloon from "./assets/balloon.ico";
 
 //context
-import { useUser } from "../../../context/allusers";
+import { useUser } from "../../pages/context/allusers";
 
 const MultiChats = (props) => {
     const { getPerson } = useUser();
@@ -20,7 +20,7 @@ const MultiChats = (props) => {
     });
 
     return (
-        <Container>
+        <Container onClick={props.onCustomClick}>
             <img id="image-balloon-multichats" src={balloon} alt="" />
             {contact ? <p>{contact.username}</p> : <p id="user-status-offline">{username} (Offline)</p>}
         </Container>

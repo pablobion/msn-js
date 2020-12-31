@@ -33,7 +33,9 @@ const chat = () => {
                     <img src={voice} alt="" />
                 </AeroButton>
             </HeaderChat>
-            <Container></Container>
+            <Container>
+                <textarea id="" cols="30" rows="10"></textarea>
+            </Container>
             <Sender>
                 <button>Enviar</button>
             </Sender>

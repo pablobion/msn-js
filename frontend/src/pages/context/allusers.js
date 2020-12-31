@@ -13,8 +13,6 @@ export default function UserProvider({ children }) {
         socket.on("socketsConnected", (data) => {
             setCountContactsOnline(data.length - 1);
             setContactsOnline(data);
-
-            console.log(contactsOnline);
         });
 
         socket.on("refresh multi chats", (data) => {

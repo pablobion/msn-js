@@ -5,16 +5,18 @@ export const Container = styled.button`
     height: 100%;
     display: flex;
     align-items: center;
-    width: 100%;
+    width: 99%;
     min-width: 100px;
     white-space: nowrap;
     overflow: hidden;
     margin-left: 5px;
     padding-left: 2px;
+    padding-right: 5px;
     border-radius: 5px 5px 0px 0px;
     background-color: white;
     border: thin solid rgb(72, 120, 160);
     box-shadow: 1px 2px 3px gray;
+
     cursor: pointer;
 
     &:hover {

@@ -1,14 +1,23 @@
+import { BiBluetooth } from "react-icons/bi";
 import styled from "styled-components";
 
 export const Container = styled.div`
-    height: 90vh;
+    height: 80vh;
     width: 50vw;
     border: 1px solid;
     display: flex;
     flex-direction: column;
     max-width: 50vw;
-
-    #multi-chats {
+    border: 4px solid #000;
+    position: absolute;
+    z-index: ${(props) => {
+        if (props.visible === true) {
+            return 0;
+        } else {
+            return -1;
+        }
+    }};
+    #header-chat-top {
         height: 30px;
         min-height: 30px;
         display: flex;
@@ -48,6 +57,7 @@ export const Container = styled.div`
         display: flex;
         max-height: 83.7%;
         position: relative;
+
         #chat-conversation-left {
             width: 78%;
             display: flex;

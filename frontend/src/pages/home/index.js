@@ -20,7 +20,6 @@ const home = () => {
             <div id="contacts-div">
                 <SideBar />
                 <Contacts />
-                <button>go</button>
             </div>
             <div id="ad-div">
                 <img src={ad} alt="" />
