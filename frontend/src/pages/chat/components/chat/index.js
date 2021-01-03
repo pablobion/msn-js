@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { MultiPoints, HeaderChat, Container, Sender } from "./styles";
 
@@ -13,7 +13,25 @@ import bg from "./assets/bg.png";
 //components
 import AeroButton from "../../../components/aeroButton/index";
 
-const chat = () => {
+//configs
+import { socket } from "../../../../configs/socket_export";
+
+const Chat = (props) => {
+    const [messageText, setMessageText] = useState();
+
+    const handleChangeMessageText = (event) => {
+        setMessageText(event.target.value);
+    };
+
+    const sendMessageText = (event) => {
+        if (props.socketidUser && props.socketidPerson) {
+            const socketidUser = props.socketidUser;
+            const socketidPerson = props.socketidPerson;
+
+            socket.emit("send message chat client", { message: messageText, socketidUser, socketidPerson });
+        }
+    };
+
     return (
         <>
             <MultiPoints>
@@ -34,13 +52,13 @@ const chat = () => {
                 </AeroButton>
             </HeaderChat>
             <Container>
-                <textarea id="" cols="30" rows="10"></textarea>
+                <textarea value={messageText} onChange={(e) => handleChangeMessageText(e)} cols="30" rows="10"></textarea>
             </Container>
             <Sender>
-                <button>Enviar</button>
+                <button onClick={sendMessageText}>Enviar</button>
             </Sender>
         </>
     );
 };
 
-export default chat;
+export default Chat;

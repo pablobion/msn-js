@@ -7,9 +7,9 @@ export const Container = styled.div`
     border: 1px solid;
     display: flex;
     flex-direction: column;
-    max-width: 50vw;
-    border: 4px solid #000;
+    border: 1px solid gray;
     position: absolute;
+    border-radius: 5px;
     z-index: ${(props) => {
         if (props.visible === true) {
             return 0;
@@ -24,6 +24,8 @@ export const Container = styled.div`
         overflow: auto;
         padding-top: 2px;
         background-color: rgb(205, 240, 246);
+        border-radius: 5px 5px 0px 0px;
+        padding: 3px;
 
         ::-webkit-scrollbar {
             height: 5px;
@@ -57,6 +59,8 @@ export const Container = styled.div`
         display: flex;
         max-height: 83.7%;
         position: relative;
+        border-radius: 5px;
+        padding-bottom: 10px;
 
         #chat-conversation-left {
             width: 78%;

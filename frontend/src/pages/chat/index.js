@@ -33,7 +33,6 @@ const ChatUser = (props) => {
     useEffect(() => {
         draggable();
         if (getPerson(props.socketidperson)) setPerson(getPerson(props.socketidperson)); //Verifica o person atraves do socketidperson passado por props, pegando o objeto do backend
-        console.log(person);
     });
 
     return (
@@ -49,10 +48,10 @@ const ChatUser = (props) => {
             <div id="chat-conversation">
                 <div id="chat-conversation-left">
                     <ChatText />
-                    <Chat />
+                    <Chat socketidUser={socket.id} socketidPerson={props.socketidperson} />
                 </div>
                 <div id="chat-conversation-right">
-                    <Persons />
+                    <Persons statusUser="offline" statusPerson="online" />
                 </div>
             </div>
         </Container>

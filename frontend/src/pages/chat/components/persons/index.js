@@ -2,17 +2,16 @@ import React from "react";
 
 import { Container } from "./styles";
 
-//images
+//components
+import ModalBorder from "../../../components/modalBorder/index";
 
-import border from "./assets/border-photo-large.png";
-
-const persons = () => {
+const Persons = (props) => {
     return (
         <Container>
-            <img src={border} alt="" />
-            <img src={border} alt="" />
+            <ModalBorder size="96" status={props.statusPerson} />
+            <ModalBorder size="96" status={props.statusUser} />
         </Container>
     );
 };
 
-export default persons;
+export default Persons;

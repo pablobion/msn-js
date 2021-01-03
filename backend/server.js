@@ -31,8 +31,16 @@ app.get("/statusall", (req, res) => {
 io.on("connection", (socket) => {
     console.log("a user connected: " + socket.id);
 
-    socketsConnected.push({ socketid: socket.id, username: socket.id, status: "busy", subnick: "", chats: [] });
+    socketsConnected.push({ socketid: socket.id, username: socket.id, status: "busy", subnick: "alguma coisa aquiu", chats: [] });
     io.emit("socketsConnected", socketsConnected); // sending to the client
+
+    socket.on("send message chat client", ({ message, socketidUser, socketidPerson }) => {
+        if (!message) message = ""; //Caso a mensagem venha como null ou quando a pessoa nao escreve nada;
+        console.log(`${message} - ${socketidUser}`);
+
+        io.to(socketidUser).emit("send message chat server", { message, socketidUser, socketidPerson }); //mandando para o usuario que mandou a msg
+        // io.to(socketidPerson).emit("send message chat server", message); // mandando para a pessoa que recebeu a mensagem
+    });
 
     const changeVisible = (data) => {
         const indexuser = socketsConnected.findIndex((elem) => elem.socketid === socket.id);
