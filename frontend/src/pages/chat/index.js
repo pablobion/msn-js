@@ -8,51 +8,19 @@ import ChatText from "./components/chatText/index";
 import Chat from "./components/chat/index";
 import Persons from "./components/persons/index";
 
-import interact from "interactjs";
-
 //configs
 import { socket } from "../../configs/socket_export";
 
+//context
+import { useUser } from "../context/allusers";
+
+//scripts
+import draggable from "./scripts/draggable";
+
 const ChatUser = (props) => {
-    interact(".draggable-chat").draggable({
-        // enable inertial throwing
-        inertia: true,
-        // keep the element within the area of it's parent
-        modifiers: [
-            interact.modifiers.restrictRect({
-                restriction: "parent",
-                endOnly: true,
-            }),
-        ],
-        // enable autoScroll
-        autoScroll: true,
+    const { getPerson } = useUser();
 
-        listeners: {
-            // call this function on every dragmove event
-            move: dragMoveListener,
-
-            // call this function on every dragend event
-        },
-    });
-
-    function dragMoveListener(event) {
-        var target = event.target;
-        // keep the dragged position in the data-x/data-y attributes
-        var x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
-        var y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
-
-        target.parentNode.appendChild(target);
-
-        // translate the element
-        target.style.webkitTransform = target.style.transform = "translate(" + x + "px, " + y + "px)";
-
-        // update the posiion attributes
-        target.setAttribute("data-x", x);
-        target.setAttribute("data-y", y);
-    }
-
-    // this function is used later in the resizing and gesture demos
-    window.dragMoveListener = dragMoveListener;
+    const [person, setPerson] = useState({});
 
     const minimizeChat = (socketidperson) => {
         socket.emit("change visible chat", socketidperson);
@@ -62,6 +30,12 @@ const ChatUser = (props) => {
         socket.emit("close chat", socketidperson);
     };
 
+    useEffect(() => {
+        draggable();
+        if (getPerson(props.socketidperson)) setPerson(getPerson(props.socketidperson)); //Verifica o person atraves do socketidperson passado por props, pegando o objeto do backend
+        console.log(person);
+    });
+
     return (
         <Container className="draggable-chat" visible={props.visible}>
             <div id="header-chat-top">
@@ -70,7 +44,7 @@ const ChatUser = (props) => {
                 {props.children}
             </div>
             <div id="chat-top">
-                <Header />
+                <Header username={person.username} subnick={person.subnick} status={person.status} />
             </div>
             <div id="chat-conversation">
                 <div id="chat-conversation-left">

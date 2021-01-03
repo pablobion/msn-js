@@ -31,7 +31,7 @@ app.get("/statusall", (req, res) => {
 io.on("connection", (socket) => {
     console.log("a user connected: " + socket.id);
 
-    socketsConnected.push({ socketid: socket.id, username: socket.id, status: "busy", subnick: "sla", chats: [] });
+    socketsConnected.push({ socketid: socket.id, username: socket.id, status: "busy", subnick: "", chats: [] });
     io.emit("socketsConnected", socketsConnected); // sending to the client
 
     const changeVisible = (data) => {

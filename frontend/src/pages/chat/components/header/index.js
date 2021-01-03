@@ -15,17 +15,32 @@ import colors from "./assets/colors.png";
 //components
 import AeroButton from "../../../components/aeroButton/index";
 
-const header = (props) => {
+const Header = (props) => {
+    let statusName;
+    switch (props.status) {
+        case "online":
+            statusName = "Online";
+            break;
+        case "away":
+            statusName = "Ausente";
+            break;
+        case "busy":
+            statusName = "Ocupado";
+            break;
+        case "invisible":
+            statusName = "Offline";
+            break;
+        default:
+            statusName= "";
+    }
     return (
         <Container>
             <div id="div-username-subnick-chat">
                 <div id="div-username">
                     <img src={balloon} alt="" />
-                    <p id="username">Pablo bion</p>
+                    <p id="username">{props.username && `${props.username} - ${statusName}`}</p>
                 </div>
-                <div id="div-subnick">
-                    <p id="subnick-header">Wow, isso é muito legal =D</p>
-                </div>
+                <div id="div-subnick">{props.subnick && <p id="subnick-header">{props.subnick}</p>}</div>
             </div>
             <div id="div-chat-menu-header">
                 <div id="left">
@@ -58,4 +73,4 @@ const header = (props) => {
     );
 };
 
-export default header;
+export default Header;
