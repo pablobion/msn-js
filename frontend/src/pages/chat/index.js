@@ -11,7 +11,7 @@ import Persons from "./components/persons/index";
 import interact from "interactjs";
 
 const ChatUser = (props) => {
-    interact(".draggable").draggable({
+    interact(".draggable-chat").draggable({
         // enable inertial throwing
         inertia: true,
         // keep the element within the area of it's parent
@@ -52,9 +52,9 @@ const ChatUser = (props) => {
     window.dragMoveListener = dragMoveListener;
 
     return (
-        <Container className="draggable" visible={props.visible}>
+        <Container id={props.id} className="draggable-chat">
             <div id="header-chat-top">
-                <button onClick={props.onCustomClick}>Minimizar</button>
+                <button>Minimizar</button>
                 {props.children}
             </div>
             <div id="chat-top">

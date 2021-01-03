@@ -32,7 +32,6 @@ io.on("connection", (socket) => {
     console.log("a user connected: " + socket.id);
 
     socketsConnected.push({ socketid: socket.id, username: socket.id, status: "busy", subnick: "sla", chats: [] });
-
     io.emit("socketsConnected", socketsConnected); // sending to the client
 
     socket.on("chat message", (msg) => {
@@ -43,16 +42,16 @@ io.on("connection", (socket) => {
         let indexperson = socketsConnected.findIndex((elem) => elem.socketid === data);
         let indexuser = socketsConnected.findIndex((elem) => elem.socketid === socket.id);
 
-        if (socketsConnected[indexperson].chats) socketsConnected[indexperson].chats = [...socketsConnected[indexperson].chats, socket.id]; //adicionando o socket id da pessoa no array de chats da outra pessoa que foi clicada
-        if (socketsConnected[indexuser].chats) socketsConnected[indexuser].chats = [...socketsConnected[indexuser].chats, data]; //adicionando a pessoa no seu array de chat
-
-        socketsConnected[indexperson].chats = Array.from(new Set(socketsConnected[indexperson].chats)); //verificando e removendo caso ja exista o id na lista
+        if (socketsConnected[indexuser].chats) {
+            //Verificando se a pessoa ja possui algum chat
+            if (!socketsConnected[indexuser].chats.find((elem) => elem.socketidperson === data)) {
+                // verificando se quem ela clicou já está na lista de chats abertos
+                socketsConnected[indexuser].chats = [...socketsConnected[indexuser].chats, { socketidperson: data, visible: true }]; //adicionando a pessoa no seu array de chat
+            }
+        }
         socketsConnected[indexuser].chats = Array.from(new Set(socketsConnected[indexuser].chats)); //verificando e removendo caso ja exista o id na lista
 
         io.to(socket.id).emit("refresh multi chats", socketsConnected[indexuser].chats);
-        // io.to(data).emit("refresh multi chats", socketsConnected[indexperson].chats);
-
-        // console.log(socketsConnected[indexperson].chats);
     });
 
     socket.on("close chat", (data) => {

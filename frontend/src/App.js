@@ -16,31 +16,18 @@ import { useUser } from "./pages/context/allusers";
 
 function App() {
     const { userChats } = useUser();
-    const [visible, setVisible] = useState(true);
-
-    const closeChat = (event) => {};
-
-    const createChat = () => {
-        return <h1>ssss</h1>;
-    };
+    console.log(userChats);
 
     return (
         <Container id="myDIV">
             <Home />
-
-            {userChats &&
-                userChats.map((socketid) => (
-                    <>
-                        <Chat key={socketid} id={socketid} visible={visible} onCustomClick={() => closeChat()}></Chat>
-                    </>
-                ))}
-
             {/* <Login /> */}
+
             <div id="multi-chats">
                 {userChats &&
-                    userChats.map((socketid) => (
+                    userChats.map((elem) => (
                         <>
-                            <MultiChats key={socketid} id={socketid} onCustomClick={() => createChat()} />
+                            <MultiChats id={elem.socketidperson} />
                         </>
                     ))}
             </div>
