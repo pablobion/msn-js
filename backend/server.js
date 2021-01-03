@@ -34,12 +34,20 @@ io.on("connection", (socket) => {
     socketsConnected.push({ socketid: socket.id, username: socket.id, status: "busy", subnick: "sla", chats: [] });
     io.emit("socketsConnected", socketsConnected); // sending to the client
 
-    socket.on("chat message", (msg) => {
-        console.log("message: " + msg);
+    socket.on("change visible chat", (data) => {
+        const indexuser = socketsConnected.findIndex((elem) => elem.socketid === socket.id);
+        const indexchat = socketsConnected[indexuser].chats.findIndex((elem) => elem.socketidperson === data);
+
+        if (socketsConnected[indexuser].chats[indexchat].visible === true) {
+            socketsConnected[indexuser].chats[indexchat].visible = false;
+        } else {
+            socketsConnected[indexuser].chats[indexchat].visible = true;
+        }
+
+        io.to(socket.id).emit("refresh multi chats", socketsConnected[indexuser].chats);
     });
 
     socket.on("click on chat", (data) => {
-        let indexperson = socketsConnected.findIndex((elem) => elem.socketid === data);
         let indexuser = socketsConnected.findIndex((elem) => elem.socketid === socket.id);
 
         if (socketsConnected[indexuser].chats) {

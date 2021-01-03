@@ -16,18 +16,24 @@ import { useUser } from "./pages/context/allusers";
 
 function App() {
     const { userChats } = useUser();
-    console.log(userChats);
 
     return (
         <Container id="myDIV">
             <Home />
             {/* <Login /> */}
 
+            {userChats &&
+                userChats.map((elem) => (
+                    <>
+                        <Chat socketidperson={elem.socketidperson} visible={elem.visible} />
+                    </>
+                ))}
+
             <div id="multi-chats">
                 {userChats &&
                     userChats.map((elem) => (
                         <>
-                            <MultiChats id={elem.socketidperson} />
+                            <MultiChats id={elem.socketidperson} socketidperson={elem.socketidperson} />
                         </>
                     ))}
             </div>

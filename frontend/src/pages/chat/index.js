@@ -10,6 +10,9 @@ import Persons from "./components/persons/index";
 
 import interact from "interactjs";
 
+//configs
+import { socket } from "../../configs/socket_export";
+
 const ChatUser = (props) => {
     interact(".draggable-chat").draggable({
         // enable inertial throwing
@@ -51,10 +54,14 @@ const ChatUser = (props) => {
     // this function is used later in the resizing and gesture demos
     window.dragMoveListener = dragMoveListener;
 
+    const minimizeChat = (socketidperson) => {
+        socket.emit("change visible chat", socketidperson);
+    };
+
     return (
-        <Container id={props.id} className="draggable-chat">
+        <Container className="draggable-chat" visible={props.visible}>
             <div id="header-chat-top">
-                <button>Minimizar</button>
+                <button onClick={() => minimizeChat(props.socketidperson)}>Minimizar</button>
                 {props.children}
             </div>
             <div id="chat-top">
