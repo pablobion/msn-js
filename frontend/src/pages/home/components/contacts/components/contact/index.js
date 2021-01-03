@@ -14,7 +14,12 @@ import AeroButton from "../../../../../components/aeroButton/index";
 //configs
 import { socket } from "../../../../../../configs/socket_export";
 
+//context
+import { useUser } from "../../../../../context/allusers";
+
 const Contact = (props) => {
+    const { userChats } = useUser();
+
     let status;
     switch (props.status) {
         case "online":
