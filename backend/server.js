@@ -74,14 +74,11 @@ io.on("connection", (socket) => {
     });
 
     socket.on("close chat", (data) => {
-        let indexuser = socketsConnected.findIndex((elem) => elem.socketid === socket.id);
-        socketsConnected[indexuser].chats.forEach((elem, index) => {
-            if (elem === data) {
-                if (index !== -1) {
-                    console.log("tentando retirar chat");
-                }
-            }
-        });
+        const indexuser = socketsConnected.findIndex((elem) => elem.socketid === socket.id);
+        const indexchat = socketsConnected[indexuser].chats.findIndex((elem) => elem.socketidperson === data);
+        socketsConnected[indexuser].chats.splice(indexchat, 1);
+
+        io.to(socket.id).emit("refresh multi chats", socketsConnected[indexuser].chats);
     });
 
     socket.on("disconnect", () => {

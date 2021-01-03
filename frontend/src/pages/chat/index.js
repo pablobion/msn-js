@@ -58,10 +58,15 @@ const ChatUser = (props) => {
         socket.emit("change visible chat", socketidperson);
     };
 
+    const closeChat = (socketidperson) => {
+        socket.emit("close chat", socketidperson);
+    };
+
     return (
         <Container className="draggable-chat" visible={props.visible}>
             <div id="header-chat-top">
                 <button onClick={() => minimizeChat(props.socketidperson)}>Minimizar</button>
+                <button onClick={() => closeChat(props.socketidperson)}>Fechar</button>
                 {props.children}
             </div>
             <div id="chat-top">
