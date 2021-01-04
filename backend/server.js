@@ -4,6 +4,8 @@ const server = require("http").createServer(app);
 
 const bodyparser = require("body-parser");
 
+const { changeVisibles } = require("./models");
+
 app.use(cors());
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
@@ -34,22 +36,35 @@ io.on("connection", (socket) => {
     socketsConnected.push({ socketid: socket.id, username: socket.id, status: "busy", subnick: "alguma coisa aquiu", chats: [] });
     io.emit("socketsConnected", socketsConnected); // sending to the client
 
-    socket.on("send message chat client", ({ message, socketidUser, socketidPerson }) => {
-        if (!message) message = ""; //Caso a mensagem venha como null ou quando a pessoa nao escreve nada;
-        console.log(`${message} - ${socketidUser}`);
+    socket.on("send server message text", ({ message, socketidUser, socketidPerson }) => {
+        const indexperson = socketsConnected.findIndex((elem) => elem.socketid === socketidPerson);
 
-        io.to(socketidUser).emit("send message chat server", { message, socketidUser, socketidPerson }); //mandando para o usuario que mandou a msg
-        // io.to(socketidPerson).emit("send message chat server", message); // mandando para a pessoa que recebeu a mensagem
+        if (!message) message = ""; //Caso a mensagem venha como null ou quando a pessoa nao escreve nada;
+
+        io.to(socketidUser).emit("send client message text", { message, socketidUser, socketidPerson }); //mandando para o usuario que mandou a msg
+
+        if (socketsConnected[indexperson]) {
+            if (socketsConnected[indexperson].chats.find((elem) => elem.socketidperson === socketidUser)) {
+                //verifica se a outra pessoa (person) também tem o chat aberto do user
+                console.log("achamos");
+            } else {
+                //Person não tem o chat aberto.
+                console.log("n tem");
+                socket.emit("click on chat", socketidUser);
+            }
+        }
     });
 
     const changeVisible = (data) => {
         const indexuser = socketsConnected.findIndex((elem) => elem.socketid === socket.id);
         const indexchat = socketsConnected[indexuser].chats.findIndex((elem) => elem.socketidperson === data);
 
-        if (socketsConnected[indexuser].chats[indexchat] && socketsConnected[indexuser].chats[indexchat].visible === true) {
-            socketsConnected[indexuser].chats[indexchat].visible = false;
-        } else {
-            socketsConnected[indexuser].chats[indexchat].visible = true;
+        if (socketsConnected[indexuser].chats[indexchat]) {
+            if (socketsConnected[indexuser].chats[indexchat].visible === true) {
+                socketsConnected[indexuser].chats[indexchat].visible = false;
+            } else {
+                socketsConnected[indexuser].chats[indexchat].visible = true;
+            }
         }
 
         io.to(socket.id).emit("refresh multi chats", socketsConnected[indexuser].chats);
@@ -76,7 +91,6 @@ io.on("connection", (socket) => {
                 }
             }
         }
-        // socketsConnected[indexuser].chats = Array.from(new Set(socketsConnected[indexuser].chats)); //verificando e removendo caso ja exista o id na lista    NÃO REMOVER
 
         io.to(socket.id).emit("refresh multi chats", socketsConnected[indexuser].chats);
     });

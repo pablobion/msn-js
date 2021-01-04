@@ -13,7 +13,6 @@ export const Container = styled.div`
     resize: vertical;
 
     #chat-textmessage {
-        margin-left: 10px;
-        margin-top: 2px;
+        margin: 2px 0px 8px 10px;
     }
 `;

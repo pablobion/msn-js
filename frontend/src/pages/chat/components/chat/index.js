@@ -28,7 +28,7 @@ const Chat = (props) => {
             const socketidUser = props.socketidUser;
             const socketidPerson = props.socketidPerson;
 
-            socket.emit("send message chat client", { message: messageText, socketidUser, socketidPerson });
+            socket.emit("send server message text", { message: messageText, socketidUser, socketidPerson });
         }
     };
 

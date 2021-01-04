@@ -22,20 +22,10 @@ function App() {
             <Home />
             {/* <Login /> */}
 
-            {userChats &&
-                userChats.map((elem) => (
-                    <>
-                        <Chat socketidperson={elem.socketidperson} visible={elem.visible} />
-                    </>
-                ))}
+            {userChats && userChats.map((elem) => <Chat key={elem.socketidperson} socketidperson={elem.socketidperson} visible={elem.visible} />)}
 
             <div id="multi-chats">
-                {userChats &&
-                    userChats.map((elem) => (
-                        <>
-                            <MultiChats id={elem.socketidperson} socketidperson={elem.socketidperson} />
-                        </>
-                    ))}
+                {userChats && userChats.map((elem) => <MultiChats key={elem.socketidperson} id={elem.socketidperson} socketidperson={elem.socketidperson} />)}
             </div>
             <GlobalStyle />
         </Container>
