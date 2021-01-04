@@ -17,13 +17,15 @@ import AeroButton from "../../../components/aeroButton/index";
 import { socket } from "../../../../configs/socket_export";
 
 const Chat = (props) => {
-    const [messageText, setMessageText] = useState();
+    const [messageText, setMessageText] = useState("");
 
     const handleChangeMessageText = (event) => {
         setMessageText(event.target.value);
     };
 
     const sendMessageText = (event) => {
+        if (!messageText) return false;
+        setMessageText("");
         if (props.socketidUser && props.socketidPerson) {
             const socketidUser = props.socketidUser;
             const socketidPerson = props.socketidPerson;
