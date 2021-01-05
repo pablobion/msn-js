@@ -15,7 +15,7 @@ const ChatText = () => {
             const person = getPerson(socketidPerson);
 
             const node = document.getElementById("div-messages-text");
-            node.insertAdjacentHTML("beforeend", `<p id="chat-usarname">${user.username} diz:</p><p id="chat-textmessage">${message}</p>`);
+            if (node && user) node.insertAdjacentHTML("beforeend", `<p id="chat-usarname">${user.username} diz:</p><p id="chat-textmessage">${message}</p>`);
         });
     }, []);
     return <Container id="div-messages-text"></Container>;

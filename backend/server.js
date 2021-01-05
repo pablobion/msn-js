@@ -4,7 +4,7 @@ const server = require("http").createServer(app);
 
 const bodyparser = require("body-parser");
 
-const { addUser, socketsConnected, removeUser, openChat, closeChat, changeVisible, messageToServer } = require("./models");
+const { addUser, socketsConnected, removeUser, closeChat, changeVisible, sendMessage, assignChat } = require("./models");
 
 app.use(cors());
 app.use(bodyparser.urlencoded({ extended: false }));
@@ -12,7 +12,14 @@ app.use(bodyparser.json());
 
 const port = process.env.PORT || 80;
 
-const io = require("socket.io")(server);
+// const io = require("socket.io")(server);
+
+const io = require("socket.io")(server, {
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"],
+    },
+});
 
 app.get("/", (req, res) => {
     res.send("Olá mundo ");
@@ -36,9 +43,13 @@ io.on("connection", (socket) => {
 
     socket.on("send server message text", ({ message, socketidUser, socketidPerson }) => {
         io.to(socketidUser).emit("send client message text", { message, socketidUser, socketidPerson }); //mandando para o usuario que mandou a msg
+        io.to(socketidPerson).emit("send client message text", { message, socketidUser, socketidPerson }); //mandando para o usuario que mandou a msg
 
-        const updateChatsPerson = messageToServer(socket, message, socketidUser, socketidPerson);
-        io.to(socketidPerson).emit("refresh multi chats", updateChatsPerson); // retornando a lista de chats do usuario que clicou
+        const updateChatsPerson = sendMessage(socket, message, socketidUser, socketidPerson);
+
+        if (updateChatsPerson) {
+            io.to(socketidPerson).emit("refresh multi chats", updateChatsPerson); // retornando a lista de chats do usuario que clicou
+        }
     });
 
     socket.on("change visible chat", (data) => {
@@ -47,7 +58,7 @@ io.on("connection", (socket) => {
     });
 
     socket.on("click on chat", (data) => {
-        const userChats = openChat(socket.id, data); // mandando o socket id person para a lista do socket user
+        const userChats = assignChat(socket.id, data, "user"); // mandando o socket id person para a lista do socket user
         io.to(socket.id).emit("refresh multi chats", userChats); // retornando a lista de chats do usuario que clicou
     });
 

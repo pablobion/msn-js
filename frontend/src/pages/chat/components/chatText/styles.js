@@ -5,7 +5,7 @@ export const Container = styled.div`
     background-color: white;
     display: flex;
     flex-direction: column;
-    font-size: 6px;
+    font-size: 14px;
     color: gray;
     overflow: auto;
     height: 150%;
