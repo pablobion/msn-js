@@ -43,13 +43,13 @@ io.on("connection", (socket) => {
 
     socket.on("send server message text", ({ message, socketidUser, socketidPerson }) => {
         io.to(socketidUser).emit("send client message text", { message, socketidUser, socketidPerson }); //mandando para o usuario que mandou a msg
-        io.to(socketidPerson).emit("send client message text", { message, socketidUser, socketidPerson }); //mandando para o usuario que mandou a msg
 
         const updateChatsPerson = sendMessage(socket, message, socketidUser, socketidPerson);
 
         if (updateChatsPerson) {
             io.to(socketidPerson).emit("refresh multi chats", updateChatsPerson); // retornando a lista de chats do usuario que clicou
         }
+        io.to(socketidPerson).emit("send client message text", { message, socketidUser, socketidPerson }); //mandando para o usuario que mandou a msg
     });
 
     socket.on("change visible chat", (data) => {
