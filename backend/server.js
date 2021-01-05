@@ -16,7 +16,7 @@ const port = process.env.PORT || 80;
 
 const io = require("socket.io")(server, {
     cors: {
-        origin: "http://671b96aa504b.ngrok.io:3000",
+        origin: "msn-js.vercel.app",
         methods: ["GET", "POST"],
     },
 });
