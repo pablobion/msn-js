@@ -16,7 +16,7 @@ const port = process.env.PORT || 80;
 
 const io = require("socket.io")(server, {
     cors: {
-        origin: "https://msn-js.vercel.app/",
+        origin: "msn-js.vercel.app",
         methods: ["GET", "POST"],
     },
 });
