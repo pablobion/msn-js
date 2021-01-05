@@ -18,7 +18,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "npm install --prefix client && npm run build --prefix frontend",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

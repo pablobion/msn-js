@@ -33,9 +33,9 @@ const assignChat = (socketid, socketidperson, to) => {
     return socketsConnected[indexuser].chats;
 };
 
-const closeChat = (socket, data) => {
+const closeChat = (socket, socketidperson) => {
     const indexuser = socketsConnected.findIndex((elem) => elem.socketid === socket.id);
-    const indexchat = socketsConnected[indexuser].chats.findIndex((elem) => elem.socketidperson === data);
+    const indexchat = socketsConnected[indexuser].chats.findIndex((elem) => elem.socketidperson === socketidperson);
     socketsConnected[indexuser].chats.splice(indexchat, 1);
 
     return socketsConnected[indexuser].chats;
@@ -64,14 +64,9 @@ const sendMessage = (socket, message, socketidUser, socketidPerson) => {
     }
 };
 
-const drawAttenAttention = (socket, socketidPerson) => {
-    const indexperson = socketsConnected.findIndex((elem) => elem.socketid === socketidPerson);
-
-    if (socketsConnected[indexperson]) {
-        const updateChatsPerson = openChat(socketidPerson, socketidUser);
-
-        return updateChatsPerson;
-    }
+const drawAttenAttention = (socketid, socketidPerson) => {
+    changeVisible(socketidPerson, socketid);
+    console.log("chamaram atenção");
 };
 
 module.exports = {
@@ -82,4 +77,5 @@ module.exports = {
     closeChat,
     sendMessage,
     assignChat,
+    drawAttenAttention,
 };

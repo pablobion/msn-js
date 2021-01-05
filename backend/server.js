@@ -4,7 +4,7 @@ const server = require("http").createServer(app);
 
 const bodyparser = require("body-parser");
 
-const { addUser, socketsConnected, removeUser, closeChat, changeVisible, sendMessage, assignChat } = require("./models");
+const { addUser, socketsConnected, removeUser, closeChat, changeVisible, sendMessage, assignChat, drawAttenAttention } = require("./models");
 
 app.use(cors());
 app.use(bodyparser.urlencoded({ extended: false }));
@@ -16,7 +16,7 @@ const port = process.env.PORT || 80;
 
 const io = require("socket.io")(server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: "http://671b96aa504b.ngrok.io:3000",
         methods: ["GET", "POST"],
     },
 });
@@ -42,28 +42,32 @@ io.on("connection", (socket) => {
     io.emit("socketsConnected", socketsConnected); // Mandando para os clientes que o socket entrou
 
     socket.on("send server message text", ({ message, socketidUser, socketidPerson }) => {
-        io.to(socketidUser).emit("send client message text", { message, socketidUser, socketidPerson }); //mandando para o usuario que mandou a msg
-
         const updateChatsPerson = sendMessage(socket, message, socketidUser, socketidPerson);
 
         if (updateChatsPerson) {
             io.to(socketidPerson).emit("refresh multi chats", updateChatsPerson); // retornando a lista de chats do usuario que clicou
         }
+        io.to(socketidUser).emit("send client message text", { message, socketidUser, socketidPerson }); //mandando para o usuario que mandou a msg
         io.to(socketidPerson).emit("send client message text", { message, socketidUser, socketidPerson }); //mandando para o usuario que mandou a msg
     });
 
-    socket.on("change visible chat", (data) => {
-        const userChats = changeVisible(socket.id, data); // troca o visible de true para false e ao contrario também, e pega os chats novamente
+    socket.on("Draw AttenAttention", (socketidperson) => {
+        const userChats = changeVisible(socket.id, socketidperson); // troca o visible de true para false e ao contrario também, e pega os chats novamente
         io.to(socket.id).emit("refresh multi chats", userChats); //manda os chats com o atributo do visible atualizado
     });
 
-    socket.on("click on chat", (data) => {
-        const userChats = assignChat(socket.id, data, "user"); // mandando o socket id person para a lista do socket user
+    socket.on("change visible chat", (socketidperson) => {
+        const userChats = changeVisible(socket.id, socketidperson); // troca o visible de true para false e ao contrario também, e pega os chats novamente
+        io.to(socket.id).emit("refresh multi chats", userChats); //manda os chats com o atributo do visible atualizado
+    });
+
+    socket.on("click on chat", (socketidperson) => {
+        const userChats = assignChat(socket.id, socketidperson, "user"); // mandando o socket id person para a lista do socket user
         io.to(socket.id).emit("refresh multi chats", userChats); // retornando a lista de chats do usuario que clicou
     });
 
-    socket.on("close chat", (data) => {
-        const userChats = closeChat(socket, data); //retornando chats do user
+    socket.on("close chat", (socketidperson) => {
+        const userChats = closeChat(socket, socketidperson); //retornando chats do user
         io.to(socket.id).emit("refresh multi chats", userChats); //envia para o client a nova lista
     });
 
