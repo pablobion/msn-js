@@ -1,12 +1,12 @@
 const app = require("express")();
 const cors = require("cors");
+app.use(cors());
 const server = require("http").createServer(app);
 
 const bodyparser = require("body-parser");
 
 const { addUser, socketsConnected, removeUser, closeChat, changeVisible, sendMessage, assignChat, drawAttenAttention } = require("./models");
 
-app.use(cors());
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 
@@ -15,12 +15,8 @@ const port = process.env.PORT || 80;
 // const io = require("socket.io")(server);
 
 const io = require("socket.io")(server, {
-    headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-    },
     cors: {
-        origin: "msn-js.vercel.app",
+        origin: "https://msn-js.vercel.app",
         methods: ["GET", "POST"],
     },
 });
