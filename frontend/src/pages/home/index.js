@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Container } from "./styles";
 
 //components
@@ -11,7 +10,7 @@ import Contacts from "./components/contacts";
 
 import ad from "./assets/ad.png";
 
-const home = () => {
+const Home = React.forwardRef((props, ref) => {
     return (
         <Container>
             <div>
@@ -26,6 +25,6 @@ const home = () => {
             </div>
         </Container>
     );
-};
+});
 
-export default home;
+export default Home;

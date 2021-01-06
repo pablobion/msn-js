@@ -1,17 +1,25 @@
 let socketsConnected = [];
 
-const addUser = (socket) => {
+const getIndex = (socketid) => {
+    return socketsConnected.findIndex((elem) => elem.socketid === socketid);
+};
+
+const getIndexChat = (index, socketidperson) => {
+    return socketsConnected[index].chats.findIndex((elem) => elem.socketidperson === socketidperson);
+};
+
+const addUser = (socketid) => {
     socketsConnected.push({
-        socketid: socket.id,
-        username: socket.id,
+        socketid: socketid,
+        username: socketid,
         status: "busy",
         subnick: "alguma coisa aquiu",
         chats: [],
     });
 };
 
-const removeUser = (socket) => {
-    const index = socketsConnected.findIndex((elem) => elem.socketid === socket.id);
+const removeUser = (socketid) => {
+    const index = getIndex(socketid);
 
     if (index !== -1) {
         socketsConnected.splice(index, 1);
@@ -19,7 +27,7 @@ const removeUser = (socket) => {
 };
 
 const assignChat = (socketid, socketidperson, to) => {
-    let indexuser = socketsConnected.findIndex((elem) => elem.socketid === socketid);
+    let indexuser = getIndex(socketid);
 
     if (socketsConnected[indexuser]) {
         if (!socketsConnected[indexuser].chats.find((elem) => elem.socketidperson === socketidperson)) {
@@ -29,49 +37,61 @@ const assignChat = (socketid, socketidperson, to) => {
                 ? (socketsConnected[indexuser].chats = [...socketsConnected[indexuser].chats, { socketidperson: socketidperson, visible: true, newMessages: false }])
                 : (socketsConnected[indexuser].chats = [...socketsConnected[indexuser].chats, { socketidperson: socketidperson, visible: false, newMessages: false }]); //adicionando a pessoa no seu array de chat
         }
+
+        return socketsConnected[indexuser].chats;
     }
-    return socketsConnected[indexuser].chats;
 };
 
-const closeChat = (socket, socketidperson) => {
-    const indexuser = socketsConnected.findIndex((elem) => elem.socketid === socket.id);
-    const indexchat = socketsConnected[indexuser].chats.findIndex((elem) => elem.socketidperson === socketidperson);
+const closeChat = (socketid, socketidperson) => {
+    const indexuser = getIndex(socketid);
+    const indexchat = getIndexChat(indexuser, socketidperson);
     socketsConnected[indexuser].chats.splice(indexchat, 1);
 
     return socketsConnected[indexuser].chats;
 };
 
-const changeVisible = (socketid, socketidperson) => {
-    const indexuser = socketsConnected.findIndex((elem) => elem.socketid === socketid);
+const changeVisibleChat = (socketid, socketidperson) => {
+    const indexuser = getIndex(socketid);
 
     if (socketsConnected[indexuser]) {
-        const indexchat = socketsConnected[indexuser].chats.findIndex((elem) => elem.socketidperson === socketidperson);
+        const indexchat = getIndexChat(indexuser, socketidperson);
+
         if (socketsConnected[indexuser].chats[indexchat].visible === true) {
+            //verifica se o chat está aberto.
             socketsConnected[indexuser].chats[indexchat].visible = false;
         } else {
             socketsConnected[indexuser].chats[indexchat].visible = true;
         }
+        socketsConnected[indexuser].chats[indexchat].newMessages = false;
+
         return socketsConnected[indexuser].chats;
     }
 };
 
-const sendMessage = (socket, message, socketidUser, socketidPerson) => {
-    const indexperson = socketsConnected.findIndex((elem) => elem.socketid === socketidPerson);
+const sendMessage = (socketid, socketidperson) => {
+    const updateChatsPerson = assignChat(socketidperson, socketid, "person"); //Atribui o chat para o person, lá na function verifica se já tem ou nao.
 
-    if (socketsConnected[indexperson]) {
-        const updateChatsPerson = assignChat(socketidPerson, socketidUser, "person");
-        return updateChatsPerson;
+    const indexuser = getIndex(socketid); //pega index do user que no caso é quem ta mandando a mensagem
+    const indexperson = getIndex(socketidperson); //index de quem ta recebendo a mensagem
+
+    const indexchatuser = getIndexChat(indexuser, socketidperson); //index do chat onde quem vai receber a mensagem está
+
+    if (socketsConnected[indexperson] && socketsConnected[indexperson].chats[indexchatuser]) {
+        // verifica se o chat de quem recebeu estava aberto
+        if (socketsConnected[indexperson].chats[indexchatuser].visible === false) socketsConnected[indexperson].chats[indexchatuser].newMessages = true; // ao enviar a msg deixa a msg como newMessages true, isso é desativado la no changeVisibleChat
     }
+
+    return updateChatsPerson;
 };
 
-const drawAttenAttention = (socketid, socketidPerson) => {
-    changeVisible(socketidPerson, socketid);
+const drawAttenAttention = (socketid, socketidperson) => {
+    changeVisibleChat(socketidperson, socketid);
     console.log("chamaram atenção");
 };
 
 module.exports = {
     addUser,
-    changeVisible,
+    changeVisibleChat,
     socketsConnected,
     removeUser,
     closeChat,

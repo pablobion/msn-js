@@ -18,6 +18,7 @@ export const Container = styled.button`
     box-shadow: 1px 2px 3px gray;
 
     cursor: pointer;
+    background-color: ${(props) => (props.backgroundColorMultiChat ? "orange" : "transparent")};
 
     &:hover {
         background: gainsboro;

@@ -25,7 +25,7 @@ function App() {
 
             {userChats && userChats.map((elem) => <Chat key={elem.socketidperson} socketidperson={elem.socketidperson} visible={elem.visible} />)}
 
-            <div id="multi-chats">{userChats && userChats.map((elem) => <MultiChats key={elem.socketidperson} id={elem.socketidperson} socketidperson={elem.socketidperson} />)}</div>
+            <div id="multi-chats">{userChats && userChats.map((elem) => <MultiChats key={elem.socketidperson} id={elem.socketidperson} socketidperson={elem.socketidperson} newmessages={elem.newMessages} />)}</div>
             <GlobalStyle />
         </Container>
     );

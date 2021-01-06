@@ -4,7 +4,7 @@ import io from "socket.io-client";
 import { config } from "./config_connections";
 const configs = config();
 
-const socket = io(`https://${configs.ipServer}`);
+const socket = io(`${configs.ipServer}`);
 socket.on("connect", () => console.log(`[IO] Connect => A new connection has been established ${socket.id}`));
 
 export { socket };
