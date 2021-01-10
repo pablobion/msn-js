@@ -18,14 +18,21 @@ import { socket } from "./configs/socket_export";
 function App() {
     const { userChats } = useUser();
 
-    const itemsRef = useRef([]);
+    const chatRef = useRef([]);
+    const multiChatRef = useRef([]);
 
     useEffect(() => {
-        socket.on("send client message text", ({ message, socketidUser, socketidPerson }) => {
-            const indexperson = itemsRef.current.findIndex((elem) => elem.id === socketidPerson);
-            const indexuser = itemsRef.current.findIndex((elem) => elem.id === socketidUser);
-            if (itemsRef.current[indexuser]) itemsRef.current[indexuser].insertAdjacentHTML("beforeend", `<p id="chat-usarname">${socketidUser} diz:</p><p id="chat-textmessage">${message}</p>`);
-            if (itemsRef.current[indexperson]) itemsRef.current[indexperson].insertAdjacentHTML("beforeend", `<p id="chat-usarname">${socketidUser} diz:</p><p id="chat-textmessage">${message}</p>`);
+        socket.on("send client message text", ({ message, socketidUser, socketidPerson, chatopen }) => {
+            if (!chatRef.current) return false;
+            const indexPersonChat = chatRef.current.findIndex((elem) => elem.id === socketidPerson);
+            const indexUserChat = chatRef.current.findIndex((elem) => elem.id === socketidUser);
+            if (chatRef.current[indexUserChat]) chatRef.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname">${socketidUser} diz:</p><p id="chat-textmessage">${message}</p>`);
+            if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname">${socketidUser} diz:</p><p id="chat-textmessage">${message}</p>`);
+
+            if (chatopen === false) {
+                const indexPersonMultiChat = multiChatRef.current.findIndex((elem) => `${elem.id}` === `${socketidUser}-multichat`);
+                if (chatRef.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: orange;";
+            }
         });
     }, []);
 
@@ -35,12 +42,12 @@ function App() {
             {/* teste */}
             {/* <Login /> */}
 
-            {userChats && userChats.map((elem, index) => <Chat key={elem.socketidperson} ref={(el) => (itemsRef.current[index] = el)} socketidperson={elem.socketidperson} visible={elem.visible} />)}
+            {userChats && userChats.map((elem, index) => <Chat key={elem.socketidperson} ref={(el) => (chatRef.current[index] = el)} socketidperson={elem.socketidperson} visible={elem.visible} />)}
 
-            <div id="multi-chats">{userChats && userChats.map((elem) => <MultiChats key={elem.socketidperson} person={elem.socketidperson} socketidperson={elem.socketidperson} newmessages={elem.newMessages} />)}</div>
+            <div id="multi-chats">{userChats && userChats.map((elem, index) => <MultiChats key={elem.socketidperson} ref={(el) => (multiChatRef.current[index] = el)} socketidperson={elem.socketidperson} />)}</div>
             <input type="text" />
             <GlobalStyle />
-            <button onClick={() => console.log(itemsRef)}>sdohjsdoiuj</button>
+            <button onClick={() => console.log(multiChatRef)}>sdohjsdoiuj</button>
         </Container>
     );
 }

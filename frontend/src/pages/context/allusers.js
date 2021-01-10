@@ -13,6 +13,7 @@ export default function UserProvider({ children }) {
         socket.on("socketsConnected", (data) => {
             setCountContactsOnline(data.length - 1);
             setContactsOnline(data);
+            console.log(data);
         });
 
         socket.on("refresh multi chats", (data) => {
@@ -22,6 +23,7 @@ export default function UserProvider({ children }) {
 
     const getPerson = (socketid) => {
         if (contactsOnline) {
+            console.log(contactsOnline);
             let person = contactsOnline.find((elem) => elem.socketid === socketid);
             return person;
         }

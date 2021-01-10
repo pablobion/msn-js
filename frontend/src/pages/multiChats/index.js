@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { Container } from "./styles";
 
@@ -11,26 +11,28 @@ import { useUser } from "../../pages/context/allusers";
 //configs
 import { socket } from "../../configs/socket_export";
 
-const MultiChats = (props) => {
+const MultiChats = React.forwardRef((props, ref) => {
     const { getPerson } = useUser();
 
     const [contact, setContact] = useState();
     const [username, setUsername] = useState();
-    const [backgroundColorMultiChat, setBackgroundColorMultiChat] = useState("transparent");
 
     useEffect(() => {
-        setContact(getPerson(props.person));
+        setContact(getPerson(props.socketidperson));
+
         if (contact) {
             setUsername(contact.username);
         }
-    }, []);
+    });
 
     const openchat = (socketidperson) => {
         socket.emit("change visible chat", socketidperson);
+        const elemento = document.getElementById(`${props.socketidperson}-multichat`);
+        elemento.style = "background-color: white;";
     };
 
     return (
-        <Container onClick={() => openchat(props.socketidperson)} backgroundColorMultiChat={props.newmessages}>
+        <Container onClick={() => openchat(props.socketidperson)} ref={ref} id={`${props.socketidperson}-multichat`}>
             <img id="image-balloon-multichats" src={balloon} alt="" />
             {contact ? (
                 <p>{contact.username}</p>
@@ -44,6 +46,6 @@ const MultiChats = (props) => {
             )}
         </Container>
     );
-};
+});
 
 export default MultiChats;
