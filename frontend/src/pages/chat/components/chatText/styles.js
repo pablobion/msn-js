@@ -12,7 +12,7 @@ export const Container = styled.div`
     padding: 5px;
     resize: vertical;
 
-    #chat-textmessage {
+    .chat-textmessage {
         margin: 2px 0px 8px 10px;
     }
 `;

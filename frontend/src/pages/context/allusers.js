@@ -1,13 +1,13 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 
-import { socket } from "../../configs/socket_export";
+import { connect, socket } from "../../configs/socket_export";
 
 const UserContext = createContext();
 
 export default function UserProvider({ children }) {
-    const [contactsOnline, setContactsOnline] = useState();
-    const [countContactsOnline, setCountContactsOnline] = useState();
-    const [userChats, setUserChats] = useState();
+    const [contactsOnline, setContactsOnline] = useState([]);
+    const [countContactsOnline, setCountContactsOnline] = useState(0);
+    const [userChats, setUserChats] = useState([]);
 
     useEffect(() => {
         socket.on("socketsConnected", (data) => {
@@ -21,8 +21,10 @@ export default function UserProvider({ children }) {
     }, []);
 
     const getPerson = (socketid) => {
-        let person = contactsOnline.find((elem) => elem.socketid === socketid);
-        return person;
+        if (contactsOnline) {
+            let person = contactsOnline.find((elem) => elem.socketid === socketid);
+            return person;
+        }
     };
 
     return (

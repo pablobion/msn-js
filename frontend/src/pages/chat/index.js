@@ -17,7 +17,7 @@ import { useUser } from "../context/allusers";
 //scripts
 import draggable from "./scripts/draggable";
 
-const ChatUser = (props) => {
+const ChatUser = React.forwardRef((props, ref) => {
     const { getPerson } = useUser();
 
     const [person, setPerson] = useState({});
@@ -33,7 +33,7 @@ const ChatUser = (props) => {
     useEffect(() => {
         draggable();
         if (getPerson(props.socketidperson)) setPerson(getPerson(props.socketidperson)); //Verifica o person atraves do socketidperson passado por props, pegando o objeto do backend
-    });
+    }, []);
 
     return (
         <Container className="draggable-chat" visible={props.visible}>
@@ -47,7 +47,7 @@ const ChatUser = (props) => {
             </div>
             <div id="chat-conversation">
                 <div id="chat-conversation-left">
-                    <ChatText />
+                    <ChatText socketidUser={socket.id} socketidperson={props.socketidperson} ref={ref} />
                     <Chat socketidUser={socket.id} socketidPerson={props.socketidperson} />
                 </div>
                 <div id="chat-conversation-right">
@@ -56,6 +56,6 @@ const ChatUser = (props) => {
             </div>
         </Container>
     );
-};
+});
 
 export default ChatUser;

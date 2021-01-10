@@ -19,7 +19,7 @@ const MultiChats = (props) => {
     const [backgroundColorMultiChat, setBackgroundColorMultiChat] = useState("transparent");
 
     useEffect(() => {
-        setContact(getPerson(props.id));
+        setContact(getPerson(props.person));
         if (contact) {
             setUsername(contact.username);
         }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Profile, Navbar } from "./styles";
 
@@ -17,7 +17,16 @@ import AeroButton from "../../../components/aeroButton/index";
 import Borderavatar from "../../../components/modalBorder/index";
 import NavBar from "../../../components/navbar/index";
 
-const header = () => {
+//socket
+import { connect } from "../../../../configs/socket_export";
+//context
+import { useUser } from "./../../../context/allusers";
+
+const Header = () => {
+    const { getPerson, contactsOnline } = useUser();
+    const [person, setPerson] = useState();
+
+    useEffect(() => {}, []);
     return (
         <>
             <Profile>
@@ -60,4 +69,4 @@ const header = () => {
     );
 };
 
-export default header;
+export default Header;

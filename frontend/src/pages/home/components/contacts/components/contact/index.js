@@ -12,7 +12,7 @@ import away from "./assets/away.png";
 import AeroButton from "../../../../../components/aeroButton/index";
 
 //configs
-import { socket } from "../../../../../../configs/socket_export";
+import { connect, socket } from "../../../../../../configs/socket_export";
 
 //context
 import { useUser } from "../../../../../context/allusers";
