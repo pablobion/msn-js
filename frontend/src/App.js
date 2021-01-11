@@ -26,6 +26,7 @@ function App() {
             if (!chatRef.current) return false;
             const indexPersonChat = chatRef.current.findIndex((elem) => elem.id === socketidPerson);
             const indexUserChat = chatRef.current.findIndex((elem) => elem.id === socketidUser);
+
             if (chatRef.current[indexUserChat]) chatRef.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname">${socketidUser} diz:</p><p id="chat-textmessage">${message}</p>`);
             if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname">${socketidUser} diz:</p><p id="chat-textmessage">${message}</p>`);
 

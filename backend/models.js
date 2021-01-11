@@ -83,6 +83,8 @@ const sendMessage = (socketid, socketidperson) => {
         } else {
             chatopen = true;
         }
+    } else {
+        chatopen = false;
     }
 
     return { updateChatsPerson, chatopen };
