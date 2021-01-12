@@ -26,11 +26,26 @@ const Header = () => {
     const { getPerson, contactsOnline } = useUser();
     const [person, setPerson] = useState();
 
+    const [subnick, setSubnick] = useState();
+
     const handleChangeStatus = async (e) => {
         socket.emit("change status user", e.target.value);
     };
 
-    useEffect(() => {}, []);
+    const sendSubnick = (event) => {
+        event.preventDefault();
+        const input = document.getElementById("myInput-subnick");
+        input.blur();
+        socket.emit("change subnick user", input.value);
+    };
+
+    useEffect(() => {
+        socket.on("return subnick user", (data) => {
+            const input = document.getElementById("myInput-subnick");
+            input.value = data;
+        });
+    }, []);
+
     return (
         <>
             <Profile>
@@ -52,7 +67,9 @@ const Header = () => {
                             </small>
                         </span>
                         <AeroButton id="sub-nick">
-                            <input></input>
+                            <form onSubmit={(e) => sendSubnick(e)}>
+                                <input type="text" id="myInput-subnick" onBlur={(e) => sendSubnick(e)}></input>
+                            </form>
                         </AeroButton>
                     </div>
                 </div>

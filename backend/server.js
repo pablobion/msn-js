@@ -5,7 +5,7 @@ const server = require("http").createServer(app);
 
 const bodyparser = require("body-parser");
 
-const { addUser, socketsConnected, removeUser, closeChat, changeVisibleChat, sendMessage, assignChat, drawAttenAttention, changeStatus } = require("./models");
+const { addUser, socketsConnected, removeUser, closeChat, changeVisibleChat, sendMessage, assignChat, drawAttenAttention, changeStatus, changeSubnick } = require("./models");
 
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
@@ -73,6 +73,12 @@ io.on("connection", (socket) => {
     socket.on("change status user", (status) => {
         changeStatus(socket.id, status);
         io.emit("socketsConnected", socketsConnected); // Mandando para os clientes que o socket entrou
+    });
+
+    socket.on("change subnick user", (subnick) => {
+        let subnickreturn = changeSubnick(socket.id, subnick);
+        io.emit("socketsConnected", socketsConnected); // Mandando para os clientes que o socket entrou
+        io.to(socket.id).emit("return subnick user", subnickreturn); //envia para o client a nova lista
     });
 
     socket.on("disconnect", () => {

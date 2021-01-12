@@ -110,6 +110,13 @@ const changeStatus = (socketid, status) => {
     }
 };
 
+const changeSubnick = (socketid, subnick) => {
+    const indexuser = getIndex(socketid);
+
+    socketsConnected[indexuser].subnick = `${subnick}`;
+    return socketsConnected[indexuser].subnick;
+};
+
 const drawAttenAttention = (socketid, socketidperson) => {
     changeVisibleChat(socketidperson, socketid);
     console.log("chamaram atenção");
@@ -125,4 +132,5 @@ module.exports = {
     assignChat,
     drawAttenAttention,
     changeStatus,
+    changeSubnick,
 };
