@@ -12,7 +12,7 @@ const addUser = (socketid) => {
     socketsConnected.push({
         socketid: socketid,
         username: socketid,
-        status: "busy",
+        status: "online",
         subnick: "alguma coisa aquiu",
         chats: [],
     });
@@ -90,6 +90,26 @@ const sendMessage = (socketid, socketidperson) => {
     return { updateChatsPerson, chatopen };
 };
 
+const changeStatus = (socketid, status) => {
+    const indexuser = getIndex(socketid);
+
+    switch (status) {
+        case "online":
+            socketsConnected[indexuser].status = "online";
+            break;
+        case "busy":
+            socketsConnected[indexuser].status = "busy";
+            break;
+        case "away":
+            socketsConnected[indexuser].status = "away";
+            break;
+        case "invisible":
+            socketsConnected[indexuser].status = "invisible";
+            break;
+        default:
+    }
+};
+
 const drawAttenAttention = (socketid, socketidperson) => {
     changeVisibleChat(socketidperson, socketid);
     console.log("chamaram atenção");
@@ -104,4 +124,5 @@ module.exports = {
     sendMessage,
     assignChat,
     drawAttenAttention,
+    changeStatus,
 };

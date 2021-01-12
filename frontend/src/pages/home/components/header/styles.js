@@ -27,12 +27,13 @@ export const Profile = styled.div`
             margin-left: 10px;
             width: 100%;
 
-            .button {
+            .span-username {
                 height: 27px;
                 color: white;
                 display: flex;
                 align-items: center;
                 padding-left: 5px;
+                background: transparent;
 
                 #username {
                     font-weight: 550;
@@ -48,6 +49,22 @@ export const Profile = styled.div`
                     margin-left: 10px;
                     color: MintCream;
                     color: #b9dde7;
+
+                    select {
+                        background: transparent;
+                        border: none;
+                        color: white;
+                        & option {
+                            margin: 40px;
+                            background: rgba(0, 0, 0, 0.3);
+                            color: #fff;
+                            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+                        }
+
+                        &:hover {
+                            border: white;
+                        }
+                    }
                 }
             }
             #sub-nick {

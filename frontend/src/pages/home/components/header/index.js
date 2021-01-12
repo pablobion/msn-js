@@ -18,13 +18,17 @@ import Borderavatar from "../../../components/modalBorder/index";
 import NavBar from "../../../components/navbar/index";
 
 //socket
-import { connect } from "../../../../configs/socket_export";
+import { connect, socket } from "../../../../configs/socket_export";
 //context
 import { useUser } from "./../../../context/allusers";
 
 const Header = () => {
     const { getPerson, contactsOnline } = useUser();
     const [person, setPerson] = useState();
+
+    const handleChangeStatus = async (e) => {
+        socket.emit("change status user", e.target.value);
+    };
 
     useEffect(() => {}, []);
     return (
@@ -36,11 +40,17 @@ const Header = () => {
                         <Borderavatar avatar={Avatar} size="32" status="online"></Borderavatar>
                     </div>
                     <div id="right">
-                        <AeroButton className="button">
+                        <span className="span-username">
                             <p id="username">Pablo Bion</p>
-                            <small>(Ocupado)</small>
-                            <img src={SmallArrowWhite} alt="" />
-                        </AeroButton>
+                            <small>
+                                <select onChange={(e) => handleChangeStatus(e)}>
+                                    <option value="online">(Online)</option>
+                                    <option value="busy">(Ocupado)</option>
+                                    <option value="away">(Ausente)</option>
+                                    <option value="invisible">(Offline)</option>
+                                </select>
+                            </small>
+                        </span>
                         <AeroButton id="sub-nick">
                             <input></input>
                         </AeroButton>
