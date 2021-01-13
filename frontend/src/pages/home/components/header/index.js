@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import { Profile, Navbar } from "./styles";
 
@@ -18,16 +18,9 @@ import Borderavatar from "../../../components/modalBorder/index";
 import NavBar from "../../../components/navbar/index";
 
 //socket
-import { connect, socket } from "../../../../configs/socket_export";
-//context
-import { useUser } from "./../../../context/allusers";
+import { socket } from "../../../../configs/socket_export";
 
 const Header = () => {
-    const { getPerson, contactsOnline } = useUser();
-    const [person, setPerson] = useState();
-
-    const [subnick, setSubnick] = useState();
-
     const handleChangeStatus = async (e) => {
         socket.emit("change status user", e.target.value);
     };
