@@ -5,8 +5,8 @@ export const Container = styled.div`
         text-align: center;
         padding-top: 100px;
     }
-    div {
-        border: 10px solid black;
+    #div-drop {
+        border: 5px dotted black;
         text-align: center;
         line-height: 100px;
         width: 200px;

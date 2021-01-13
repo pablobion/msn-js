@@ -14,13 +14,11 @@ const UploadPhoto = () => {
         };
     }, []);
 
-    const upload = (file) => {
-        file = document.getElementById("myFile").files[0];
+    const upload = (e) => {
+        e.preventDefault();
+        const file = document.getElementById("myFile").files[0];
         /* Is the file an image? */
         if (!file || !file.type.match(/image.*/)) return;
-
-        /* It is! */
-        document.body.className = "uploading";
 
         /* Lets build a FormData object*/
         var fd = new FormData(); // I wrote about it: https://hacks.mozilla.org/2011/01/how-to-develop-a-html5-image-uploader/
@@ -30,8 +28,9 @@ const UploadPhoto = () => {
         xhr.onload = function () {
             // Big win!
             console.log(JSON.parse(xhr.responseText).data.link);
-            // document.querySelector("#link").href = JSON.parse(xhr.responseText).data.link;
-            document.body.className = "uploaded";
+        };
+        xhr.onerror = function (e) {
+            alert("Error Status: " + e.target.status);
         };
 
         xhr.setRequestHeader("Authorization", "Client-ID 28aaa2e823b03b1"); // Get your own key http://api.imgur.com/
@@ -44,12 +43,16 @@ const UploadPhoto = () => {
 
     return (
         <Container>
-            <div>DROP!</div>
-            <button onClick={() => document.querySelector("input").click()}>Or click</button>
-            {/* <input style={{ visibility: "collapse", width: 0 }} type="file" id="input-files" onChange={upload(this.files[0])} /> */}
+            <div id="div-drop">DROP!</div>
+            <div>
+                <p>Envio rápido</p>
+                {/* <input type="file" id="myFile" onChange={upload} required></input> */}
+            </div>
 
-            <input id="myFile" type="file" onChange={upload} required />
-            <button type="submit">Submit</button>
+            <input id="myFile" type="file" required />
+            <button type="submit" onClick={upload}>
+                Submit
+            </button>
         </Container>
     );
 };
