@@ -24,6 +24,22 @@ export const Profile = styled.div`
         #left {
             margin-bottom: 15px;
             display: flex;
+
+            #btn-edit-photo {
+                position: absolute;
+                margin-left: 60px;
+                margin-top: 55px;
+                height: 21px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: transparent;
+                border: none;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
         }
         #right {
             margin-left: 10px;

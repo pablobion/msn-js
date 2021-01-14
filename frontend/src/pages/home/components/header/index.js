@@ -12,10 +12,15 @@ import navbarColors from "./assets/navbar/navbar-colors.png";
 import navbarMail from "./assets/navbar/navbar-mail.png";
 import navbarContacts from "./assets/navbar/navbar-contacts.png";
 
+//icons
+import { BsPencil } from "react-icons/bs";
+
 //components
 import AeroButton from "../../../components/aeroButton/index";
 import Borderavatar from "../../../components/modalBorder/index";
 import NavBar from "../../../components/navbar/index";
+
+import Crop from "../../../crop/index";
 
 //socket
 import { socket } from "../../../../configs/socket_export";
@@ -46,7 +51,9 @@ const Header = () => {
                 <div id="profile">
                     <div id="left">
                         <Borderavatar avatar={Avatar} size="64" status="online"></Borderavatar>
-                        <span>ss</span>
+                        <button id="btn-edit-photo" onClick={() => <Crop />}>
+                            <BsPencil id="btn-edit-photo-icons" size={15} color="white" />
+                        </button>
                     </div>
                     <div id="right">
                         <span className="span-username">
