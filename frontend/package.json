@@ -11,6 +11,7 @@
     "react-dom": "^17.0.1",
     "react-hook-form": "^6.13.1",
     "react-icons": "^4.1.0",
+    "react-image-crop": "^8.6.6",
     "react-scripts": "4.0.1",
     "socket.io-client": "^3.0.4",
     "styled-components": "^5.2.1",

@@ -25,7 +25,7 @@ const modalBorder = (props) => {
             size = 120;
             break;
         default:
-            size = 100;
+            size = props.size;
     }
 
     let status;

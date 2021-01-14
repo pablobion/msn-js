@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Profile = styled.div`
     padding: 10px;
-    height: 100px;
+    height: 130px;
     background-image: url("https://github.com/pablobion/msn-js/blob/master/frontend/src/pages/home/components/header/assets/background-large.png?raw=true");
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -18,10 +18,12 @@ export const Profile = styled.div`
     #profile {
         display: flex;
         align-items: center;
-        height: 80px;
+        height: 110px;
+        padding-left: 3px;
 
         #left {
             margin-bottom: 15px;
+            display: flex;
         }
         #right {
             margin-left: 10px;

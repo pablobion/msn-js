@@ -4,7 +4,7 @@ import { Profile, Navbar } from "./styles";
 
 //images profile
 import SmallArrowWhite from "./assets/small-arrow.svg";
-import Avatar from "./assets/avatar2.jpg";
+import Avatar from "./assets/avatar3.png";
 
 //images navbar
 import navbarNews from "./assets/navbar/navbar-news.png";
@@ -45,7 +45,8 @@ const Header = () => {
                 <NavBar />
                 <div id="profile">
                     <div id="left">
-                        <Borderavatar avatar={Avatar} size="32" status="online"></Borderavatar>
+                        <Borderavatar avatar={Avatar} size="64" status="online"></Borderavatar>
+                        <span>ss</span>
                     </div>
                     <div id="right">
                         <span className="span-username">
