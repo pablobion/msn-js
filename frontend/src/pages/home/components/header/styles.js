@@ -27,8 +27,8 @@ export const Profile = styled.div`
 
             #btn-edit-photo {
                 position: absolute;
-                margin-left: 60px;
-                margin-top: 55px;
+                top: 90px;
+                left: 70px;
                 height: 21px;
                 display: flex;
                 justify-content: center;

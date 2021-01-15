@@ -19,8 +19,9 @@ import { BsPencil } from "react-icons/bs";
 import AeroButton from "../../../components/aeroButton/index";
 import Borderavatar from "../../../components/modalBorder/index";
 import NavBar from "../../../components/navbar/index";
+import ModalCropUpdate from "../../../components/modalCropUpdate";
 
-import Crop from "../../../crop/index";
+import Crop from "../../../components/modalCropUpdate/components/crop/index";
 
 //socket
 import { socket } from "../../../../configs/socket_export";
@@ -51,9 +52,11 @@ const Header = () => {
                 <div id="profile">
                     <div id="left">
                         <Borderavatar avatar={Avatar} size="64" status="online"></Borderavatar>
-                        <button id="btn-edit-photo" onClick={() => <Crop />}>
-                            <BsPencil id="btn-edit-photo-icons" size={15} color="white" />
-                        </button>
+                        <ModalCropUpdate id="btn-edit-photo">
+                            <button id="btn-edit-photo" onClick={() => <Crop />}>
+                                <BsPencil size={15} color="white" />
+                            </button>
+                        </ModalCropUpdate>
                     </div>
                     <div id="right">
                         <span className="span-username">

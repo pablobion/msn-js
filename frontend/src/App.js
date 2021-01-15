@@ -10,8 +10,6 @@ import MultiChats from "../src/pages/multiChats/index";
 import Home from "./pages/home/index";
 import Chat from "./pages/chat/index";
 import Login from "./pages/login/index";
-import UploadPhoto from "./pages/uploadPhoto/index";
-import Crop from "./pages/crop/index";
 
 //context
 import { useUser } from "./pages/context/allusers";
@@ -43,8 +41,6 @@ function App() {
         <Container>
             <Home />
             {/* <Login /> */}
-            {/* <UploadPhoto /> */}
-            {/* <Crop /> */}
             {userChats && userChats.map((elem, index) => <Chat key={elem.socketidperson} ref={(el) => (chatRef.current[index] = el)} socketidperson={elem.socketidperson} visible={elem.visible} />)}
 
             <div id="multi-chats">{userChats && userChats.map((elem, index) => <MultiChats key={elem.socketidperson} ref={(el) => (multiChatRef.current[index] = el)} socketidperson={elem.socketidperson} />)}</div>
