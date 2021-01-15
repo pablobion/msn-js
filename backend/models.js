@@ -13,7 +13,7 @@ const addUser = (socketid) => {
         socketid: socketid,
         username: socketid,
         status: "online",
-        subnick: "alguma coisa aquiu",
+        subnick: "",
         chats: [],
     });
 };

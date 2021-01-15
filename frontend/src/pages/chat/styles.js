@@ -26,24 +26,18 @@ export const Container = styled.div`
         background-color: rgb(205, 240, 246);
         border-radius: 5px 5px 0px 0px;
         padding: 3px;
+        justify-content: flex-end;
 
-        ::-webkit-scrollbar {
-            height: 5px;
-        }
-
-        /* Track */
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        /* Handle */
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-        }
-
-        /* Handle on hover */
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
+        .header-chat-top-buttons {
+            background: white;
+            padding: 0px 7px 0px;
+            border: 1px solid gray;
+            margin-right: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     }
 

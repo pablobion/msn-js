@@ -8,6 +8,9 @@ import ChatText from "./components/chatText/index";
 import Chat from "./components/chat/index";
 import Persons from "./components/persons/index";
 
+//icons
+import { VscChromeMinimize, VscChromeClose } from "react-icons/vsc";
+
 //configs
 import { socket } from "../../configs/socket_export";
 
@@ -38,8 +41,12 @@ const ChatUser = React.forwardRef((props, ref) => {
     return (
         <Container className="draggable-chat" visible={props.visible}>
             <div id="header-chat-top">
-                <button onClick={() => minimizeChat(props.socketidperson)}>Minimizar</button>
-                <button onClick={() => closeChat(props.socketidperson)}>Fechar</button>
+                <button className="header-chat-top-buttons" onClick={() => minimizeChat(props.socketidperson)}>
+                    <VscChromeMinimize />
+                </button>
+                <button className="header-chat-top-buttons" onClick={() => closeChat(props.socketidperson)}>
+                    <VscChromeClose color="red" />
+                </button>
                 {props.children}
             </div>
             <div id="chat-top">
