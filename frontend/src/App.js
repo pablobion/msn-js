@@ -46,7 +46,6 @@ function App() {
             {/* <Login /> */}
             {/* <UploadPhoto /> */}
             {/* <Crop /> */}
-            {/* teste */}
             {userChats && userChats.map((elem, index) => <Chat key={elem.socketidperson} ref={(el) => (chatRef.current[index] = el)} socketidperson={elem.socketidperson} visible={elem.visible} />)}
 
             <div id="multi-chats">{userChats && userChats.map((elem, index) => <MultiChats key={elem.socketidperson} ref={(el) => (multiChatRef.current[index] = el)} socketidperson={elem.socketidperson} />)}</div>
