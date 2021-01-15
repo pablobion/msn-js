@@ -42,7 +42,6 @@ function App() {
     return (
         <Container>
             <Home />
-            {/* teste */}
             {/* <Login /> */}
             {/* <UploadPhoto /> */}
             {/* <Crop /> */}
