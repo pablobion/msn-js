@@ -36,8 +36,11 @@ const ChatUser = React.forwardRef((props, ref) => {
 
     useEffect(() => {
         draggable();
-        if (getPerson(props.socketidperson)) setPerson(getPerson(props.socketidperson)); //Verifica o person atraves do socketidperson passado por props, pegando o objeto do backend
-        if (getPerson(socket.id)) setUser(getPerson(socket.id)); //Verifica o person atraves do socketidperson passado por props, pegando o objeto do backend
+
+        (async function () {
+            if (getPerson(props.socketidperson)) setPerson(await getPerson(props.socketidperson)); //Verifica o person atraves do socketidperson passado por props, pegando o objeto do backend
+            if (getPerson(socket.id)) setUser(await getPerson(socket.id)); //Verifica o person atraves do socketidperson passado por props, pegando o objeto do backend
+        })();
     }, [getPerson(props.socketidperson), getPerson(socket.id)]);
 
     return (

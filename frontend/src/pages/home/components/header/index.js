@@ -30,7 +30,7 @@ import { socket } from "../../../../configs/socket_export";
 import { useUser } from "../../../context/allusers";
 
 const Header = () => {
-    const { getPerson } = useUser();
+    const { getUser } = useUser();
     const [person, setPerson] = useState();
 
     const handleChangeStatus = async (e) => {
@@ -51,7 +51,7 @@ const Header = () => {
         });
 
         (async function () {
-            setPerson(await getPerson(socket.id));
+            setPerson(await getUser(socket.id));
         })();
     });
 

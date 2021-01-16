@@ -21,7 +21,14 @@ export default function UserProvider({ children }) {
         });
     }, []);
 
-    const getPerson = async (socketid) => {
+    const getPerson = (socketid) => {
+        if (contactsOnline) {
+            let person = contactsOnline.find((elem) => elem.socketid === socketid);
+            return person;
+        }
+    };
+
+    const getUser = async (socketid) => {
         if (await contactsOnline) {
             let person = contactsOnline.find((elem) => elem.socketid === socketid);
             return person;
@@ -35,6 +42,7 @@ export default function UserProvider({ children }) {
                 countContactsOnline,
                 userChats,
                 getPerson,
+                getUser,
             }}
         >
             {children}
@@ -46,7 +54,7 @@ export function useUser() {
     const context = useContext(UserContext);
     if (!context) throw new Error("useCount must be used within a CountProvider");
 
-    const { contactsOnline, countContactsOnline, userChats, getPerson } = context;
+    const { contactsOnline, countContactsOnline, userChats, getPerson, getUser } = context;
 
-    return { contactsOnline, countContactsOnline, userChats, getPerson };
+    return { contactsOnline, countContactsOnline, userChats, getPerson, getUser };
 }
