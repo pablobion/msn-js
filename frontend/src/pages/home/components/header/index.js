@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Profile, Navbar } from "./styles";
 
@@ -31,6 +31,7 @@ import { useUser } from "../../../context/allusers";
 
 const Header = () => {
     const { getPerson } = useUser();
+    const [person, setPerson] = useState();
 
     const handleChangeStatus = async (e) => {
         socket.emit("change status user", e.target.value);
@@ -48,7 +49,11 @@ const Header = () => {
             const input = document.getElementById("myInput-subnick");
             input.value = data;
         });
-    }, []);
+
+        (async function () {
+            setPerson(await getPerson(socket.id));
+        })();
+    });
 
     return (
         <>
@@ -56,7 +61,12 @@ const Header = () => {
                 <NavBar />
                 <div id="profile">
                     <div id="left">
-                        <Borderavatar avatar="https://i.imgur.com/hIbb87P.png" size="64" status={getPerson(socket.id).status} minus="19" top="2px" left="2px"></Borderavatar>
+                        {person ? (
+                            <Borderavatar avatar="https://i.imgur.com/hIbb87P.png" size="64" status={person.status} minus="19" top="2px" left="2px"></Borderavatar>
+                        ) : (
+                            <Borderavatar avatar="https://i.imgur.com/hIbb87P.png" size="64" status="online" minus="19" top="2px" left="2px"></Borderavatar>
+                        )}
+
                         <ModalCropUpdate id="btn-edit-photo">
                             <button id="btn-edit-photo" onClick={() => <Crop />}>
                                 <BsPencil size={15} color="white" />

@@ -20,8 +20,8 @@ export default function UserProvider({ children }) {
         });
     }, []);
 
-    const getPerson = (socketid) => {
-        if (contactsOnline) {
+    const getPerson = async (socketid) => {
+        if (await contactsOnline) {
             let person = contactsOnline.find((elem) => elem.socketid === socketid);
             return person;
         }
