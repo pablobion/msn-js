@@ -51,7 +51,7 @@ const Header = () => {
                 <NavBar />
                 <div id="profile">
                     <div id="left">
-                        <Borderavatar avatar={Avatar} size="64" status="online"></Borderavatar>
+                        <Borderavatar avatar="https://i.imgur.com/hIbb87P.png" size="64" status="online"></Borderavatar>
                         <ModalCropUpdate id="btn-edit-photo">
                             <button id="btn-edit-photo" onClick={() => <Crop />}>
                                 <BsPencil size={15} color="white" />
