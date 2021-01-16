@@ -27,7 +27,7 @@ const Login = () => {
         <Main>
             <Navbar />
             <Container>
-                <ModalBorder size="96" status="online" />
+                <ModalBorder size="96" status="online" minus="22" top="4px" left="3px" />
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="div-input-login">
                         <p id="login-input-email">Nome de usuario:</p>

@@ -63,6 +63,7 @@ export const Container = styled.div`
             padding: 5px;
         }
         #chat-conversation-right {
+            padding-top: 10px;
             width: 22%;
         }
     }

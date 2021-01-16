@@ -26,7 +26,12 @@ import Crop from "../../../components/modalCropUpdate/components/crop/index";
 //socket
 import { socket } from "../../../../configs/socket_export";
 
+//context
+import { useUser } from "../../../context/allusers";
+
 const Header = () => {
+    const { getPerson } = useUser();
+
     const handleChangeStatus = async (e) => {
         socket.emit("change status user", e.target.value);
     };
@@ -51,7 +56,7 @@ const Header = () => {
                 <NavBar />
                 <div id="profile">
                     <div id="left">
-                        <Borderavatar avatar="https://i.imgur.com/hIbb87P.png" size="64" status="online"></Borderavatar>
+                        <Borderavatar avatar="https://i.imgur.com/hIbb87P.png" size="64" status={getPerson(socket.id).status} minus="19" top="2px" left="2px"></Borderavatar>
                         <ModalCropUpdate id="btn-edit-photo">
                             <button id="btn-edit-photo" onClick={() => <Crop />}>
                                 <BsPencil size={15} color="white" />

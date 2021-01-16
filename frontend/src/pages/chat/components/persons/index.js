@@ -8,8 +8,8 @@ import ModalBorder from "../../../components/modalBorder/index";
 const Persons = (props) => {
     return (
         <Container>
-            <ModalBorder size="96" status={props.statusPerson} />
-            <ModalBorder size="96" status={props.statusUser} />
+            <ModalBorder size="96" status={props.statusPerson} avatar="https://i.imgur.com/hIbb87P.png" minus="22" top="5px" left="5px" />
+            <ModalBorder size="96" status={props.statusUser} minus="22" top="5px" left="5px" />
         </Container>
     );
 };

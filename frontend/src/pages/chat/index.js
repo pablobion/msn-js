@@ -24,6 +24,7 @@ const ChatUser = React.forwardRef((props, ref) => {
     const { getPerson } = useUser();
 
     const [person, setPerson] = useState({});
+    const [user, setUser] = useState({});
 
     const minimizeChat = (socketidperson) => {
         socket.emit("change visible chat", socketidperson);
@@ -36,7 +37,8 @@ const ChatUser = React.forwardRef((props, ref) => {
     useEffect(() => {
         draggable();
         if (getPerson(props.socketidperson)) setPerson(getPerson(props.socketidperson)); //Verifica o person atraves do socketidperson passado por props, pegando o objeto do backend
-    }, []);
+        if (getPerson(socket.id)) setUser(getPerson(socket.id)); //Verifica o person atraves do socketidperson passado por props, pegando o objeto do backend
+    }, [getPerson(props.socketidperson), getPerson(socket.id)]);
 
     return (
         <Container className="draggable-chat" visible={props.visible}>
@@ -58,7 +60,7 @@ const ChatUser = React.forwardRef((props, ref) => {
                     <Chat socketidUser={socket.id} socketidPerson={props.socketidperson} />
                 </div>
                 <div id="chat-conversation-right">
-                    <Persons statusUser="offline" statusPerson="online" />
+                    <Persons statusUser={user.status} statusPerson={person.status} />
                 </div>
             </div>
         </Container>

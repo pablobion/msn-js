@@ -52,7 +52,7 @@ const modalBorder = (props) => {
     }
 
     return (
-        <Container size={size}>
+        <Container size={size} top={props.top} left={props.left} minus={props.minus}>
             <div id="modal-border-avatar-div">
                 <img id="modal-border-avatar-frame" src={status} alt="" />
                 <div id="frame-div-avatar">
