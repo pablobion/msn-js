@@ -42,8 +42,10 @@ const ChatUser = React.forwardRef((props, ref) => {
         (async function () {
             setPerson(await getPerson(props.socketidperson)); //Verifica o person atraves do socketidperson passado por props, pegando o objeto do backend
             setUser(await getPerson(socket.id)); //Verifica o person atraves do socketidperson passado por props, pegando o objeto do backend
-            setUsernamePersonOld(person.username); // coloca username da pessoa em um state
-            setSubnickOld(person.subnick); // coloca subnick da pessoa em um state
+            if (person) {
+                setUsernamePersonOld(person.username); // coloca username da pessoa em um state
+                setSubnickOld(person.subnick); // coloca subnick da pessoa em um state
+            }
         })();
     }, [getPerson(props.socketidperson), getPerson(socket.id)]);
 
