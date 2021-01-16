@@ -15,6 +15,7 @@ const addUser = (socketid) => {
         status: "online",
         subnick: "",
         chats: [],
+        avatar: "",
     });
 };
 
@@ -117,6 +118,12 @@ const changeSubnick = (socketid, subnick) => {
     return socketsConnected[indexuser].subnick;
 };
 
+const changeAvatar = (socketid, avatarlink) => {
+    const indexuser = getIndex(socketid);
+
+    socketsConnected[indexuser].avatar = `${avatarlink}`;
+};
+
 const drawAttenAttention = (socketid, socketidperson) => {
     changeVisibleChat(socketidperson, socketid);
     console.log("chamaram atenção");
@@ -133,4 +140,5 @@ module.exports = {
     drawAttenAttention,
     changeStatus,
     changeSubnick,
+    changeAvatar,
 };

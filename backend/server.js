@@ -5,7 +5,7 @@ const server = require("http").createServer(app);
 
 const bodyparser = require("body-parser");
 
-const { addUser, socketsConnected, removeUser, closeChat, changeVisibleChat, sendMessage, assignChat, drawAttenAttention, changeStatus, changeSubnick } = require("./models");
+const { addUser, socketsConnected, removeUser, closeChat, changeVisibleChat, sendMessage, assignChat, drawAttenAttention, changeStatus, changeSubnick, changeAvatar } = require("./models");
 
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
@@ -40,6 +40,11 @@ io.on("connection", (socket) => {
 
     addUser(socket.id); //Adicionando o usuario que entrou na lista de sockets online
     io.emit("socketsConnected", socketsConnected); // Mandando para os clientes que o socket entrou
+
+    socket.on("change avatar", (avatarlink) => {
+        changeAvatar(socket.id, avatarlink);
+        io.emit("socketsConnected", socketsConnected); // Mandando para os clientes que o socket entrou
+    });
 
     socket.on("send server message text", ({ message, socketidUser, socketidPerson }) => {
         const { updateChatsPerson, chatopen } = sendMessage(socketidUser, socketidPerson);

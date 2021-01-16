@@ -24,8 +24,7 @@ const ChatUser = React.forwardRef((props, ref) => {
     const { getPerson } = useUser();
 
     const [person, setPerson] = useState({});
-    const [usernamePersonOld, setUsernamePersonOld] = useState();
-    const [subnickOld, setSubnickOld] = useState();
+    const [oldPerson, setOldPerson] = useState({});
     const [user, setUser] = useState({});
 
     const minimizeChat = (socketidperson) => {
@@ -43,8 +42,7 @@ const ChatUser = React.forwardRef((props, ref) => {
             setPerson(await getPerson(props.socketidperson)); //Verifica o person atraves do socketidperson passado por props, pegando o objeto do backend
             setUser(await getPerson(socket.id)); //Verifica o person atraves do socketidperson passado por props, pegando o objeto do backend
             if (person) {
-                setUsernamePersonOld(person.username); // coloca username da pessoa em um state
-                setSubnickOld(person.subnick); // coloca subnick da pessoa em um state
+                setOldPerson(person);
             }
         })();
     }, [getPerson(props.socketidperson), getPerson(socket.id)]);
@@ -61,7 +59,7 @@ const ChatUser = React.forwardRef((props, ref) => {
                 {props.children}
             </div>
             <div id="chat-top">
-                <Header username={person ? person.username : `${usernamePersonOld}`} subnick={person ? person.subnick : `${subnickOld}`} status={person ? person.status : "invisible"} />
+                <Header username={person ? person.username : `${oldPerson.username}`} subnick={person ? person.subnick : `${oldPerson.subnick}`} status={person ? person.status : "invisible"} />
             </div>
             <div id="chat-conversation">
                 <div id="chat-conversation-left">
@@ -69,7 +67,7 @@ const ChatUser = React.forwardRef((props, ref) => {
                     <Chat socketidUser={socket.id} socketidPerson={props.socketidperson} />
                 </div>
                 <div id="chat-conversation-right">
-                    <Persons statusUser={user.status} statusPerson={person ? person.status : "invisible"} />
+                    <Persons statusUser={user.status} statusPerson={person ? person.status : "invisible"} avatarperson={person ? person.avatar : oldPerson.avatar} avataruser={user ? user.avatar : ""} />
                 </div>
             </div>
         </Container>

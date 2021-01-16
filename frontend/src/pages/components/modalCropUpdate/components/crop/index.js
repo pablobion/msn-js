@@ -5,7 +5,10 @@ import "react-image-crop/dist/ReactCrop.css";
 //styles
 import { Container, Button, SelectFile } from "./styles";
 
-export default function App() {
+//socket
+import { socket } from "../../../../../configs/socket_export";
+
+export default function App(props) {
     const [upImg, setUpImg] = useState();
     const imgRef = useRef(null);
     const previewCanvasRef = useRef(null);
@@ -24,7 +27,25 @@ export default function App() {
         xhr.open("POST", "https://api.imgur.com/3/image.json"); // Boooom!
         xhr.onload = function () {
             // Big win!
-            console.log(JSON.parse(xhr.responseText).data.link);
+            socket.emit("change avatar", JSON.parse(xhr.responseText).data.link);
+
+            let history = [];
+
+            if (JSON.parse(localStorage.getItem("photosHistory"))) {
+                //verifica se a pessoa ja upou alguma foto na vida
+                if (JSON.parse(localStorage.getItem("photosHistory")).length > 6) {
+                    //caso a pessoa ja tenha 7 fotos no historico, ele vai removendo e adicionando a nova
+                    history = JSON.parse(localStorage.getItem("photosHistory"));
+                    history.shift();
+                } else {
+                    history = JSON.parse(localStorage.getItem("photosHistory"));
+                }
+
+                localStorage.setItem("photosHistory", JSON.stringify([...history, JSON.parse(xhr.responseText).data.link]));
+            } else {
+                //se nunca colocou uma foto, ele ira cair aqui para baixo.
+                localStorage.setItem("photosHistory", JSON.stringify([JSON.parse(xhr.responseText).data.link]));
+            }
         };
         xhr.onerror = function (e) {
             alert("Error Status: " + e.target.status);
@@ -117,7 +138,14 @@ export default function App() {
                 </div>
             </div>
 
-            <Button type="button" disabled={!completedCrop?.width || !completedCrop?.height} onClick={() => generateDownload(previewCanvasRef.current, completedCrop)}>
+            <Button
+                type="button"
+                disabled={!completedCrop?.width || !completedCrop?.height}
+                onClick={() => {
+                    generateDownload(previewCanvasRef.current, completedCrop);
+                    props.close();
+                }}
+            >
                 Salvar
             </Button>
         </Container>

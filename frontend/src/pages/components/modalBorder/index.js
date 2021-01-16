@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Container } from "./styles";
 
@@ -11,7 +11,13 @@ import online from "./assets/online.png";
 import away from "./assets/away.png";
 import busy from "./assets/busy.png";
 
-const modalBorder = (props) => {
+//images profile default
+import ProfileLeaf from "./assets/defaultAvatars/leaf.png";
+
+//scripts
+import verifyAvatarDefault from "./verifyAvatarDefault.js";
+
+const ModalBorder = (props) => {
     let size;
 
     switch (props.size) {
@@ -44,12 +50,7 @@ const modalBorder = (props) => {
             status = invisible;
     }
 
-    let avatar;
-    if (props.avatar) {
-        avatar = props.avatar;
-    } else {
-        avatar = avatarDefault;
-    }
+    let avatar = verifyAvatarDefault(props.avatar);
 
     return (
         <Container size={size} top={props.top} left={props.left} minus={props.minus}>
@@ -63,4 +64,4 @@ const modalBorder = (props) => {
     );
 };
 
-export default modalBorder;
+export default ModalBorder;

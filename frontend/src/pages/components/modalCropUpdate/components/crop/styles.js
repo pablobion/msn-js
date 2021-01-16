@@ -94,6 +94,7 @@ export const Button = styled.button`
     background: #1e9d24;
     border: 1px solid lightgray;
     color: white;
+    cursor: pointer;
 `;
 
 export const SelectFile = styled.input`
