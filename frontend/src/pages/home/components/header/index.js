@@ -75,7 +75,8 @@ const Header = () => {
                     </div>
                     <div id="right">
                         <span className="span-username">
-                            <p id="username">Pablo Bion</p>
+                            {person ? <p id="username">{person.username}</p> : <p id="username">n/a</p>}
+
                             <small>
                                 <select onChange={(e) => handleChangeStatus(e)}>
                                     <option value="online">(Online)</option>
