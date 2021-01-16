@@ -34,6 +34,9 @@ export const Container = styled.div`
 
     #contacts-list {
         padding: 5px;
+        height: 90%;
+        max-height: 90%;
+        overflow: auto;
 
         .contacts-group-list summary::-webkit-details-marker {
             display: none;
@@ -61,6 +64,7 @@ export const Container = styled.div`
 
         #contacts-group-list-contacts {
             margin-left: 20px;
+            height: 100%;
         }
     }
 `;

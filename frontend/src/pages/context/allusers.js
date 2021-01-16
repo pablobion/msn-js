@@ -11,6 +11,7 @@ export default function UserProvider({ children }) {
 
     useEffect(() => {
         socket.on("socketsConnected", (data) => {
+            console.log(data.status);
             setCountContactsOnline(data.length - 1);
             setContactsOnline(data);
         });

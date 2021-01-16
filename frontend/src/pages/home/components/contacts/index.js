@@ -39,17 +39,12 @@ const Contacts = () => {
                         {contactsOnline &&
                             contactsOnline.map((elem) => {
                                 if (socket.id !== elem.socketid) {
-                                    return (
-                                        <Contact
-                                            username={elem.username}
-                                            status={elem.status}
-                                            subnick={elem.subnick}
-                                            socketid={elem.socketid}
-                                            key={elem.socketid}
-                                        />
-                                    );
+                                    if (elem.status != "invisible") {
+                                        return <Contact username={elem.username} status={elem.status} subnick={elem.subnick} socketid={elem.socketid} key={elem.socketid} />;
+                                    }
                                 }
                             })}
+                        <small style={{ color: "darkgray", height: "100%" }}>* Usuários com status offline aparecem no contador mas são ocultos da lista.</small>
                     </div>
                 </details>
             </div>

@@ -20,6 +20,7 @@ const Home = React.forwardRef((props, ref) => {
                 <SideBar />
                 <Contacts />
             </div>
+
             <div id="ad-div">
                 <img src={ad} alt="" />
             </div>
