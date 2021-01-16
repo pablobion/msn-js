@@ -5,9 +5,14 @@ import { Container } from "./styles";
 //components
 import ModalBorder from "../../../modalBorder";
 
+//scripts
+import { verifyAvatarDefault, defaultPhotosArray } from "../../../modalBorder/verifyAvatarDefault.js";
+
 //images
 import Logo from "./assets/msn-logo.png";
-import Praia from "./assets/7.webp";
+
+//configs
+import { socket } from "../../../../../configs/socket_export";
 
 const PhotoHistory = (props) => {
     const [photos, setPhotos] = useState();
@@ -18,6 +23,11 @@ const PhotoHistory = (props) => {
             setPhotos(JSON.parse(localStorage.getItem("photosHistory")));
         }
     }, []);
+
+    const handleClickChangeAvatarDefault = (elem) => {
+        if (!elem) return false;
+        socket.emit("change avatar", elem);
+    };
 
     return (
         <Container>
@@ -34,34 +44,26 @@ const PhotoHistory = (props) => {
                     <h5>Imagens comuns</h5>
 
                     <div id="photos-galary">
-                        <h5>Imagens comuns</h5>
-                        <button
-                            onClick={() => {
-                                setPhotoFocus(Praia);
-                                console.log(photoFocus);
-                            }}
-                        >
-                            <img src={Praia} alt="" />
-                        </button>
-
-                        <button
-                            onClick={() => {
-                                setPhotoFocus(Logo);
-                                console.log(photoFocus);
-                            }}
-                        >
-                            <img src={Logo} alt="" />
-                        </button>
+                        {defaultPhotosArray.map((elem) => (
+                            <button
+                                className="button-photos-galary"
+                                onClick={() => {
+                                    setPhotoFocus(verifyAvatarDefault(elem));
+                                    handleClickChangeAvatarDefault(elem);
+                                }}
+                            >
+                                <img src={verifyAvatarDefault(elem)}></img>
+                            </button>
+                        ))}
                     </div>
                 </div>
                 <div id="right">
-                    <ModalBorder avatar={photoFocus} minus="29" top="-10px" left="2px" />
+                    <ModalBorder id="right-avatar-preview" avatar={photoFocus} size="64" minus="15" top="10px" left="2px" />
                     <button onClick={props.custom}>Custom</button>
                 </div>
             </div>
             <div id="bottom">
-                <button>OK</button>
-                <button>Fechar</button>
+                <button onClick={props.close}>Fechar</button>
             </div>
 
             {/* <h1>Avatares Disponiveis</h1>

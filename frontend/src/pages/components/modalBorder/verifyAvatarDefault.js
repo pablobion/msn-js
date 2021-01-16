@@ -29,23 +29,55 @@ import surf from "./assets/defaultAvatars/surf.png";
 import tennis from "./assets/defaultAvatars/tennis.png";
 import winter from "./assets/defaultAvatars/winter.gif";
 
-export default (avatarname) => {
+export const defaultPhotosArray = [
+    "leaf",
+    "basketball",
+    "bonsai",
+    "chef",
+    "chess",
+    "doctor",
+    "dog",
+    "electric_guitar",
+    "executive",
+    "fall",
+    "fish",
+    "flare",
+    "gerber_daisy",
+    "golf",
+    "guest",
+    "guitar",
+    "kitten",
+    "morty",
+    "music",
+    "robot",
+    "seastar",
+    "shopping",
+    "soccer",
+    "sports",
+    "spring",
+    "summer",
+    "surf",
+    "tennis",
+    "winter",
+];
+
+export const verifyAvatarDefault = (avatarname) => {
     if (!avatarname) return avatarDefault;
 
     if (avatarname === "leaf") return leaf;
     if (avatarname === "basketball") return basketball;
     if (avatarname === "bonsai") return bonsai;
-    if (avatarname === "chef ") return chef;
+    if (avatarname === "chef") return chef;
     if (avatarname === "chess") return chess;
     if (avatarname === "doctor") return doctor;
     if (avatarname === "dog") return dog;
     if (avatarname === "electric_guitar") return electric_guitar;
     if (avatarname === "executive") return executive;
-    if (avatarname === "fall ") return fall;
-    if (avatarname === "fish ") return fish;
+    if (avatarname === "fall") return fall;
+    if (avatarname === "fish") return fish;
     if (avatarname === "flare") return flare;
     if (avatarname === "gerber_daisy") return gerber_daisy;
-    if (avatarname === "golf ") return golf;
+    if (avatarname === "golf") return golf;
     if (avatarname === "guest") return guest;
     if (avatarname === "guitar") return guitar;
     if (avatarname === "kitten") return kitten;

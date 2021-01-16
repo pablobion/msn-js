@@ -31,7 +31,7 @@ const ModalCropUpdate = (props) => {
                     </span>
                     {deafult ? (
                         <>
-                            <PhotoHistory custom={() => setDefault(false)} />
+                            <PhotoHistory custom={() => setDefault(false)} close={handleClickClose} />
                         </>
                     ) : (
                         <Crop close={handleClickClose} />

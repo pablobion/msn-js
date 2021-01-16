@@ -15,7 +15,7 @@ import busy from "./assets/busy.png";
 import ProfileLeaf from "./assets/defaultAvatars/leaf.png";
 
 //scripts
-import verifyAvatarDefault from "./verifyAvatarDefault.js";
+import { verifyAvatarDefault } from "./verifyAvatarDefault.js";
 
 const ModalBorder = (props) => {
     let size;

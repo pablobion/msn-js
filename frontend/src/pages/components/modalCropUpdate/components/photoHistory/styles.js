@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    border: 1px solid #000;
+    width: 100%;
+    padding: 0px 18vw;
+
     #header {
         p {
             display: flex;
@@ -28,22 +30,44 @@ export const Container = styled.div`
 
     #mid {
         display: flex;
-        border: 1px solid #000;
+        margin-top: 10px;
 
         #left {
-            border: 1px solid #000;
-            width: 170%;
+            width: 100%;
             height: 400px;
             display: flex;
             flex-direction: column;
+
             #photos-galary {
-                border: 1px solid #000;
                 width: 100%;
                 max-width: 100%;
                 overflow: auto;
+                display: flex;
+
+                flex-wrap: wrap;
 
                 img {
                     width: 20%;
+                }
+
+                .button-photos-galary {
+                    border-radius: 5px;
+                    border: 1px solid lightgray;
+                    cursor: pointer;
+                    margin: 5px;
+                    height: 50px;
+                    width: 50px;
+                    padding: 1px;
+
+                    &:hover {
+                        background: lightgrey;
+                    }
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 5px;
+                    }
                 }
             }
         }
@@ -52,6 +76,39 @@ export const Container = styled.div`
             justify-content: flex-start;
             align-items: center;
             flex-direction: column;
+            button {
+                margin-top: 40px;
+                padding: 5px 20px;
+                border-radius: 5px;
+                background: lightgray;
+                color: #454545;
+                border: 1px solid gray;
+                cursor: pointer;
+
+                &:hover {
+                    background: gray;
+                    color: white;
+                }
+            }
+        }
+    }
+    #bottom {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        button {
+            margin-top: 40px;
+            padding: 5px 20px;
+            border-radius: 5px;
+            background: tomato;
+            color: white;
+            border: 1px solid lightgray;
+            cursor: pointer;
+
+            &:hover {
+                background: red;
+                color: white;
+            }
         }
     }
 `;

@@ -67,7 +67,7 @@ const ChatUser = React.forwardRef((props, ref) => {
                     <Chat socketidUser={socket.id} socketidPerson={props.socketidperson} />
                 </div>
                 <div id="chat-conversation-right">
-                    <Persons statusUser={user.status} statusPerson={person ? person.status : "invisible"} avatarperson={person ? person.avatar : oldPerson.avatar} avataruser={user ? user.avatar : ""} />
+                    <Persons statusUser={user ? user.status : "invisible"} statusPerson={person ? person.status : "invisible"} avatarperson={person ? person.avatar : oldPerson.avatar} avataruser={user ? user.avatar : ""} />
                 </div>
             </div>
         </Container>

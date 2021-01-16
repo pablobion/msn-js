@@ -117,6 +117,7 @@ export default function App(props) {
 
     return (
         <Container>
+            <h3>Selecione um arquivo abaixo para fazer o recorte e salvar.</h3>
             <div id="button-select-photo">
                 <SelectFile type="file" accept="image/*" onChange={onSelectFile} />
             </div>
