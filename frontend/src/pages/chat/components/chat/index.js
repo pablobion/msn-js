@@ -34,6 +34,11 @@ const Chat = (props) => {
         }
     };
 
+    const handleClickDrawAttention = () => {
+        const socketidPerson = props.socketidPerson;
+        socket.emit("Draw AttenAttention", socketidPerson);
+    };
+
     return (
         <>
             <MultiPoints>
@@ -46,7 +51,7 @@ const Chat = (props) => {
                 <AeroButton>
                     <img src={winks} alt="" />
                 </AeroButton>
-                <AeroButton>
+                <AeroButton onCustomClick={handleClickDrawAttention}>
                     <img src={tilt} alt="" />
                 </AeroButton>
                 <AeroButton>

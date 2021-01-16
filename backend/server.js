@@ -56,8 +56,9 @@ io.on("connection", (socket) => {
     });
 
     socket.on("Draw AttenAttention", (socketidperson) => {
-        const userChats = changeVisibleChat(socket.id, socketidperson); // troca o visible de true para false e ao contrario também, e pega os chats novamente
-        io.to(socket.id).emit("refresh multi chats", userChats); //manda os chats com o atributo do visible atualizado
+        const userChats = drawAttenAttention(socket.id, socketidperson);
+        io.to(socketidperson).emit("refresh multi chats", userChats);
+        io.to(socketidperson).emit("Draw AttenAttention", socket.id);
     });
 
     socket.on("change visible chat", (socketidperson) => {

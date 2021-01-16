@@ -5,7 +5,9 @@ const getIndex = (socketid) => {
 };
 
 const getIndexChat = (index, socketidperson) => {
-    return socketsConnected[index].chats.findIndex((elem) => elem.socketidperson === socketidperson);
+    if (socketsConnected[index]) {
+        return socketsConnected[index].chats.findIndex((elem) => elem.socketidperson === socketidperson);
+    }
 };
 
 const addUser = (socketid) => {
@@ -125,8 +127,16 @@ const changeAvatar = (socketid, avatarlink) => {
 };
 
 const drawAttenAttention = (socketid, socketidperson) => {
-    changeVisibleChat(socketidperson, socketid);
-    console.log("chamaram atenção");
+    const updateChatsPerson = assignChat(socketidperson, socketid, "person"); //Atribui o chat para o person, lá na function verifica se já tem ou nao.
+
+    const indexperson = getIndex(socketidperson);
+    const indexchat = getIndexChat(indexperson, socketid);
+
+    if (socketsConnected[indexperson]) {
+        socketsConnected[indexperson].chats[indexchat].visible = true;
+    }
+
+    return updateChatsPerson;
 };
 
 module.exports = {

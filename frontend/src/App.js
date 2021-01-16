@@ -18,22 +18,32 @@ import { socket } from "./configs/socket_export";
 function App() {
     const { userChats } = useUser();
 
-    const chatRef = useRef([]);
+    const chatRefText = useRef([]);
     const multiChatRef = useRef([]);
 
     useEffect(() => {
         socket.on("send client message text", ({ message, socketidUser, socketidPerson, chatopen }) => {
-            if (!chatRef.current) return false;
-            const indexPersonChat = chatRef.current.findIndex((elem) => elem.id === socketidPerson);
-            const indexUserChat = chatRef.current.findIndex((elem) => elem.id === socketidUser);
+            if (!chatRefText.current) return false;
+            const indexPersonChat = chatRefText.current.findIndex((elem) => elem.id === socketidPerson);
+            const indexUserChat = chatRefText.current.findIndex((elem) => elem.id === socketidUser);
 
-            if (chatRef.current[indexUserChat]) chatRef.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname">${socketidUser} diz:</p><p id="chat-textmessage">${message}</p>`);
-            if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname">${socketidUser} diz:</p><p id="chat-textmessage">${message}</p>`);
+            if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname">${socketidUser} diz:</p><p id="chat-textmessage">${message}</p>`);
+            if (chatRefText.current[indexPersonChat]) chatRefText.current[indexPersonChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname">${socketidUser} diz:</p><p id="chat-textmessage">${message}</p>`);
 
             if (chatopen === false) {
+                //verificando se o chat estava aberto, se caso não, deixa ele laranja
                 const indexPersonMultiChat = multiChatRef.current.findIndex((elem) => `${elem.id}` === `${socketidUser}-multichat`);
-                if (chatRef.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: orange;";
+                if (chatRefText.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: orange;";
             }
+        });
+
+        socket.on("Draw AttenAttention", (data) => {
+            const indexPersonMultiChat = multiChatRef.current.findIndex((elem) => `${elem.id}` === `${data}-multichat`);
+            if (chatRefText.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: tomato;animation: shake 0.5s;";
+
+            setTimeout(() => {
+                if (chatRefText.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: transparent;";
+            }, 3000);
         });
     }, []);
 
@@ -41,7 +51,7 @@ function App() {
         <Container>
             <Home />
             {/* <Login /> */}
-            {userChats && userChats.map((elem, index) => <Chat key={elem.socketidperson} ref={(el) => (chatRef.current[index] = el)} socketidperson={elem.socketidperson} visible={elem.visible} />)}
+            {userChats && userChats.map((elem, index) => <Chat key={elem.socketidperson} ref={(el) => (chatRefText.current[index] = el)} socketidperson={elem.socketidperson} visible={elem.visible} />)}
 
             <div id="multi-chats">{userChats && userChats.map((elem, index) => <MultiChats key={elem.socketidperson} ref={(el) => (multiChatRef.current[index] = el)} socketidperson={elem.socketidperson} />)}</div>
             <GlobalStyle />
