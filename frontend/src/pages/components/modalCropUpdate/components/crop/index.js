@@ -33,7 +33,7 @@ export default function App(props) {
 
             if (JSON.parse(localStorage.getItem("photosHistory"))) {
                 //verifica se a pessoa ja upou alguma foto na vida
-                if (JSON.parse(localStorage.getItem("photosHistory")).length > 6) {
+                if (JSON.parse(localStorage.getItem("photosHistory")).length > 10) {
                     //caso a pessoa ja tenha 7 fotos no historico, ele vai removendo e adicionando a nova
                     history = JSON.parse(localStorage.getItem("photosHistory"));
                     history.shift();

@@ -41,20 +41,37 @@ const PhotoHistory = (props) => {
             </div>
             <div id="mid">
                 <div id="left">
-                    <h5>Imagens comuns</h5>
-
                     <div id="photos-galary">
-                        {defaultPhotosArray.map((elem) => (
-                            <button
-                                className="button-photos-galary"
-                                onClick={() => {
-                                    setPhotoFocus(verifyAvatarDefault(elem));
-                                    handleClickChangeAvatarDefault(elem);
-                                }}
-                            >
-                                <img src={verifyAvatarDefault(elem)}></img>
-                            </button>
-                        ))}
+                        <div>
+                            {photos && <h5>Imagens custom</h5>}
+                            <div>
+                                {photos &&
+                                    photos.map((elem) => (
+                                        <button
+                                            className="button-photos-galary"
+                                            onClick={() => {
+                                                setPhotoFocus(verifyAvatarDefault(elem));
+                                                handleClickChangeAvatarDefault(elem);
+                                            }}
+                                        >
+                                            <img src={verifyAvatarDefault(elem)}></img>
+                                        </button>
+                                    ))}
+                            </div>
+
+                            <h5>Imagens comuns</h5>
+                            {defaultPhotosArray.map((elem) => (
+                                <button
+                                    className="button-photos-galary"
+                                    onClick={() => {
+                                        setPhotoFocus(verifyAvatarDefault(elem));
+                                        handleClickChangeAvatarDefault(elem);
+                                    }}
+                                >
+                                    <img src={verifyAvatarDefault(elem)}></img>
+                                </button>
+                            ))}
+                        </div>
                     </div>
                 </div>
                 <div id="right">
