@@ -16,3 +16,16 @@ export const Container = styled.div`
         margin: 2px 0px 8px 10px;
     }
 `;
+
+export const MessageStatus = styled.span`
+    border: 1px solid lightgray;
+    color: black;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    background: rgb(255, 255, 185, 0.7);
+    img {
+        margin-right: 10px;
+    }
+    height: 25px;
+`;

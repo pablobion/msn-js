@@ -24,6 +24,8 @@ const ChatUser = React.forwardRef((props, ref) => {
     const { getPerson } = useUser();
 
     const [person, setPerson] = useState({});
+    const [usernamePersonOld, setUsernamePersonOld] = useState();
+    const [subnickOld, setSubnickOld] = useState();
     const [user, setUser] = useState({});
 
     const minimizeChat = (socketidperson) => {
@@ -38,8 +40,10 @@ const ChatUser = React.forwardRef((props, ref) => {
         draggable();
 
         (async function () {
-            if (getPerson(props.socketidperson)) setPerson(await getPerson(props.socketidperson)); //Verifica o person atraves do socketidperson passado por props, pegando o objeto do backend
-            if (getPerson(socket.id)) setUser(await getPerson(socket.id)); //Verifica o person atraves do socketidperson passado por props, pegando o objeto do backend
+            setPerson(await getPerson(props.socketidperson)); //Verifica o person atraves do socketidperson passado por props, pegando o objeto do backend
+            setUser(await getPerson(socket.id)); //Verifica o person atraves do socketidperson passado por props, pegando o objeto do backend
+            setUsernamePersonOld(person.username); // coloca username da pessoa em um state
+            setSubnickOld(person.subnick); // coloca subnick da pessoa em um state
         })();
     }, [getPerson(props.socketidperson), getPerson(socket.id)]);
 
@@ -55,15 +59,15 @@ const ChatUser = React.forwardRef((props, ref) => {
                 {props.children}
             </div>
             <div id="chat-top">
-                <Header username={person.username} subnick={person.subnick} status={person.status} />
+                <Header username={person ? person.username : `${usernamePersonOld}`} subnick={person ? person.subnick : `${subnickOld}`} status={person ? person.status : "invisible"} />
             </div>
             <div id="chat-conversation">
                 <div id="chat-conversation-left">
-                    <ChatText socketidUser={socket.id} socketidperson={props.socketidperson} ref={ref} />
+                    <ChatText socketidUser={socket.id} socketidperson={props.socketidperson} ref={ref} status={person ? person.status : "invisible"} />
                     <Chat socketidUser={socket.id} socketidPerson={props.socketidperson} />
                 </div>
                 <div id="chat-conversation-right">
-                    <Persons statusUser={user.status} statusPerson={person.status} />
+                    <Persons statusUser={user.status} statusPerson={person ? person.status : "invisible"} />
                 </div>
             </div>
         </Container>
