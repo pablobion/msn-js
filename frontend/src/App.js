@@ -40,7 +40,7 @@ function App() {
 
         socket.on("Draw AttenAttention", (data) => {
             const indexPersonMultiChat = multiChatRef.current.findIndex((elem) => `${elem.id}` === `${data}-multichat`);
-            const indexPersonChat = chatRef.current.findIndex((elem) => elem.id === data);
+            const indexPersonChat = chatRefText.current.findIndex((elem) => elem.id === data);
 
             if (multiChatRef.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: tomato;animation: shake 0.5s;";
 
