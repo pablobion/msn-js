@@ -40,14 +40,14 @@ function App() {
 
         socket.on("Draw AttenAttention", (data) => {
             const indexPersonMultiChat = multiChatRef.current.findIndex((elem) => `${elem.id}` === `${data}-multichat`);
-            const indexPersonChat = chatRefText.current.findIndex((elem) => elem.id === data);
+            const indexPersonChat = chatRef.current.findIndex((elem) => elem.id === data);
 
-            if (chatRefText.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: tomato;animation: shake 0.5s;";
+            if (multiChatRef.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: tomato;animation: shake 0.5s;";
 
             if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].style = "animation: shake 0.5s; top: 100px; left: 100px; z-index: 1";
 
             setTimeout(() => {
-                if (chatRefText.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: transparent;";
+                if (multiChatRef.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: transparent;";
                 if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].style = "animation: none; top: 100px; left: 100px;";
             }, 500);
         });
