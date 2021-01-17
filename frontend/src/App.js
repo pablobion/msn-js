@@ -19,6 +19,7 @@ function App() {
     const { userChats } = useUser();
 
     const chatRefText = useRef([]);
+    const chatRef = useRef([]);
     const multiChatRef = useRef([]);
 
     useEffect(() => {
@@ -39,11 +40,16 @@ function App() {
 
         socket.on("Draw AttenAttention", (data) => {
             const indexPersonMultiChat = multiChatRef.current.findIndex((elem) => `${elem.id}` === `${data}-multichat`);
+            const indexPersonChat = chatRefText.current.findIndex((elem) => elem.id === data);
+
             if (chatRefText.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: tomato;animation: shake 0.5s;";
+
+            if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].style = "animation: shake 0.5s; top: 100px; left: 100px; z-index: 1";
 
             setTimeout(() => {
                 if (chatRefText.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: transparent;";
-            }, 3000);
+                if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].style = "animation: none; top: 100px; left: 100px;";
+            }, 500);
         });
     }, []);
 
@@ -51,7 +57,7 @@ function App() {
         <Container>
             <Home />
             {/* <Login /> */}
-            {userChats && userChats.map((elem, index) => <Chat key={elem.socketidperson} ref={(el) => (chatRefText.current[index] = el)} socketidperson={elem.socketidperson} visible={elem.visible} />)}
+            {userChats && userChats.map((elem, index) => <Chat key={elem.socketidperson} ref={{ chatRefText: (el) => (chatRefText.current[index] = el), chatRef: (el) => (chatRef.current[index] = el) }} socketidperson={elem.socketidperson} visible={elem.visible} />)}
 
             <div id="multi-chats">{userChats && userChats.map((elem, index) => <MultiChats key={elem.socketidperson} ref={(el) => (multiChatRef.current[index] = el)} socketidperson={elem.socketidperson} />)}</div>
             <GlobalStyle />

@@ -21,6 +21,8 @@ import { useUser } from "../context/allusers";
 import draggable from "./scripts/draggable";
 
 const ChatUser = React.forwardRef((props, ref) => {
+    const { chatRefText, chatRef } = ref;
+
     const { getPerson } = useUser();
 
     const [person, setPerson] = useState({});
@@ -48,7 +50,7 @@ const ChatUser = React.forwardRef((props, ref) => {
     }, [getPerson(props.socketidperson), getPerson(socket.id)]);
 
     return (
-        <Container className="draggable-chat" visible={props.visible}>
+        <Container className="draggable-chat" visible={props.visible} ref={chatRef}>
             <div id="header-chat-top">
                 <button className="header-chat-top-buttons" onClick={() => minimizeChat(props.socketidperson)}>
                     <VscChromeMinimize />
@@ -63,7 +65,7 @@ const ChatUser = React.forwardRef((props, ref) => {
             </div>
             <div id="chat-conversation">
                 <div id="chat-conversation-left">
-                    <ChatText socketidUser={socket.id} socketidperson={props.socketidperson} ref={ref} status={person ? person.status : "invisible"} />
+                    <ChatText socketidUser={socket.id} socketidperson={props.socketidperson} ref={chatRefText} status={person ? person.status : "invisible"} />
                     <Chat socketidUser={socket.id} socketidPerson={props.socketidperson} />
                 </div>
                 <div id="chat-conversation-right">

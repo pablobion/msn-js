@@ -10,6 +10,14 @@ export const Container = styled.div`
     border: 1px solid gray;
     position: absolute;
     border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 
     /* Animations component */
 
@@ -18,34 +26,34 @@ export const Container = styled.div`
             transform: translate(1px, 1px) rotate(0deg);
         }
         10% {
-            transform: translate(-1px, -2px) rotate(-1deg);
+            transform: translate(-1px, -2px) rotate(-3deg);
         }
         20% {
-            transform: translate(-3px, 0px) rotate(1deg);
+            transform: translate(-3px, 0px) rotate(3deg);
         }
         30% {
             transform: translate(3px, 2px) rotate(0deg);
         }
         40% {
-            transform: translate(1px, -1px) rotate(1deg);
+            transform: translate(1px, -1px) rotate(3deg);
         }
         50% {
-            transform: translate(-1px, 2px) rotate(-1deg);
+            transform: translate(-1px, 2px) rotate(-3deg);
         }
         60% {
             transform: translate(-3px, 1px) rotate(0deg);
         }
         70% {
-            transform: translate(3px, 1px) rotate(-1deg);
+            transform: translate(3px, 1px) rotate(-3deg);
         }
         80% {
-            transform: translate(-1px, -1px) rotate(1deg);
+            transform: translate(-1px, -1px) rotate(3deg);
         }
         90% {
             transform: translate(1px, 2px) rotate(0deg);
         }
         100% {
-            transform: translate(1px, -2px) rotate(-1deg);
+            transform: translate(1px, -2px) rotate(-3deg);
         }
     }
 
