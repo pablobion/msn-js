@@ -132,11 +132,18 @@ const drawAttenAttention = (socketid, socketidperson) => {
     const indexperson = getIndex(socketidperson);
     const indexchat = getIndexChat(indexperson, socketid);
 
+    const indexuser = getIndex(socketid); // pega o index de quem ta chamando atenção
+    let whosend = "";
+    if (socketsConnected[indexuser]) {
+        //verifica se a pessoa realmente ta on
+        whosend = socketsConnected[indexuser].username;
+    }
+
     if (socketsConnected[indexperson]) {
         socketsConnected[indexperson].chats[indexchat].visible = true;
     }
 
-    return updateChatsPerson;
+    return { updateChatsPerson, whosend };
 };
 
 module.exports = {

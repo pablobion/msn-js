@@ -15,6 +15,11 @@ export const Container = styled.div`
     .chat-textmessage {
         margin: 2px 0px 8px 10px;
     }
+
+    #attention {
+        margin-top: 10px;
+        color: red;
+    }
 `;
 
 export const MessageStatus = styled.span`

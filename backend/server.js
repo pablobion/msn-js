@@ -56,9 +56,11 @@ io.on("connection", (socket) => {
     });
 
     socket.on("Draw AttenAttention", (socketidperson) => {
-        const userChats = drawAttenAttention(socket.id, socketidperson);
-        io.to(socketidperson).emit("refresh multi chats", userChats);
-        io.to(socketidperson).emit("Draw AttenAttention", socket.id);
+        const { updateChatsPerson, whosend } = drawAttenAttention(socket.id, socketidperson);
+        io.to(socketidperson).emit("refresh multi chats", updateChatsPerson);
+
+        io.to(socketidperson).emit("Draw AttenAttention", { id: socket.id, whosend });
+        io.to(socket.id).emit("Draw AttenAttention", { id: socketidperson, whosend });
     });
 
     socket.on("change visible chat", (socketidperson) => {
