@@ -133,6 +133,9 @@ const drawAttenAttention = (socketid, socketidperson) => {
     const indexchat = getIndexChat(indexperson, socketid);
 
     const indexuser = getIndex(socketid); // pega o index de quem ta chamando atenção
+
+    let statusperson;
+
     let whosend = "";
     if (socketsConnected[indexuser]) {
         //verifica se a pessoa realmente ta on
@@ -140,10 +143,25 @@ const drawAttenAttention = (socketid, socketidperson) => {
     }
 
     if (socketsConnected[indexperson]) {
-        socketsConnected[indexperson].chats[indexchat].visible = true;
+        statusperson = socketsConnected[indexperson].status;
     }
 
-    return { updateChatsPerson, whosend };
+    return { updateChatsPerson, whosend, statusperson };
+};
+
+const changeVisibleChatAttention = ({ socketiduser, socketidperson }) => {
+    const indexperson = getIndex(socketidperson); // pega index da pessoa que vai receber o change visible chat
+
+    if (socketsConnected[indexperson]) {
+        const indexchat = getIndexChat(indexperson, socketiduser);
+        if (socketsConnected[indexperson].chats[indexchat]) {
+            if (socketsConnected[indexperson].status === "online") {
+                socketsConnected[indexperson].chats[indexchat].visible = true;
+            }
+
+            return socketsConnected[indexperson].chats;
+        }
+    }
 };
 
 module.exports = {
@@ -158,4 +176,5 @@ module.exports = {
     changeStatus,
     changeSubnick,
     changeAvatar,
+    changeVisibleChatAttention,
 };

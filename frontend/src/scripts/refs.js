@@ -21,7 +21,7 @@ export const sendmessage = ({ chatRefText, chatRef, multiChatRef, message, socke
     }
 };
 
-export const drawAttention = ({ chatRefText, chatRef, multiChatRef, id, whosend }) => {
+export const drawAttention = ({ chatRefText, chatRef, multiChatRef, id, whosend, isend, statusperson }) => {
     const indexPersonMultiChat = multiChatRef.current.findIndex((elem) => `${elem.id}` === `${id}-multichat`);
     const indexPersonChat = chatRefText.current.findIndex((elem) => elem.id === id);
     const indexUserChat = chatRefText.current.findIndex((elem) => elem.id === id);
@@ -31,8 +31,13 @@ export const drawAttention = ({ chatRefText, chatRef, multiChatRef, id, whosend 
         setTimeout(() => {
             timeout = false;
         }, 5000);
-        if (multiChatRef.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: tomato;animation: shake 0.5s;";
-        if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].style = "animation: shake 0.5s; top: 100px; left: 100px; z-index: 1";
+
+        if (statusperson === "online") {
+            //so faz animação se a pessa estiver online.
+            if (isend) socket.emit("change visible chat draw attention", { socketiduser: socket.id, socketidperson: id }); // faz um emit para mostrar o chat pra pessoa caso ela esteja com status online
+            if (multiChatRef.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: tomato;animation: shake 0.5s;";
+            if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].style = "animation: shake 0.5s; top: 100px; left: 100px";
+        }
 
         if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p>—————————</p><p id="chat-usarname">${whosend} acabou de chamar a atenção.</p><p>—————————</p>`);
         setTimeout(() => {
@@ -40,6 +45,7 @@ export const drawAttention = ({ chatRefText, chatRef, multiChatRef, id, whosend 
             if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].style = "animation: none; top: 100px; left: 100px;";
         }, 500);
     } else {
+        if (!isend) return false; // so manda a mensagem abaixo só para pessoa que esta clicando mais de uma vez.
         if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id='attention'>Você não pode pedir a atenção de alguém com tanta freqüência.</p>`);
     }
 };

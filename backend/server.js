@@ -5,7 +5,7 @@ const server = require("http").createServer(app);
 
 const bodyparser = require("body-parser");
 
-const { addUser, socketsConnected, removeUser, closeChat, changeVisibleChat, sendMessage, assignChat, drawAttenAttention, changeStatus, changeSubnick, changeAvatar } = require("./models");
+const { addUser, socketsConnected, removeUser, closeChat, changeVisibleChat, sendMessage, assignChat, drawAttenAttention, changeStatus, changeSubnick, changeAvatar, changeVisibleChatAttention } = require("./models");
 
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
@@ -56,11 +56,16 @@ io.on("connection", (socket) => {
     });
 
     socket.on("Draw AttenAttention", (socketidperson) => {
-        const { updateChatsPerson, whosend } = drawAttenAttention(socket.id, socketidperson);
+        const { updateChatsPerson, whosend, statusperson } = drawAttenAttention(socket.id, socketidperson);
         io.to(socketidperson).emit("refresh multi chats", updateChatsPerson);
 
-        io.to(socketidperson).emit("Draw AttenAttention", { id: socket.id, whosend });
-        io.to(socket.id).emit("Draw AttenAttention", { id: socketidperson, whosend });
+        io.to(socketidperson).emit("Draw AttenAttention", { id: socket.id, whosend, isend: false, statusperson });
+        io.to(socket.id).emit("Draw AttenAttention", { id: socketidperson, whosend, isend: true, statusperson });
+    });
+
+    socket.on("change visible chat draw attention", ({ socketiduser, socketidperson }) => {
+        const personChats = changeVisibleChatAttention({ socketiduser, socketidperson }); // troca o visible de true para false e ao contrario também, e pega os chats novamente
+        io.to(socketidperson).emit("refresh multi chats", personChats); //manda os chats com o atributo do visible atualizado
     });
 
     socket.on("change visible chat", (socketidperson) => {

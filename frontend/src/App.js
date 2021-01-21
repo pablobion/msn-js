@@ -29,8 +29,8 @@ function App() {
             sendmessage({ chatRefText, chatRef, multiChatRef, message, socketidUser, socketidPerson, chatopen });
         });
 
-        socket.on("Draw AttenAttention", ({ id, whosend }) => {
-            drawAttention({ chatRefText, chatRef, multiChatRef, id, whosend });
+        socket.on("Draw AttenAttention", ({ id, whosend, isend, statusperson }) => {
+            drawAttention({ chatRefText, chatRef, multiChatRef, id, whosend, isend, statusperson });
         });
     }, []);
 
