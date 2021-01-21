@@ -3,7 +3,15 @@ import { socket, connect } from "../configs/socket_export";
 //images
 import nodraw from "../pages/chat/components/chatText/assets/nodraw.png";
 
+//sounds
+import nudge from "../sounds/nudge.mp3";
+
 let timeout = false;
+
+const playSongNudge = () => {
+    let audio = new Audio(nudge);
+    audio.play();
+};
 
 export const sendmessage = ({ chatRefText, chatRef, multiChatRef, message, socketidUser, socketidPerson, chatopen }) => {
     if (!chatRefText.current) return false;
@@ -34,6 +42,7 @@ export const drawAttention = ({ chatRefText, chatRef, multiChatRef, id, whosend,
 
         if (statusperson === "online") {
             //so faz animação se a pessa estiver online.
+            playSongNudge();
             if (isend) socket.emit("change visible chat draw attention", { socketiduser: socket.id, socketidperson: id }); // faz um emit para mostrar o chat pra pessoa caso ela esteja com status online
             if (multiChatRef.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: tomato;animation: shake 0.5s;";
             if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].style = "animation: shake 0.5s; top: 100px; left: 100px";

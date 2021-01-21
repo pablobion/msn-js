@@ -15,6 +15,7 @@ import Login from "./pages/login/index";
 import { useUser } from "./pages/context/allusers";
 import { socket } from "./configs/socket_export";
 
+//refs
 import { sendmessage, drawAttention } from "./scripts/refs";
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
             {userChats && userChats.map((elem, index) => <Chat key={elem.socketidperson} ref={{ chatRefText: (el) => (chatRefText.current[index] = el), chatRef: (el) => (chatRef.current[index] = el) }} socketidperson={elem.socketidperson} visible={elem.visible} />)}
 
             <div id="multi-chats">{userChats && userChats.map((elem, index) => <MultiChats key={elem.socketidperson} ref={(el) => (multiChatRef.current[index] = el)} socketidperson={elem.socketidperson} />)}</div>
+
             <GlobalStyle />
         </Container>
     );
