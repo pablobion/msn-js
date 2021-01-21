@@ -17,14 +17,15 @@ import AeroButton from "../../../components/aeroButton/index";
 import { socket } from "../../../../configs/socket_export";
 
 const Chat = (props) => {
-    const [messageText, setMessageText] = useState("");
+    const [messageText, setMessageText] = useState();
 
     const handleChangeMessageText = (event) => {
         setMessageText(event.target.value);
     };
 
-    const sendMessageText = (event) => {
-        if (!messageText) return false;
+    const sendMessageText = () => {
+        if (!messageText || messageText === "" || messageText === " " || messageText === "") return false;
+
         setMessageText("");
         if (props.socketidUser && props.socketidPerson) {
             const socketidUser = props.socketidUser;
@@ -37,6 +38,13 @@ const Chat = (props) => {
     const handleClickDrawAttention = () => {
         const socketidPerson = props.socketidPerson;
         socket.emit("Draw AttenAttention", socketidPerson);
+    };
+
+    const handleUserKeyPress = (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            sendMessageText();
+        }
     };
 
     return (
@@ -58,8 +66,9 @@ const Chat = (props) => {
                     <img src={voice} alt="" />
                 </AeroButton>
             </HeaderChat>
+
             <Container>
-                <textarea value={messageText} onChange={(e) => handleChangeMessageText(e)} cols="30" rows="10"></textarea>
+                <textarea onKeyPress={handleUserKeyPress} value={messageText} onChange={(e) => handleChangeMessageText(e)} cols="30" rows="10"></textarea>
             </Container>
             <Sender>
                 <button onClick={sendMessageText}>Enviar</button>
