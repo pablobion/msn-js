@@ -63,11 +63,6 @@ const Header = (props) => {
                         <img src={block}></img>
                     </AeroButton>
                 </div>
-                <div id="right">
-                    <AeroButton>
-                        <img src={colors}></img>
-                    </AeroButton>
-                </div>
             </div>
         </Container>
     );

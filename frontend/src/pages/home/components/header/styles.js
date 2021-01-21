@@ -4,11 +4,42 @@ import styled from "styled-components";
 import backgroundHeader from "./assets/background-large.png";
 import backgroundHeaderNavbar from "./assets/background-large.png";
 
+import backgroundHeaderPink from "./assets/background-large-pink.png";
+import backgroundHeaderNavbarPink from "./assets/background-large-pink.png";
+
+import backgroundHeaderYellow from "./assets/background-large-yellow.png";
+import backgroundHeaderNavbarYellow from "./assets/background-large-yellow.png";
+
+import backgroundHeaderGreen from "./assets/background-large-green.png";
+import backgroundHeaderNavbarGreen from "./assets/background-large-green.png";
+
 export const Profile = styled.div`
     padding: 10px;
     height: 130px;
 
     background-image: url(${backgroundHeader});
+    ${(props) => {
+        if (props.color === "blue")
+            return `
+            background-image: url(${backgroundHeader});
+        `;
+
+        if (props.color === "pink")
+            return `
+            background-image: url(${backgroundHeaderPink});
+        `;
+
+        if (props.color === "yellow")
+            return `
+            background-image: url(${backgroundHeaderYellow});
+        `;
+
+        if (props.color === "green")
+            return `
+            background-image: url(${backgroundHeaderGreen});
+        `;
+    }}
+
     background-repeat: no-repeat;
     background-size: 100% 100%;
 
@@ -114,6 +145,27 @@ export const Profile = styled.div`
 
 export const Navbar = styled.div`
     background-image: url(${backgroundHeaderNavbar});
+    ${(props) => {
+        if (props.color === "blue")
+            return `
+            background-image: url(${backgroundHeaderNavbar});
+        `;
+
+        if (props.color === "pink")
+            return `
+            background-image: url(${backgroundHeaderNavbarPink});
+        `;
+
+        if (props.color === "yellow")
+            return `
+            background-image: url(${backgroundHeaderNavbarYellow});
+        `;
+
+        if (props.color === "green")
+            return `
+            background-image: url(${backgroundHeaderNavbarGreen});
+        `;
+    }}
     background-repeat: no-repeat;
     background-size: 100% 100%;
     height: 30px;

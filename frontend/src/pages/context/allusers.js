@@ -8,6 +8,7 @@ export default function UserProvider({ children }) {
     const [contactsOnline, setContactsOnline] = useState([]);
     const [countContactsOnline, setCountContactsOnline] = useState(0);
     const [userChats, setUserChats] = useState([]);
+    const [theme, setTheme] = useState("blue");
 
     useEffect(() => {
         socket.on("socketsConnected", (data) => {
@@ -35,6 +36,18 @@ export default function UserProvider({ children }) {
         }
     };
 
+    const changeTheme = () => {
+        if (theme === "blue") {
+            setTheme("pink");
+        } else if (theme === "pink") {
+            setTheme("yellow");
+        } else if (theme === "yellow") {
+            setTheme("green");
+        } else if (theme === "green") {
+            setTheme("blue");
+        }
+    };
+
     return (
         <UserContext.Provider
             value={{
@@ -43,6 +56,8 @@ export default function UserProvider({ children }) {
                 userChats,
                 getPerson,
                 getUser,
+                theme,
+                changeTheme,
             }}
         >
             {children}
@@ -54,7 +69,7 @@ export function useUser() {
     const context = useContext(UserContext);
     if (!context) throw new Error("useCount must be used within a CountProvider");
 
-    const { contactsOnline, countContactsOnline, userChats, getPerson, getUser } = context;
+    const { contactsOnline, countContactsOnline, userChats, getPerson, getUser, theme, changeTheme } = context;
 
-    return { contactsOnline, countContactsOnline, userChats, getPerson, getUser };
+    return { contactsOnline, countContactsOnline, userChats, getPerson, getUser, theme, changeTheme };
 }

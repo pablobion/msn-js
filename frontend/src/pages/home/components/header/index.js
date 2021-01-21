@@ -29,7 +29,7 @@ import { socket } from "../../../../configs/socket_export";
 import { useUser } from "../../../context/allusers";
 
 const Header = () => {
-    const { getUser } = useUser();
+    const { getUser, theme, changeTheme } = useUser();
     const [person, setPerson] = useState();
 
     const handleChangeStatus = async (e) => {
@@ -56,7 +56,7 @@ const Header = () => {
 
     return (
         <>
-            <Profile>
+            <Profile color={theme}>
                 <NavBar />
                 <div id="profile">
                     <div id="left">
@@ -89,7 +89,7 @@ const Header = () => {
                     </div>
                 </div>
             </Profile>
-            <Navbar>
+            <Navbar color={theme}>
                 <div id="left">
                     <AeroButton className="button">
                         <img src={navbarMail} alt="" />
@@ -102,7 +102,7 @@ const Header = () => {
                     </AeroButton>
                 </div>
                 <div id="right">
-                    <AeroButton className="button">
+                    <AeroButton className="button" onCustomClick={() => changeTheme()}>
                         <img src={navbarColors} alt="" />
                     </AeroButton>
                 </div>
