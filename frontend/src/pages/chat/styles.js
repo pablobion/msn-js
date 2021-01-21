@@ -100,7 +100,6 @@ export const Container = styled.div`
         display: flex;
         max-height: 83.7%;
         position: relative;
-        border-radius: 5px;
         padding-bottom: 10px;
 
         #chat-conversation-left {
