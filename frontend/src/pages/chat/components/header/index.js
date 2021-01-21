@@ -44,22 +44,22 @@ const Header = (props) => {
             </div>
             <div id="div-chat-menu-header">
                 <div id="left">
-                    <AeroButton>
+                    <AeroButton disabled="true">
                         <img src={invite}></img>
                     </AeroButton>
-                    <AeroButton>
+                    <AeroButton disabled="true">
                         <img src={folder}></img>
                     </AeroButton>
-                    <AeroButton>
+                    <AeroButton disabled="true">
                         <img src={phone}></img>
                     </AeroButton>
-                    <AeroButton>
+                    <AeroButton disabled="true">
                         <img src={music}></img>
                     </AeroButton>
-                    <AeroButton>
+                    <AeroButton disabled="true">
                         <img src={games}></img>
                     </AeroButton>
-                    <AeroButton>
+                    <AeroButton disabled="true">
                         <img src={block}></img>
                     </AeroButton>
                 </div>

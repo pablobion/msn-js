@@ -9,6 +9,16 @@ export const Button = styled.button`
     border-radius: 5px;
     border: 1px solid transparent;
 
+    cursor: pointer;
+
+    ${(props) => {
+        if (props.disabled === "true")
+            return `
+            cursor: not-allowed;
+            // filter: grayscale(100%);
+        `;
+    }}
+
     &:hover {
         border: 1px solid gray;
         box-shadow: inset 0 0 3px rgba(255, 255, 255);
