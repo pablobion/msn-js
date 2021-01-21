@@ -31,7 +31,7 @@ const Header = (props) => {
             statusName = "Offline";
             break;
         default:
-            statusName= "";
+            statusName = "";
     }
     return (
         <Container>

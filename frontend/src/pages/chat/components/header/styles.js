@@ -5,9 +5,13 @@ import backgroundHeader from "./assets/chat_header.png";
 
 export const Container = styled.div`
     padding: 5px;
-    background-image: url(${backgroundHeader});
+    /* background-image: url(${backgroundHeader});
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: 100% 100%; */
+
+    background: linear-gradient(180deg, rgba(247, 253, 255, 1) 0%, rgba(214, 227, 234, 1) 50%, rgba(238, 249, 250, 1) 100%);
+    background-color: transparent;
+
     height: 100%;
     box-shadow: 0px 1px 5px #00000077;
 

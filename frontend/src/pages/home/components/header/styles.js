@@ -1,9 +1,14 @@
 import styled from "styled-components";
 
+//images
+import backgroundHeader from "./assets/background-large.png";
+import backgroundHeaderNavbar from "./assets/background-large.png";
+
 export const Profile = styled.div`
     padding: 10px;
     height: 130px;
-    background-image: url("https://github.com/pablobion/msn-js/blob/master/frontend/src/pages/home/components/header/assets/background-large.png?raw=true");
+
+    background-image: url(${backgroundHeader});
     background-repeat: no-repeat;
     background-size: 100% 100%;
 
@@ -108,7 +113,7 @@ export const Profile = styled.div`
 `;
 
 export const Navbar = styled.div`
-    background-image: url("https://raw.githubusercontent.com/AndroidWG/WLMOnline/master/assets/background/msgres_navbar.png");
+    background-image: url(${backgroundHeaderNavbar});
     background-repeat: no-repeat;
     background-size: 100% 100%;
     height: 30px;

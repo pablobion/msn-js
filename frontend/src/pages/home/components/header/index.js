@@ -4,7 +4,6 @@ import { Profile, Navbar } from "./styles";
 
 //images profile
 import SmallArrowWhite from "./assets/small-arrow.svg";
-import Avatar from "./assets/avatar3.png";
 
 //images navbar
 import navbarNews from "./assets/navbar/navbar-news.png";
