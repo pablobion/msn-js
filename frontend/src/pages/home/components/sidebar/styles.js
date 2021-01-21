@@ -29,12 +29,22 @@ export const Container = styled.div`
             background: rgba(255, 255, 255, 0.15);
         }
 
-        &:focus {
-            border-top: 1px solid lightgray;
-            border-bottom: 1px solid lightgray;
-            border-left: 1px solid lightgray;
-            border-radius: 5px;
-            background: white;
+        a:visited {
+            text-decoration: none;
+            color: black;
+        }
+        a:hover {
+            text-decoration: none;
+            color: black;
+        }
+        a:focus {
+            text-decoration: none;
+            color: black;
+        }
+        a:hover,
+        a:active {
+            text-decoration: none;
+            color: black;
         }
     }
 `;
