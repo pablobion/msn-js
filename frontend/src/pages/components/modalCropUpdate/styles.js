@@ -37,7 +37,7 @@ export const Container = styled.div`
     }
 `;
 
-export const Button = styled.button`
+export const Buttons = styled.button`
     border: none;
     background: transparent;
 `;

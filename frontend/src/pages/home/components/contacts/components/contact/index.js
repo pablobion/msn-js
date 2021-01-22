@@ -12,14 +12,9 @@ import away from "./assets/away.png";
 import AeroButton from "../../../../../components/aeroButton/index";
 
 //configs
-import { connect, socket } from "../../../../../../configs/socket_export";
-
-//context
-import { useUser } from "../../../../../context/allusers";
+import { socket } from "../../../../../../configs/socket_export";
 
 const Contact = (props) => {
-    const { userChats } = useUser();
-
     let status;
     switch (props.status) {
         case "online":

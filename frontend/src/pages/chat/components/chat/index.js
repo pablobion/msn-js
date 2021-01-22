@@ -8,7 +8,6 @@ import emotions from "./assets/emoticon.png";
 import winks from "./assets/winks.png";
 import tilt from "./assets/tilt.png";
 import voice from "./assets/voice.png";
-import bg from "./assets/bg.png";
 
 //components
 import AeroButton from "../../../components/aeroButton/index";

@@ -12,7 +12,7 @@ export const Button = styled.button`
     cursor: pointer;
 
     ${(props) => {
-        if (props.disabled === "true")
+        if (props.disabled === true)
             return `
             cursor: not-allowed;
             // filter: grayscale(100%);

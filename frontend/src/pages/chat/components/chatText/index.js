@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
+import React, { useEffect } from "react";
 import { Container, MessageStatus } from "./styles";
 
 //images
@@ -12,19 +11,19 @@ const ChatText = React.forwardRef((props, ref) => {
         <>
             {props.status === "invisible" && (
                 <MessageStatus id="info-status">
-                    <img src={information} />
+                    <img src={information} alt="image" />
                     Este contato está offline.
                 </MessageStatus>
             )}
             {props.status === "busy" && (
                 <MessageStatus id="info-status">
-                    <img src={information} />
+                    <img src={information} alt="image" />
                     Este contato está ocupado e pode não responder.
                 </MessageStatus>
             )}
             {props.status === "away" && (
                 <MessageStatus id="info-status">
-                    <img src={information} />
+                    <img src={information} alt="image" />
                     Este contato está ausente e pode não responder.
                 </MessageStatus>
             )}

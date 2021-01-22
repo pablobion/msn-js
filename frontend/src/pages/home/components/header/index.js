@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 
 import { Profile, Navbar } from "./styles";
 
-//images profile
-import SmallArrowWhite from "./assets/small-arrow.svg";
-
 //images navbar
 import navbarNews from "./assets/navbar/navbar-news.png";
 import navbarColors from "./assets/navbar/navbar-colors.png";
@@ -81,7 +78,7 @@ const Header = () => {
                                 </select>
                             </small>
                         </span>
-                        <AeroButton id="sub-nick" disabled="true">
+                        <AeroButton id="sub-nick">
                             <form onSubmit={(e) => sendSubnick(e)}>
                                 <input type="text" id="myInput-subnick" onBlur={(e) => sendSubnick(e)}></input>
                             </form>
@@ -91,13 +88,13 @@ const Header = () => {
             </Profile>
             <Navbar color={theme}>
                 <div id="left">
-                    <AeroButton className="button" disabled="true">
+                    <AeroButton className="button" disabled={true}>
                         <img src={navbarMail} alt="" />
                     </AeroButton>
-                    <AeroButton className="button" disabled="true">
+                    <AeroButton className="button" disabled={true}>
                         <img src={navbarContacts} alt="" />
                     </AeroButton>
-                    <AeroButton className="button" disabled="true">
+                    <AeroButton className="button" disabled={true}>
                         <img src={navbarNews} alt="" />
                     </AeroButton>
                 </div>

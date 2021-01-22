@@ -36,7 +36,7 @@ const Login = () => {
 
                     <div id="login-status">
                         <p>Entrar como:</p>
-                        <select name="cars" id="cars" ref={register} name="status">
+                        <select id="cars" ref={register} name="status">
                             <option value="online">Online</option>
                             <option value="busy">Ocupado</option>
                             <option value="away">Ausente</option>

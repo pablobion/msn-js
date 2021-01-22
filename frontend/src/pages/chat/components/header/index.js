@@ -10,7 +10,6 @@ import phone from "./assets/phone.png";
 import music from "./assets/music.png";
 import games from "./assets/games.png";
 import block from "./assets/block.png";
-import colors from "./assets/colors.png";
 
 //components
 import AeroButton from "../../../components/aeroButton/index";
@@ -44,23 +43,23 @@ const Header = (props) => {
             </div>
             <div id="div-chat-menu-header">
                 <div id="left">
-                    <AeroButton disabled="true">
-                        <img src={invite}></img>
+                    <AeroButton disabled={true}>
+                        <img src={invite} alt="image"></img>
                     </AeroButton>
-                    <AeroButton disabled="true">
-                        <img src={folder}></img>
+                    <AeroButton disabled={true}>
+                        <img src={folder} alt="image"></img>
                     </AeroButton>
-                    <AeroButton disabled="true">
-                        <img src={phone}></img>
+                    <AeroButton disabled={true}>
+                        <img src={phone} alt="image"></img>
                     </AeroButton>
-                    <AeroButton disabled="true">
-                        <img src={music}></img>
+                    <AeroButton disabled={true}>
+                        <img src={music} alt="image"></img>
                     </AeroButton>
-                    <AeroButton disabled="true">
-                        <img src={games}></img>
+                    <AeroButton disabled={true}>
+                        <img src={games} alt="image"></img>
                     </AeroButton>
-                    <AeroButton disabled="true">
-                        <img src={block}></img>
+                    <AeroButton disabled={true}>
+                        <img src={block} alt="image"></img>
                     </AeroButton>
                 </div>
             </div>

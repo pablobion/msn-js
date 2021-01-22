@@ -1,7 +1,4 @@
-import { socket, connect } from "../configs/socket_export";
-
-//images
-import nodraw from "../pages/chat/components/chatText/assets/nodraw.png";
+import { socket } from "../configs/socket_export";
 
 //sounds
 import nudge from "../sounds/nudge.mp3";

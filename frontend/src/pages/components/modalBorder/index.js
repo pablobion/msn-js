@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { Container } from "./styles";
 
@@ -10,9 +10,6 @@ import invisible from "./assets/invisible.png";
 import online from "./assets/online.png";
 import away from "./assets/away.png";
 import busy from "./assets/busy.png";
-
-//images profile default
-import ProfileLeaf from "./assets/defaultAvatars/leaf.png";
 
 //scripts
 import { verifyAvatarDefault } from "./verifyAvatarDefault.js";

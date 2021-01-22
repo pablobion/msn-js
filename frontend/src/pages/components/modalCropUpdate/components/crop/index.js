@@ -141,7 +141,7 @@ export default function App(props) {
 
             <Button
                 type="button"
-                disabled={!completedCrop?.width || !completedCrop?.height}
+                disabled={!completedCrop?.width || !completedCrop?.height} //ORIGINAL
                 onClick={() => {
                     generateDownload(previewCanvasRef.current, completedCrop);
                     props.close();

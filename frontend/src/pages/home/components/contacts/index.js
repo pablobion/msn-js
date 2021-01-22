@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import { Container } from "./styles";
 
@@ -22,13 +22,13 @@ const Contacts = () => {
         <Container>
             <div id="search-contacts">
                 <input type="text"></input>
-                <AeroButton className="button">
+                <AeroButton className="button" disabled={true}>
                     <BiSearch color="gray" />
                 </AeroButton>
-                <AeroButton className="button">
+                <AeroButton className="button" disabled={true}>
                     <img src={addcontact} alt="" />
                 </AeroButton>
-                <AeroButton className="button">
+                <AeroButton className="button" disabled={true}>
                     <img src={sortContacts} alt="" />
                 </AeroButton>
             </div>
@@ -39,7 +39,7 @@ const Contacts = () => {
                         {contactsOnline &&
                             contactsOnline.map((elem) => {
                                 if (socket.id !== elem.socketid) {
-                                    if (elem.status != "invisible") {
+                                    if (elem.status !== "invisible") {
                                         return <Contact username={elem.username} status={elem.status} subnick={elem.subnick} socketid={elem.socketid} key={elem.socketid} />;
                                     }
                                 }

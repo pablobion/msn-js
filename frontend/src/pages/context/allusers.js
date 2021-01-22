@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 
-import { connect, socket } from "../../configs/socket_export";
+import { socket } from "../../configs/socket_export";
 
 const UserContext = createContext();
 
@@ -12,7 +12,6 @@ export default function UserProvider({ children }) {
 
     useEffect(() => {
         socket.on("socketsConnected", (data) => {
-            console.log(data.status);
             setCountContactsOnline(data.length - 1);
             setContactsOnline(data);
         });

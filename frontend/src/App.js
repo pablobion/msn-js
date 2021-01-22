@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
+import React, { useEffect, useRef } from "react";
 import { Container } from "./styles";
 import GlobalStyle from "./styles/global";
 

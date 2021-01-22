@@ -19,7 +19,6 @@ const PhotoHistory = (props) => {
     const [photoFocus, setPhotoFocus] = useState();
     useEffect(() => {
         if (JSON.parse(localStorage.getItem("photosHistory"))) {
-            console.log(JSON.parse(localStorage.getItem("photosHistory")));
             setPhotos(JSON.parse(localStorage.getItem("photosHistory")));
         }
     }, []);
@@ -48,13 +47,14 @@ const PhotoHistory = (props) => {
                                 {photos &&
                                     photos.map((elem) => (
                                         <button
+                                            key={elem}
                                             className="button-photos-galary"
                                             onClick={() => {
                                                 setPhotoFocus(verifyAvatarDefault(elem));
                                                 handleClickChangeAvatarDefault(elem);
                                             }}
                                         >
-                                            <img src={verifyAvatarDefault(elem)}></img>
+                                            <img src={verifyAvatarDefault(elem)} alt=""></img>
                                         </button>
                                     ))}
                             </div>
@@ -62,13 +62,14 @@ const PhotoHistory = (props) => {
                             <h5>Imagens comuns</h5>
                             {defaultPhotosArray.map((elem) => (
                                 <button
+                                    key={elem}
                                     className="button-photos-galary"
                                     onClick={() => {
                                         setPhotoFocus(verifyAvatarDefault(elem));
                                         handleClickChangeAvatarDefault(elem);
                                     }}
                                 >
-                                    <img src={verifyAvatarDefault(elem)}></img>
+                                    <img src={verifyAvatarDefault(elem)} alt=""></img>
                                 </button>
                             ))}
                         </div>

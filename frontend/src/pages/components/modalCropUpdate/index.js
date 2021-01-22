@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-import { Container, Button } from "./styles";
+import { Container, Buttons } from "./styles";
 
 //components
 import Crop from "./components/crop";
@@ -21,9 +21,9 @@ const ModalCropUpdate = (props) => {
 
     return (
         <>
-            <Button id="myBtn" onClick={handleClickOpen}>
+            <Buttons id="myBtn" onClick={handleClickOpen}>
                 {props.children}
-            </Button>
+            </Buttons>
             <Container id="myModal">
                 <div className="modal-content">
                     <span className="close" onClick={handleClickClose}>
