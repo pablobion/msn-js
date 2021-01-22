@@ -6,6 +6,8 @@ import { Container, MessageStatus } from "./styles";
 import information from "./assets/information.png";
 
 const ChatText = React.forwardRef((props, ref) => {
+    useEffect(() => {});
+
     return (
         <>
             {props.status === "invisible" && (
