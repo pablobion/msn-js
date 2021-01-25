@@ -45,7 +45,7 @@ const Login = () => {
         if (data.username === "") data.username = "Nome não disponivel";
 
         data.socketid = socket.id;
-        data.rembeber = rememberIsChecked.current.checked;
+        data.remember = rememberIsChecked.current.checked;
         data.autologin = autoLoginIsChecked.current.checked;
 
         sendSocketEmitStatus(data.status); // troca status ao entrar.
@@ -53,7 +53,7 @@ const Login = () => {
         console.log(data);
 
         //se o input estiver selecionado, irá salvar foto e nome.
-        if (data.rembeber) {
+        if (data.remember) {
             localStorage.setItem("saveUser", { username: data.username });
         }
     };
