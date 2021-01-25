@@ -18,6 +18,13 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
 
+    #chage-photo-button {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     #login-input-email {
         margin-top: 40px;
     }

@@ -14,7 +14,7 @@ const addUser = (socketid) => {
     socketsConnected.push({
         socketid: socketid,
         username: socketid,
-        status: "online",
+        status: "invisible",
         subnick: "",
         chats: [],
         avatar: "",
@@ -115,9 +115,20 @@ const changeStatus = (socketid, status) => {
 
 const changeSubnick = (socketid, subnick) => {
     const indexuser = getIndex(socketid);
+    if (socketsConnected[indexuser]) {
+        socketsConnected[indexuser].subnick = `${subnick}`;
+    }
 
-    socketsConnected[indexuser].subnick = `${subnick}`;
     return socketsConnected[indexuser].subnick;
+};
+
+const changeUsername = (socketid, username) => {
+    const indexuser = getIndex(socketid);
+    if (socketsConnected[indexuser]) {
+        socketsConnected[indexuser].username = `${username}`;
+    }
+
+    return socketsConnected[indexuser].username;
 };
 
 const changeAvatar = (socketid, avatarlink) => {
@@ -177,4 +188,5 @@ module.exports = {
     changeSubnick,
     changeAvatar,
     changeVisibleChatAttention,
+    changeUsername,
 };
