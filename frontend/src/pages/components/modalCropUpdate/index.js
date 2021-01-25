@@ -21,7 +21,7 @@ const ModalCropUpdate = (props) => {
 
     return (
         <>
-            <Buttons id="myBtn" onClick={handleClickOpen}>
+            <Buttons className={props.className} id="myBtn" onClick={handleClickOpen}>
                 {props.children}
             </Buttons>
             <Container id="myModal">

@@ -26,6 +26,11 @@ const PhotoHistory = (props) => {
     const handleClickChangeAvatarDefault = (elem) => {
         if (!elem) return false;
         socket.emit("change avatar", elem);
+        if (localStorage.getItem("saveUser")) {
+            let infos = JSON.parse(localStorage.getItem("saveUser"));
+            infos.avatar = elem;
+            localStorage.setItem("saveUser", JSON.stringify(infos));
+        }
     };
 
     return (

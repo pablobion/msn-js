@@ -10,7 +10,7 @@ import ModalCropUpdate from "../components/modalCropUpdate";
 import Crop from "../components/modalCropUpdate/components/crop/index";
 
 //icons
-import { BsPencil } from "react-icons/bs";
+import { BsPencil, BsTrash } from "react-icons/bs";
 
 //configs
 import { socket } from "../../configs/socket_export";
@@ -76,6 +76,13 @@ const Login = () => {
         }
     };
 
+    const clearSaveUser = () => {
+        alert("Informações limpas");
+        localStorage.removeItem("saveUser");
+        setUsername("");
+        socket.emit("change avatar", "");
+    };
+
     (async function () {
         setPerson(await getUser(socket.id));
     })();
@@ -96,16 +103,14 @@ const Login = () => {
             <Container>
                 {person ? <Borderavatar avatar={person.avatar} size="96" status={changeStatusBorder} minus="22" top="4px" left="3px"></Borderavatar> : <Borderavatar avatar="" size="96" status="busy" minus="22" top="4px" left="3px"></Borderavatar>}
 
-                <div id="chage-photo-button">
-                    <ModalCropUpdate id="btn-edit-photo-login" onClick={() => <Crop />}>
-                        <BsPencil size={15} color="black" />
-                    </ModalCropUpdate>
-                </div>
+                <ModalCropUpdate className="change-photo-button">
+                    <BsPencil size={15} color="black" />
+                </ModalCropUpdate>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="div-input-login">
-                        <p id="login-input-email">Nome de usuario:</p>
-                        <input ref={register} name="username" type="text" value={username} onChange={handleChangeUsername} />
+                        <p>Nome de usuario:</p>
+                        <input id="login-input-email" ref={register} name="username" type="text" value={username} onChange={handleChangeUsername} />
                     </div>
 
                     <div id="login-status">
@@ -121,13 +126,19 @@ const Login = () => {
                     <div className="checkbox-buttons-login">
                         <input type="checkbox" ref={rememberIsChecked} onChange={handleVerifyRememberInput}></input>
                         <p>Lembrar-me</p>
+                        <button type="button" onClick={clearSaveUser}>
+                            <BsTrash />
+                        </button>
                     </div>
                     <div className="checkbox-buttons-login">
                         <input disabled type="checkbox" ref={autoLoginIsChecked}></input>
                         <p>Entrar Automaticamente</p>
                     </div>
-
-                    <button onClick={() => {}}>Entrar</button>
+                    <div id="footer-buttons">
+                        <button type="submit" onClick={() => {}}>
+                            Entrar
+                        </button>
+                    </div>
                 </form>
             </Container>
         </Main>
