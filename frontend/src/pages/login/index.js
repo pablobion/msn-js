@@ -27,12 +27,13 @@ const Login = () => {
 
     const [changeStatusBorder, setChangeStatusBorder] = useState();
     const rememberIsChecked = useRef();
+    const autoLoginIsChecked = useRef();
 
-    const handleChangeStatus = (status) => {
+    const sendSocketEmitStatus = (status) => {
         socket.emit("change status user", status);
     };
 
-    const handleChangeUsername = (username) => {
+    const sendSocketEmitUsername = (username) => {
         socket.emit("change username user", username);
     };
 
@@ -45,12 +46,31 @@ const Login = () => {
 
         data.socketid = socket.id;
         data.rembeber = rememberIsChecked.current.checked;
-        handleChangeStatus(data.status); // troca status ao entrar.
-        handleChangeUsername(data.username); // troca username ao entrar
+        data.autologin = autoLoginIsChecked.current.checked;
+
+        sendSocketEmitStatus(data.status); // troca status ao entrar.
+        sendSocketEmitUsername(data.username); // troca username ao entrar
+        console.log(data);
+
+        //se o input estiver selecionado, irá salvar foto e nome.
+        if (data.rembeber) {
+            localStorage.setItem("saveUser", { username: data.username });
+        }
     };
 
-    const handleChange = (e) => {
+    const handleChangeUsername = (e) => {
+        //muda o state de username
         setUsername(e.target.value);
+    };
+
+    const handleVerifyRememberInput = () => {
+        //Função onde verifica se o input de lembrar está ativo, se sim ele deixar clicar para entrar automaticamente.
+        if (rememberIsChecked.current.checked) {
+            autoLoginIsChecked.current.disabled = false;
+        } else {
+            autoLoginIsChecked.current.disabled = true;
+            autoLoginIsChecked.current.checked = false;
+        }
     };
 
     useEffect(() => {
@@ -74,7 +94,7 @@ const Login = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="div-input-login">
                         <p id="login-input-email">Nome de usuario:</p>
-                        <input ref={register} name="username" type="text" value={username} onChange={handleChange} />
+                        <input ref={register} name="username" type="text" value={username} onChange={handleChangeUsername} />
                     </div>
 
                     <div id="login-status">
@@ -88,8 +108,12 @@ const Login = () => {
                         </select>
                     </div>
                     <div className="checkbox-buttons-login">
-                        <input type="checkbox" ref={rememberIsChecked}></input>
+                        <input type="checkbox" ref={rememberIsChecked} onChange={handleVerifyRememberInput}></input>
                         <p>Lembrar-me</p>
+                    </div>
+                    <div className="checkbox-buttons-login">
+                        <input disabled type="checkbox" ref={autoLoginIsChecked}></input>
+                        <p>Entrar Automaticamente</p>
                     </div>
 
                     <button onClick={() => {}}>Entrar</button>
