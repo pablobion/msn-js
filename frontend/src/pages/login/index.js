@@ -52,9 +52,12 @@ const Login = () => {
         sendSocketEmitUsername(data.username); // troca username ao entrar
         console.log(data);
 
-        //se o input estiver selecionado, irá salvar foto e nome.
+        //se o input estiver selecionado, irá as informações.
         if (data.remember) {
-            localStorage.setItem("saveUser", { username: data.username });
+            localStorage.setItem("saveUser", JSON.stringify({ username: data.username, avatar: person.avatar, autologin: autoLoginIsChecked.current.checked }));
+        } else {
+            //caso nao esteja ele irá remover.
+            localStorage.removeItem("saveUser");
         }
     };
 
@@ -73,17 +76,25 @@ const Login = () => {
         }
     };
 
+    (async function () {
+        setPerson(await getUser(socket.id));
+    })();
+
     useEffect(() => {
-        (async function () {
-            setPerson(await getUser(socket.id));
-        })();
-    });
+        if (localStorage.getItem("saveUser")) {
+            let infos = JSON.parse(localStorage.getItem("saveUser"));
+            setUsername(infos.username);
+            socket.emit("change avatar", infos.avatar);
+            rememberIsChecked.current.checked = true;
+            autoLoginIsChecked.current.disabled = false;
+        }
+    }, []);
 
     return (
         <Main>
             <Navbar />
             <Container>
-                {person ? <Borderavatar avatar={person.avatar} size="96" status={changeStatusBorder} minus="22" top="4px" left="3px"></Borderavatar> : <Borderavatar avatar="https://i.imgur.com/hIbb87P.png" size="64" status="online" minus="22" top="4px" left="3px"></Borderavatar>}
+                {person ? <Borderavatar avatar={person.avatar} size="96" status={changeStatusBorder} minus="22" top="4px" left="3px"></Borderavatar> : <Borderavatar avatar="" size="96" status="busy" minus="22" top="4px" left="3px"></Borderavatar>}
 
                 <div id="chage-photo-button">
                     <ModalCropUpdate id="btn-edit-photo-login" onClick={() => <Crop />}>
