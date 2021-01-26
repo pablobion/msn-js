@@ -21,7 +21,7 @@ import { useUser } from "../context/allusers";
 const Login = () => {
     const { register, handleSubmit } = useForm();
 
-    const { getUser } = useUser();
+    const { getUser, setMode } = useUser();
     const [username, setUsername] = useState("");
     const [person, setPerson] = useState();
 
@@ -59,6 +59,8 @@ const Login = () => {
             //caso nao esteja ele irá remover.
             localStorage.removeItem("saveUser");
         }
+
+        setMode("home");
     };
 
     const handleChangeUsername = (e) => {

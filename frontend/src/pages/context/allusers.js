@@ -9,6 +9,7 @@ export default function UserProvider({ children }) {
     const [countContactsOnline, setCountContactsOnline] = useState(0);
     const [userChats, setUserChats] = useState([]);
     const [theme, setTheme] = useState("blue");
+    const [mode, setMode] = useState("login");
 
     useEffect(() => {
         socket.on("socketsConnected", (data) => {
@@ -57,6 +58,8 @@ export default function UserProvider({ children }) {
                 getUser,
                 theme,
                 changeTheme,
+                mode,
+                setMode,
             }}
         >
             {children}
@@ -68,7 +71,7 @@ export function useUser() {
     const context = useContext(UserContext);
     if (!context) throw new Error("useCount must be used within a CountProvider");
 
-    const { contactsOnline, countContactsOnline, userChats, getPerson, getUser, theme, changeTheme } = context;
+    const { contactsOnline, countContactsOnline, userChats, getPerson, getUser, theme, changeTheme, mode, setMode } = context;
 
-    return { contactsOnline, countContactsOnline, userChats, getPerson, getUser, theme, changeTheme };
+    return { contactsOnline, countContactsOnline, userChats, getPerson, getUser, theme, changeTheme, mode, setMode };
 }
