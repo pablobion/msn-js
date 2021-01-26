@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
+import ReactLoading from "react-loading";
 
 import { Main, Container } from "./styles";
 
@@ -7,7 +8,6 @@ import { Main, Container } from "./styles";
 import Navbar from "../components/navbar/index";
 import Borderavatar from "../components/modalBorder/index";
 import ModalCropUpdate from "../components/modalCropUpdate";
-import Crop from "../components/modalCropUpdate/components/crop/index";
 
 //icons
 import { BsPencil, BsTrash } from "react-icons/bs";
@@ -77,10 +77,10 @@ const Login = () => {
     };
 
     const clearSaveUser = () => {
-        alert("Informações limpas");
         localStorage.removeItem("saveUser");
         setUsername("");
         socket.emit("change avatar", "");
+        alert("Informações limpas");
     };
 
     (async function () {
@@ -101,7 +101,7 @@ const Login = () => {
         <Main>
             <Navbar />
             <Container>
-                {person ? <Borderavatar avatar={person.avatar} size="96" status={changeStatusBorder} minus="22" top="4px" left="3px"></Borderavatar> : <Borderavatar avatar="" size="96" status="busy" minus="22" top="4px" left="3px"></Borderavatar>}
+                {person ? <Borderavatar avatar={person.avatar} size="96" status={changeStatusBorder} minus="22" top="4px" left="3px"></Borderavatar> : <ReactLoading type="spin" color="black" height={100} width={100} />}
 
                 <ModalCropUpdate className="change-photo-button">
                     <BsPencil size={15} color="black" />
