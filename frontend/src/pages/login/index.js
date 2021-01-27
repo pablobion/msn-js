@@ -60,7 +60,7 @@ const Login = () => {
             localStorage.removeItem("saveUser");
         }
 
-        setMode("home");
+        setMode("home"); //muda para home depois que clica.
     };
 
     const handleChangeUsername = (e) => {

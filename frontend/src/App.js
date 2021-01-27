@@ -4,6 +4,7 @@ import GlobalStyle from "./styles/global";
 
 //components
 import MultiChats from "../src/pages/multiChats/index";
+import PersonWindowLogin from "./pages/components/personWindowLogin/index";
 
 //pages
 import Home from "./pages/home/index";
@@ -36,7 +37,9 @@ function App() {
 
     return (
         <Container>
-            {mode === "login" ? (
+            <PersonWindowLogin />
+
+            {/* {mode === "login" ? (
                 <Login />
             ) : (
                 <>
@@ -46,7 +49,7 @@ function App() {
 
                     <div id="multi-chats">{userChats && userChats.map((elem, index) => <MultiChats key={elem.socketidperson} ref={(el) => (multiChatRef.current[index] = el)} socketidperson={elem.socketidperson} />)}</div>
                 </>
-            )}
+            )} */}
 
             <GlobalStyle />
         </Container>

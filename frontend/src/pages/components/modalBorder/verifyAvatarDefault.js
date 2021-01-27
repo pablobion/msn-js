@@ -29,6 +29,16 @@ import surf from "./assets/defaultAvatars/surf.png";
 import tennis from "./assets/defaultAvatars/tennis.png";
 import winter from "./assets/defaultAvatars/winter.gif";
 
+import forest from "./assets/defaultAvatars/forest.png";
+import flower from "./assets/defaultAvatars/flower.png";
+import rocket from "./assets/defaultAvatars/rocket.png";
+import duck from "./assets/defaultAvatars/duck.png";
+import bike from "./assets/defaultAvatars/bike.png";
+import skate from "./assets/defaultAvatars/skate.png";
+import ball from "./assets/defaultAvatars/ball.png";
+import dogb from "./assets/defaultAvatars/dogb.png";
+import beach from "./assets/defaultAvatars/beach.png";
+
 export const defaultPhotosArray = [
     "leaf",
     "basketball",
@@ -59,6 +69,15 @@ export const defaultPhotosArray = [
     "surf",
     "tennis",
     "winter",
+    "forest",
+    "flower",
+    "rocket",
+    "duck",
+    "bike",
+    "skate",
+    "ball",
+    "dogb",
+    "beach",
 ];
 
 export const verifyAvatarDefault = (avatarname) => {
