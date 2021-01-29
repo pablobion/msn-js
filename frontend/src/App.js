@@ -25,6 +25,8 @@ function App() {
     const chatRef = useRef([]);
     const multiChatRef = useRef([]);
 
+    const notifications = useRef();
+
     useEffect(() => {
         socket.on("send client message text", ({ message, socketidUser, socketidPerson, chatopen }) => {
             sendmessage({ chatRefText, chatRef, multiChatRef, message, socketidUser, socketidPerson, chatopen });
@@ -33,13 +35,24 @@ function App() {
         socket.on("Draw AttenAttention", ({ id, whosend, isend, statusperson }) => {
             drawAttention({ chatRefText, chatRef, multiChatRef, id, whosend, isend, statusperson });
         });
+
+        notifications.current.classList.add("show");
     }, []);
+
+    const startWindowLogin = () => {
+        notifications.current.classList.add("show");
+
+        // setTimeout(() => {
+        //     notifications.current.classList.remove("show");
+        // }, 3300);
+    };
 
     return (
         <Container>
-            <PersonWindowLogin />
+            <button onClick={startWindowLogin}>ashuasuh</button>
+            <PersonWindowLogin ref={notifications} />
 
-            {/* {mode === "login" ? (
+            {mode === "login" ? (
                 <Login />
             ) : (
                 <>
@@ -49,7 +62,7 @@ function App() {
 
                     <div id="multi-chats">{userChats && userChats.map((elem, index) => <MultiChats key={elem.socketidperson} ref={(el) => (multiChatRef.current[index] = el)} socketidperson={elem.socketidperson} />)}</div>
                 </>
-            )} */}
+            )}
 
             <GlobalStyle />
         </Container>
