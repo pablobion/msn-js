@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import { Container } from "./styles";
 
@@ -17,11 +17,9 @@ import ModalBorder from "../../components/modalBorder/index";
 //configs
 import { socket } from "../../../configs/socket_export";
 
-let avatarxd;
-
-const NotificationOnline = () => {
+const NotificationOnline = (props) => {
     const [person, setPerson] = useState();
-    const notificationSystem = React.createRef();
+    const notificationSystem = useRef();
 
     const stylemsn = {
         Containers: {
@@ -83,8 +81,8 @@ const NotificationOnline = () => {
 
     const addNotification = (event) => {
         event.preventDefault();
-        const notification = notificationSystem.current;
-        notification.addNotification({
+
+        notificationSystem.current.addNotification({
             level: "info",
             position: "br",
             children: (
@@ -95,7 +93,8 @@ const NotificationOnline = () => {
                         <AiOutlineClose />
                     </div>
                     <div id="body">
-                        <ModalBorder avatar={person.avatar} size="32" minus="12" left="4px" top="4px" />
+                        {person ? <ModalBorder avatar={person.avatar} size="32" minus="12" left="4px" top="4px" /> : <ModalBorder avatar="" size="32" minus="12" left="4px" top="4px" />}
+
                         <div id="body-username">
                             <p>{person.username}</p>
                             <p>acabou de entrar.</p>
@@ -106,22 +105,25 @@ const NotificationOnline = () => {
         });
     };
 
+    // const playNotification = () => {
+    //     if (document.getElementById("button-add-notification")) document.getElementById("button-add-notification").click();
+    // };
+
     useEffect(() => {
-        socket.emit("socket connected notification");
+        let avatar = JSON.parse(localStorage.getItem("saveUser")).avatar;
+        socket.emit("socket connected notification", { avatar });
         socket.on("socket connected notification", (data) => {
             setPerson(data);
-            avatarxd = data.avatar;
-            if (document.getElementById("button-add-notification")) document.getElementById("button-add-notification").click();
         });
     }, []);
 
     return (
         <>
             <NotificationSystem ref={notificationSystem} style={stylemsn} />
-            <button id="button-add-notification" onClick={addNotification} style={{ position: "absolute", zIndex: "-3" }}>
-                sdsd
+            <button id="button-add-notification" onClick={addNotification}>
+                sss
             </button>
-            <button onClick={() => console.log(person.avatar)}></button>
+            {/* style={{ position: "absolute", zIndex: "-3" }} */}
         </>
     );
 };

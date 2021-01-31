@@ -4,7 +4,6 @@ import GlobalStyle from "./styles/global";
 
 //components
 import MultiChats from "../src/pages/multiChats/index";
-import PersonWindowLogin from "./pages/components/personWindowLogin/index";
 import { NotificationOnline } from "./pages/components/notificationOnline/index";
 
 //pages
@@ -25,6 +24,7 @@ function App() {
     const chatRefText = useRef([]);
     const chatRef = useRef([]);
     const multiChatRef = useRef([]);
+    const buttonnotification = useRef();
 
     useEffect(() => {
         socket.on("send client message text", ({ message, socketidUser, socketidPerson, chatopen }) => {
@@ -34,13 +34,12 @@ function App() {
         socket.on("Draw AttenAttention", ({ id, whosend, isend, statusperson }) => {
             drawAttention({ chatRefText, chatRef, multiChatRef, id, whosend, isend, statusperson });
         });
-
-        // notifications.current.classList.add("show");
     }, []);
 
     return (
         <Container>
             <NotificationOnline />
+
             {mode === "login" ? (
                 <Login />
             ) : (

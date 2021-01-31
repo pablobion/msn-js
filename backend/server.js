@@ -41,9 +41,9 @@ io.on("connection", (socket) => {
     addUser(socket.id); //Adicionando o usuario que entrou na lista de sockets online
     io.emit("socketsConnected", socketsConnected); // Mandando para os clientes que o socket entrou e atualizando as listas de sockets
 
-    socket.on("socket connected notification", () => {
-        io.emit("socket connected notification", getPerson(socket.id)); // mandando o cliente que entoru para notificação...
-        console.log(getPerson(socket.id));
+    socket.on("socket connected notification", ({ avatar }) => {
+        const username = getPerson(socket.id).username;
+        io.emit("socket connected notification", { username, avatar }); // mandando o cliente que entoru para notificação...
     });
 
     socket.on("change avatar", (avatarlink) => {
