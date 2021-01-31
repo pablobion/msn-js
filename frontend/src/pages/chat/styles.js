@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     height: 80vh;
-    width: 50vw;
+    width: 850px;
     border: 1px solid;
     display: flex;
     flex-direction: column;
@@ -98,9 +98,10 @@ export const Container = styled.div`
         height: 100%;
         background-color: rgb(236, 246, 249);
         display: flex;
-        max-height: 83.7%;
+        max-height: 85.7%;
         position: relative;
         padding-bottom: 10px;
+        padding: 10px;
 
         #chat-conversation-left {
             width: 78%;

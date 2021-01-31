@@ -5,8 +5,8 @@ import nudge from "../sounds/nudge.mp3";
 
 let timeout = false;
 
-const playSongNudge = () => {
-    let audio = new Audio(nudge);
+const playSongNudge = (sound) => {
+    let audio = new Audio(sound);
     audio.play();
 };
 
@@ -17,11 +17,11 @@ export const sendmessage = ({ chatRefText, chatRef, multiChatRef, message, socke
     const indexUserChat = chatRefText.current.findIndex((elem) => elem.id === socketidUser);
 
     if (chatRefText.current[indexUserChat]) {
-        chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname">${usernamesend} diz:</p><p id="chat-textmessage">${message}</p>`);
+        chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname" style="color: black; font-size: 14px;">${usernamesend} diz:</p><p id="chat-textmessage" style="margin-left: 10px; margin-bottom: 5px;">${message}</p>`);
         chatRefText.current[indexUserChat].scrollTop = chatRefText.current[indexUserChat].scrollHeight; //move o scroll para baixo
     }
     if (chatRefText.current[indexPersonChat]) {
-        chatRefText.current[indexPersonChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname">${usernamesend} diz:</p><p id="chat-textmessage">${message}</p>`);
+        chatRefText.current[indexPersonChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname" style="color: black; font-size: 14px;" >${usernamesend} diz:</p><p id="chat-textmessage"style="margin-left: 10px; margin-bottom: 5px;">${message}</p>`);
         chatRefText.current[indexPersonChat].scrollTop = chatRefText.current[indexPersonChat].scrollHeight; //move o scroll para baixo
     }
 
@@ -45,7 +45,7 @@ export const drawAttention = ({ chatRefText, chatRef, multiChatRef, id, whosend,
 
         if (statusperson === "online") {
             //so faz animação se a pessa estiver online.
-            playSongNudge();
+            playSongNudge(nudge);
             if (isend) socket.emit("change visible chat draw attention", { socketiduser: socket.id, socketidperson: id }); // faz um emit para mostrar o chat pra pessoa caso ela esteja com status online
             if (multiChatRef.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: tomato;animation: shake 0.5s;";
             if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].style = "animation: shake 0.5s; top: 100px; left: 100px";
