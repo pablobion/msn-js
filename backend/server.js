@@ -14,7 +14,7 @@ const port = process.env.PORT || 80;
 
 const io = require("socket.io")(server, {
     cors: {
-        origin: "https://msn-js.vercel.app",
+        origin: "http://localhost:3000",
         //origin: "https://msn-js.vercel.app",
         //origin: "http://localhost:3000",
         methods: ["GET", "POST"],
@@ -55,8 +55,8 @@ io.on("connection", (socket) => {
 
         if (updateChatsPerson) io.to(socketidPerson).emit("refresh multi chats", updateChatsPerson); // retornando a lista de chats do usuario que clicou
 
-        io.to(socketidUser).emit("send client message text", { message, socketidUser, socketidPerson }); //mandando para o usuario que mandou a msg
-        io.to(socketidPerson).emit("send client message text", { message, socketidUser, socketidPerson, chatopen }); //mandando para o usuario que recebeu a msg
+        io.to(socketidUser).emit("send client message text", { message, socketidUser, socketidPerson, usernamesend: getPerson(socket.id).username }); //mandando para o usuario que mandou a msg
+        io.to(socketidPerson).emit("send client message text", { message, socketidUser, socketidPerson, chatopen, usernamesend: getPerson(socket.id).username }); //mandando para o usuario que recebeu a msg
     });
 
     socket.on("Draw AttenAttention", (socketidperson) => {

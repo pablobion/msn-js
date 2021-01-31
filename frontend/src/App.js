@@ -27,8 +27,8 @@ function App() {
     const buttonNotificationRef = useRef();
 
     useEffect(() => {
-        socket.on("send client message text", ({ message, socketidUser, socketidPerson, chatopen }) => {
-            sendmessage({ chatRefText, chatRef, multiChatRef, message, socketidUser, socketidPerson, chatopen });
+        socket.on("send client message text", ({ message, socketidUser, socketidPerson, chatopen, usernamesend }) => {
+            sendmessage({ chatRefText, chatRef, multiChatRef, message, socketidUser, socketidPerson, chatopen, usernamesend });
         });
 
         socket.on("Draw AttenAttention", ({ id, whosend, isend, statusperson }) => {

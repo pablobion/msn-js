@@ -10,18 +10,18 @@ const playSongNudge = () => {
     audio.play();
 };
 
-export const sendmessage = ({ chatRefText, chatRef, multiChatRef, message, socketidUser, socketidPerson, chatopen }) => {
+export const sendmessage = ({ chatRefText, chatRef, multiChatRef, message, socketidUser, socketidPerson, chatopen, usernamesend }) => {
     if (!chatRefText.current) return false;
     if (!socketidUser) return alert("Houve um erro ao enviar sua mensaem.");
     const indexPersonChat = chatRefText.current.findIndex((elem) => elem.id === socketidPerson);
     const indexUserChat = chatRefText.current.findIndex((elem) => elem.id === socketidUser);
 
     if (chatRefText.current[indexUserChat]) {
-        chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname">${socketidUser} diz:</p><p id="chat-textmessage">${message}</p>`);
+        chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname">${usernamesend} diz:</p><p id="chat-textmessage">${message}</p>`);
         chatRefText.current[indexUserChat].scrollTop = chatRefText.current[indexUserChat].scrollHeight; //move o scroll para baixo
     }
     if (chatRefText.current[indexPersonChat]) {
-        chatRefText.current[indexPersonChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname">${socketidUser} diz:</p><p id="chat-textmessage">${message}</p>`);
+        chatRefText.current[indexPersonChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname">${usernamesend} diz:</p><p id="chat-textmessage">${message}</p>`);
         chatRefText.current[indexPersonChat].scrollTop = chatRefText.current[indexPersonChat].scrollHeight; //move o scroll para baixo
     }
 
