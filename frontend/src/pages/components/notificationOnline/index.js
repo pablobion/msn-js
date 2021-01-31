@@ -17,9 +17,10 @@ import ModalBorder from "../../components/modalBorder/index";
 //configs
 import { socket } from "../../../configs/socket_export";
 
-const NotificationOnline = (props) => {
+const NotificationOnline = () => {
     const [person, setPerson] = useState();
     const notificationSystem = useRef();
+    const ButtonnotificationSystem = useRef();
 
     const stylemsn = {
         Containers: {
@@ -80,7 +81,7 @@ const NotificationOnline = (props) => {
     };
 
     const addNotification = (event) => {
-        event.preventDefault();
+        // event.preventDefault();
 
         notificationSystem.current.addNotification({
             level: "info",
@@ -96,7 +97,7 @@ const NotificationOnline = (props) => {
                         {person ? <ModalBorder avatar={person.avatar} size="32" minus="12" left="4px" top="4px" /> : <ModalBorder avatar="" size="32" minus="12" left="4px" top="4px" />}
 
                         <div id="body-username">
-                            <p>{person.username}</p>
+                            <p>{person ? person.username : "Alguém"}</p>
                             <p>acabou de entrar.</p>
                         </div>
                     </div>
@@ -105,25 +106,17 @@ const NotificationOnline = (props) => {
         });
     };
 
-    // const playNotification = () => {
-    //     if (document.getElementById("button-add-notification")) document.getElementById("button-add-notification").click();
-    // };
-
     useEffect(() => {
-        let avatar = JSON.parse(localStorage.getItem("saveUser")).avatar;
-        socket.emit("socket connected notification", { avatar });
         socket.on("socket connected notification", (data) => {
             setPerson(data);
+            ButtonnotificationSystem.current.click();
         });
     }, []);
 
     return (
         <>
             <NotificationSystem ref={notificationSystem} style={stylemsn} />
-            <button id="button-add-notification" onClick={addNotification}>
-                sss
-            </button>
-            {/* style={{ position: "absolute", zIndex: "-3" }} */}
+            <button id="button-add-notification" onClick={addNotification} style={{ position: "absolute", zIndex: "-3" }} ref={ButtonnotificationSystem} />
         </>
     );
 };

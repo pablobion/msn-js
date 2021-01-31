@@ -42,8 +42,7 @@ io.on("connection", (socket) => {
     io.emit("socketsConnected", socketsConnected); // Mandando para os clientes que o socket entrou e atualizando as listas de sockets
 
     socket.on("socket connected notification", ({ avatar }) => {
-        const username = getPerson(socket.id).username;
-        io.emit("socket connected notification", { username, avatar }); // mandando o cliente que entoru para notificação...
+        io.emit("socket connected notification", { username: getPerson(socket.id).username, avatar }); // mandando o cliente que entoru para notificação...
     });
 
     socket.on("change avatar", (avatarlink) => {

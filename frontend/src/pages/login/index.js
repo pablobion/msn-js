@@ -50,7 +50,6 @@ const Login = () => {
 
         sendSocketEmitStatus(data.status); // troca status ao entrar.
         sendSocketEmitUsername(data.username); // troca username ao entrar
-        console.log(data);
 
         //se o input estiver selecionado, irá as informações.
         if (data.remember) {
@@ -59,6 +58,9 @@ const Login = () => {
             //caso nao esteja ele irá remover.
             localStorage.removeItem("saveUser");
         }
+
+        let avatar = JSON.parse(localStorage.getItem("saveUser")).avatar; // pega o avatar que esta em local storage
+        socket.emit("socket connected notification", { avatar }); // faz um emit pro serivdor
 
         setMode("home"); //muda para home depois que clica.
     };

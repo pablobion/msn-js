@@ -24,7 +24,7 @@ function App() {
     const chatRefText = useRef([]);
     const chatRef = useRef([]);
     const multiChatRef = useRef([]);
-    const buttonnotification = useRef();
+    const buttonNotificationRef = useRef();
 
     useEffect(() => {
         socket.on("send client message text", ({ message, socketidUser, socketidPerson, chatopen }) => {
