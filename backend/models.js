@@ -175,6 +175,12 @@ const changeVisibleChatAttention = ({ socketiduser, socketidperson }) => {
     }
 };
 
+const getPerson = (socketid) => {
+    if (socketsConnected) {
+        let person = socketsConnected.find((elem) => elem.socketid === socketid);
+        return person;
+    }
+};
 module.exports = {
     addUser,
     changeVisibleChat,
@@ -189,4 +195,5 @@ module.exports = {
     changeAvatar,
     changeVisibleChatAttention,
     changeUsername,
+    getPerson,
 };

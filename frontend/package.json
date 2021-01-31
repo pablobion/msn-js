@@ -13,6 +13,7 @@
     "react-icons": "^4.1.0",
     "react-image-crop": "^8.6.6",
     "react-loading": "^2.0.3",
+    "react-notification-system": "^0.4.0",
     "react-scripts": "4.0.1",
     "socket.io-client": "^3.0.4",
     "styled-components": "^5.2.1",
