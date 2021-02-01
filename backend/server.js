@@ -91,6 +91,7 @@ io.on("connection", (socket) => {
     socket.on("change status user", (status) => {
         changeStatus(socket.id, status);
         io.emit("socketsConnected", socketsConnected); // Mandando para os clientes que o socket entrou
+        io.emit("socketsConnectedCounter", socketsConnectedCounter()); // Quantidade de pessoas online...
     });
 
     socket.on("change subnick user", (subnick) => {
