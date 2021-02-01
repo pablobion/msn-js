@@ -12,6 +12,9 @@ import ModalCropUpdate from "../components/modalCropUpdate";
 //icons
 import { BsPencil, BsTrash } from "react-icons/bs";
 
+//gif
+import loading from "./assets/loading.gif";
+
 //configs
 import { socket } from "../../configs/socket_export";
 
@@ -24,6 +27,7 @@ const Login = () => {
     const { getUser, setMode } = useUser();
     const [username, setUsername] = useState("");
     const [person, setPerson] = useState();
+    const [gifLogin, setGifLogin] = useState(false);
 
     const [changeStatusBorder, setChangeStatusBorder] = useState();
     const rememberIsChecked = useRef();
@@ -38,33 +42,36 @@ const Login = () => {
     };
 
     const onSubmit = (data) => {
-        if (!data.username || data.username === " ") {
-            alert("Você deve colocar o seu nome de usuário.");
-            return false;
-        }
-        if (data.username === "") data.username = "Nome não disponivel";
+        setGifLogin(true);
+        setTimeout(() => {
+            if (!data.username || data.username === " ") {
+                alert("Você deve colocar o seu nome de usuário.");
+                return false;
+            }
+            if (data.username === "") data.username = "Nome não disponivel";
 
-        data.socketid = socket.id;
-        data.remember = rememberIsChecked.current.checked;
-        data.autologin = autoLoginIsChecked.current.checked;
+            data.socketid = socket.id;
+            data.remember = rememberIsChecked.current.checked;
+            data.autologin = autoLoginIsChecked.current.checked;
 
-        sendSocketEmitStatus(data.status); // troca status ao entrar.
-        sendSocketEmitUsername(data.username); // troca username ao entrar
+            sendSocketEmitStatus(data.status); // troca status ao entrar.
+            sendSocketEmitUsername(data.username); // troca username ao entrar
 
-        //se o input estiver selecionado, irá as informações.
-        if (data.remember) {
-            localStorage.setItem("saveUser", JSON.stringify({ username: data.username, avatar: person.avatar, autologin: autoLoginIsChecked.current.checked }));
-        } else {
-            //caso nao esteja ele irá remover.
-            localStorage.removeItem("saveUser");
-        }
+            //se o input estiver selecionado, irá as informações.
+            if (data.remember) {
+                localStorage.setItem("saveUser", JSON.stringify({ username: data.username, avatar: person.avatar, autologin: autoLoginIsChecked.current.checked }));
+            } else {
+                //caso nao esteja ele irá remover.
+                localStorage.removeItem("saveUser");
+            }
 
-        if (JSON.parse(localStorage.getItem("saveUser"))) {
-            let avatar = JSON.parse(localStorage.getItem("saveUser")).avatar; // pega o avatar que esta em local storage
-            socket.emit("socket connected notification", { avatar }); // faz um emit pro serivdor
-        }
+            if (JSON.parse(localStorage.getItem("saveUser"))) {
+                let avatar = JSON.parse(localStorage.getItem("saveUser")).avatar; // pega o avatar que esta em local storage
+                socket.emit("socket connected notification", { avatar }); // faz um emit pro serivdor
+            }
 
-        setMode("home"); //muda para home depois que clica.
+            setMode("home"); //muda para home depois que clica.
+        }, 5000);
     };
 
     const handleChangeUsername = (e) => {
@@ -146,6 +153,11 @@ const Login = () => {
                         </button>
                     </div>
                 </form>
+                {gifLogin && (
+                    <div>
+                        <img src={loading} alt="" />
+                    </div>
+                )}
             </Container>
         </Main>
     );
