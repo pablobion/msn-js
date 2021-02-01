@@ -12,6 +12,7 @@ export default function UserProvider({ children }) {
     const [mode, setMode] = useState("login");
 
     useEffect(() => {
+        setTheme(`${localStorage.getItem("msn-theme")}`);
         socket.on("socketsConnected", (data) => {
             setCountContactsOnline(data.length - 1);
             setContactsOnline(data);
@@ -39,11 +40,15 @@ export default function UserProvider({ children }) {
     const changeTheme = () => {
         if (theme === "blue") {
             setTheme("pink");
+            localStorage.setItem("msn-theme", "pink");
         } else if (theme === "pink") {
+            localStorage.setItem("msn-theme", "yellow");
             setTheme("yellow");
         } else if (theme === "yellow") {
+            localStorage.setItem("msn-theme", "green");
             setTheme("green");
         } else if (theme === "green") {
+            localStorage.setItem("msn-theme", "blue");
             setTheme("blue");
         }
     };
