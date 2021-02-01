@@ -23,7 +23,8 @@ const PhotoHistory = (props) => {
         }
     }, []);
 
-    const handleClickChangeAvatarDefault = (elem) => {
+    const sendAvatar = (elem) => {
+        elem = photoFocus;
         if (!elem) return false;
         socket.emit("change avatar", elem);
         if (localStorage.getItem("saveUser")) {
@@ -51,14 +52,7 @@ const PhotoHistory = (props) => {
                             <div>
                                 {photos &&
                                     photos.map((elem) => (
-                                        <button
-                                            key={elem}
-                                            className="button-photos-galary"
-                                            onClick={() => {
-                                                setPhotoFocus(verifyAvatarDefault(elem));
-                                                handleClickChangeAvatarDefault(elem);
-                                            }}
-                                        >
+                                        <button key={elem} className="button-photos-galary" onClick={() => setPhotoFocus(verifyAvatarDefault(elem))}>
                                             <img src={verifyAvatarDefault(elem)} alt=""></img>
                                         </button>
                                     ))}
@@ -66,14 +60,7 @@ const PhotoHistory = (props) => {
 
                             <h5>Imagens comuns</h5>
                             {defaultPhotosArray.map((elem) => (
-                                <button
-                                    key={elem}
-                                    className="button-photos-galary"
-                                    onClick={() => {
-                                        setPhotoFocus(verifyAvatarDefault(elem));
-                                        handleClickChangeAvatarDefault(elem);
-                                    }}
-                                >
+                                <button key={elem} className="button-photos-galary" onClick={() => setPhotoFocus(verifyAvatarDefault(elem))}>
                                     <img src={verifyAvatarDefault(elem)} alt=""></img>
                                 </button>
                             ))}
@@ -81,12 +68,15 @@ const PhotoHistory = (props) => {
                     </div>
                 </div>
                 <div id="right">
-                    <ModalBorder id="right-avatar-preview" avatar={photoFocus} size="64" minus="15" top="10px" left="2px" />
+                    <ModalBorder id="right-avatar-preview" avatar={photoFocus} size="64" minus="18" top="4px" left="4px" />
                     <button onClick={props.custom}>Custom</button>
                 </div>
             </div>
             <div id="bottom">
                 <button onClick={props.close}>Fechar</button>
+                <button onClick={sendAvatar} style={{ marginLeft: "30px", backgroundColor: "MediumSeaGreen" }}>
+                    Salvar
+                </button>
             </div>
 
             {/* <h1>Avatares Disponiveis</h1>
