@@ -4,7 +4,9 @@ import { Container } from "./styles";
 
 import NotificationSystem from "react-notification-system";
 
-//components
+//components sounds
+import playsound from "../../../scripts/sounds/sounds";
+
 //images
 import msnLogo from "./assets/msn-logo.png";
 
@@ -82,7 +84,7 @@ const NotificationOnline = () => {
 
     const addNotification = (event) => {
         // event.preventDefault();
-
+        playsound("online");
         notificationSystem.current.addNotification({
             level: "info",
             position: "br",

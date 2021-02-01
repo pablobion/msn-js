@@ -1,7 +1,7 @@
 import { socket } from "../configs/socket_export";
 
 //sounds
-import nudge from "../sounds/nudge.mp3";
+import playsound from "./sounds/sounds";
 
 let timeout = false;
 
@@ -29,6 +29,7 @@ export const sendmessage = ({ chatRefText, chatRef, multiChatRef, message, socke
         //verificando se o chat estava aberto, se caso não, deixa ele laranja
         const indexPersonMultiChat = multiChatRef.current.findIndex((elem) => `${elem.id}` === `${socketidUser}-multichat`);
         if (chatRefText.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: orange;";
+        playsound("type");
     }
 };
 
@@ -45,7 +46,7 @@ export const drawAttention = ({ chatRefText, chatRef, multiChatRef, id, whosend,
 
         if (statusperson === "online") {
             //so faz animação se a pessa estiver online.
-            playSongNudge(nudge);
+            playsound("nudge");
             if (isend) socket.emit("change visible chat draw attention", { socketiduser: socket.id, socketidperson: id }); // faz um emit para mostrar o chat pra pessoa caso ela esteja com status online
             if (multiChatRef.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: tomato;animation: shake 0.5s;";
             if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].style = "animation: shake 0.5s; top: 100px; left: 100px";
