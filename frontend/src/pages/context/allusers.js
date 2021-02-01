@@ -50,6 +50,9 @@ export default function UserProvider({ children }) {
         } else if (theme === "green") {
             localStorage.setItem("msn-theme", "blue");
             setTheme("blue");
+        } else {
+            localStorage.setItem("msn-theme", "yellow");
+            setTheme("yellow");
         }
     };
 

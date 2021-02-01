@@ -48,6 +48,7 @@ const Login = () => {
                 alert("Você deve colocar o seu nome de usuário.");
                 return false;
             }
+
             if (data.username === "") data.username = "Nome não disponivel";
 
             data.socketid = socket.id;
