@@ -52,16 +52,16 @@ const Chat = (props) => {
                 <img src={points} alt="" />
             </MultiPoints>
             <HeaderChat>
-                <AeroButton disabled="true">
+                <AeroButton disabled={true}>
                     <img src={emotions} alt="" />
                 </AeroButton>
-                <AeroButton disabled="true">
+                <AeroButton disabled={true}>
                     <img src={winks} alt="" />
                 </AeroButton>
                 <AeroButton onCustomClick={handleClickDrawAttention}>
                     <img src={tilt} alt="" />
                 </AeroButton>
-                <AeroButton disabled="true">
+                <AeroButton disabled={true}>
                     <img src={voice} alt="" />
                 </AeroButton>
             </HeaderChat>
