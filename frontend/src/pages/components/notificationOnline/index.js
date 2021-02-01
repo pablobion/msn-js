@@ -17,12 +17,18 @@ import { AiOutlineClose } from "react-icons/ai";
 import ModalBorder from "../../components/modalBorder/index";
 
 //configs
-import { socket } from "../../../configs/socket_export";
+import { socket, connect } from "../../../configs/socket_export";
+
+//context
+import { useUser } from "../../context/allusers";
 
 const NotificationOnline = () => {
     const [person, setPerson] = useState();
+    const [statusUser, setStatusUser] = useState();
     const notificationSystem = useRef();
     const ButtonnotificationSystem = useRef();
+
+    const { getUser } = useUser();
 
     const stylemsn = {
         Containers: {
