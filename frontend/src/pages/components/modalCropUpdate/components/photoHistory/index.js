@@ -32,6 +32,7 @@ const PhotoHistory = (props) => {
             infos.avatar = elem;
             localStorage.setItem("saveUser", JSON.stringify(infos));
         }
+        props.close();
     };
 
     return (

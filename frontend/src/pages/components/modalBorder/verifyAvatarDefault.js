@@ -39,6 +39,8 @@ import ball from "./assets/defaultAvatars/ball.png";
 import dogb from "./assets/defaultAvatars/dogb.png";
 import beach from "./assets/defaultAvatars/beach.png";
 
+import horses from "./assets/defaultAvatars/horses.png";
+
 export const defaultPhotosArray = [
     "leaf",
     "basketball",
@@ -78,6 +80,7 @@ export const defaultPhotosArray = [
     "ball",
     "dogb",
     "beach",
+    "horses",
 ];
 
 export const verifyAvatarDefault = (avatarname) => {
@@ -112,6 +115,16 @@ export const verifyAvatarDefault = (avatarname) => {
     if (avatarname === "surf") return surf;
     if (avatarname === "tennis") return tennis;
     if (avatarname === "winter") return winter;
+    if (avatarname === "forest") return forest;
+    if (avatarname === "flower") return flower;
+    if (avatarname === "rocket") return rocket;
+    if (avatarname === "duck") return duck;
+    if (avatarname === "bike") return bike;
+    if (avatarname === "skate") return skate;
+    if (avatarname === "ball") return ball;
+    if (avatarname === "dogb") return dogb;
+    if (avatarname === "beach") return beach;
+    if (avatarname === "horses") return horses;
 
     return avatarname;
 };
