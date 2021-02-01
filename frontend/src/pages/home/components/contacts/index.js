@@ -44,7 +44,7 @@ const Contacts = () => {
                                     }
                                 }
                             })}
-                        <small style={{ color: "darkgray", height: "100%" }}>* Usuários com status offline aparecem no contador mas são ocultos da lista.</small>
+                        <small style={{ color: "darkgray", height: "100%" }}>* Usuários onlines aparecerão nesta lista.</small>
                     </div>
                 </details>
             </div>

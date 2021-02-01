@@ -181,6 +181,15 @@ const getPerson = (socketid) => {
         return person;
     }
 };
+
+const socketsConnectedCounter = () => {
+    let counter = 0;
+    socketsConnected.forEach((elem) => {
+        if (elem.status != "invisible") counter += 1;
+    });
+    return counter;
+};
+
 module.exports = {
     addUser,
     changeVisibleChat,
@@ -196,4 +205,5 @@ module.exports = {
     changeVisibleChatAttention,
     changeUsername,
     getPerson,
+    socketsConnectedCounter,
 };

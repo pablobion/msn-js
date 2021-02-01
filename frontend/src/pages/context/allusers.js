@@ -14,8 +14,11 @@ export default function UserProvider({ children }) {
     useEffect(() => {
         setTheme(`${localStorage.getItem("msn-theme")}`);
         socket.on("socketsConnected", (data) => {
-            setCountContactsOnline(data.length - 1);
             setContactsOnline(data);
+        });
+
+        socket.on("socketsConnectedCounter", (data) => {
+            setCountContactsOnline(data - 1);
         });
 
         socket.on("refresh multi chats", (data) => {
