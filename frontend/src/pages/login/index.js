@@ -72,7 +72,7 @@ const Login = () => {
             }
 
             setMode("home"); //muda para home depois que clica.
-        }, 5000);
+        }, 2000);
     };
 
     const handleChangeUsername = (e) => {

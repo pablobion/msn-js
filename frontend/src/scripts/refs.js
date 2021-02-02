@@ -44,18 +44,21 @@ export const drawAttention = ({ chatRefText, chatRef, multiChatRef, id, whosend,
             timeout = false;
         }, 5000);
 
+        const styles = getComputedStyle(chatRef.current[indexPersonChat]); //pegando os styles do chat
+
         if (statusperson === "online") {
             //so faz animação se a pessa estiver online.
             playsound("nudge");
             if (isend) socket.emit("change visible chat draw attention", { socketiduser: socket.id, socketidperson: id }); // faz um emit para mostrar o chat pra pessoa caso ela esteja com status online
             if (multiChatRef.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: tomato;animation: shake 0.5s;";
-            if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].style = "animation: shake 0.5s; top: 100px; left: 100px";
+            if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].style = `animation: shake 0.5s; width: ${styles.width}; height: ${styles.height}`;
+            console.log(styles.marginLeft);
         }
 
         if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p>—————————</p><p id="chat-usarname">${whosend} acabou de chamar a atenção.</p><p>—————————</p>`);
         setTimeout(() => {
             if (multiChatRef.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: transparent;";
-            if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].style = "animation: none; top: 100px; left: 100px;";
+            if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].style = `animation: none; width: ${styles.width}; height: ${styles.height}`;
         }, 500);
     } else {
         if (!isend) return false; // so manda a mensagem abaixo só para pessoa que esta clicando mais de uma vez.

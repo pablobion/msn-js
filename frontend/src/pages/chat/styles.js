@@ -20,6 +20,7 @@ export const Container = styled.div`
     right: 0;
     top: 0;
     bottom: 0;
+    overflow: hidden;
 
     /* Animations component */
 
