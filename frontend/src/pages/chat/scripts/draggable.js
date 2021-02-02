@@ -1,25 +1,43 @@
 import interact from "interactjs";
-export default () => {
-    interact(".draggable-chat").draggable({
-        // enable inertial throwing
-        inertia: true,
-        // keep the element within the area of it's parent
-        modifiers: [
-            interact.modifiers.restrictRect({
-                restriction: "parent",
-                endOnly: true,
-            }),
-        ],
-        // enable autoScroll
-        autoScroll: true,
 
-        listeners: {
-            // call this function on every dragmove event
-            move: dragMoveListener,
+export default (chatRefText) => {
+    interact(".draggable-chat")
+        .draggable({
+            // enable inertial throwing
+            inertia: true,
+            // keep the element within the area of it's parent
+            modifiers: [
+                interact.modifiers.restrictRect({
+                    restriction: "parent",
+                    endOnly: true,
+                }),
+            ],
+            // enable autoScroll
+            autoScroll: true,
 
-            // call this function on every dragend event
-        },
-    });
+            listeners: {
+                // call this function on every dragmove event
+                move: dragMoveListener,
+
+                // call this function on every dragend event
+            },
+        })
+        .resizable({
+            edges: { top: true, left: true, bottom: true, right: true },
+            listeners: {
+                move: function (event) {
+                    let { x, y } = event.target.dataset;
+
+                    x = (parseFloat(x) || 0) + event.deltaRect.left;
+                    y = (parseFloat(y) || 0) + event.deltaRect.top;
+
+                    Object.assign(event.target.style, {
+                        width: `${event.rect.width}px`,
+                        height: `${event.rect.height}px`,
+                    });
+                },
+            },
+        });
 
     function dragMoveListener(event) {
         var target = event.target;
@@ -27,7 +45,11 @@ export default () => {
         var x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
         var y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
 
-        target.parentNode.appendChild(target);
+        target.parentNode.appendChild(target); // faz puxar para frente ao mover...
+
+        chatRefText.current.forEach((elem, index) => {
+            elem.scrollTop = elem.scrollHeight;
+        });
 
         // translate the element
         target.style.webkitTransform = target.style.transform = "translate(" + x + "px, " + y + "px)";

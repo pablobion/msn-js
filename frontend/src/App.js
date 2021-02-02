@@ -19,12 +19,7 @@ import { socket } from "./configs/socket_export";
 import { sendmessage, drawAttention } from "./scripts/refs";
 
 function App() {
-    const { userChats, mode } = useUser();
-
-    const chatRefText = useRef([]);
-    const chatRef = useRef([]);
-    const multiChatRef = useRef([]);
-    const buttonNotificationRef = useRef();
+    const { userChats, mode, chatRefText, chatRef, multiChatRef } = useUser();
 
     useEffect(() => {
         socket.on("send client message text", ({ message, socketidUser, socketidPerson, chatopen, usernamesend }) => {
@@ -46,7 +41,7 @@ function App() {
                 <>
                     <Home />
 
-                    {userChats && userChats.map((elem, index) => <Chat key={elem.socketidperson} ref={{ chatRefText: (el) => (chatRefText.current[index] = el), chatRef: (el) => (chatRef.current[index] = el) }} socketidperson={elem.socketidperson} visible={elem.visible} />)}
+                    {userChats && userChats.map((elem, index) => <Chat key={elem.socketidperson} chatRefText={chatRefText} ref={{ chatRefText: (el) => (chatRefText.current[index] = el), chatRef: (el) => (chatRef.current[index] = el) }} socketidperson={elem.socketidperson} visible={elem.visible} />)}
 
                     <div id="multi-chats">{userChats && userChats.map((elem, index) => <MultiChats key={elem.socketidperson} ref={(el) => (multiChatRef.current[index] = el)} socketidperson={elem.socketidperson} />)}</div>
                 </>

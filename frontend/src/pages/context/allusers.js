@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, { createContext, useState, useContext, useEffect, useRef } from "react";
 
 import { socket } from "../../configs/socket_export";
 
@@ -10,6 +10,10 @@ export default function UserProvider({ children }) {
     const [userChats, setUserChats] = useState([]);
     const [theme, setTheme] = useState("blue");
     const [mode, setMode] = useState("login");
+
+    const chatRefText = useRef([]);
+    const chatRef = useRef([]);
+    const multiChatRef = useRef([]);
 
     useEffect(() => {
         setTheme(`${localStorage.getItem("msn-theme")}`);
@@ -71,6 +75,9 @@ export default function UserProvider({ children }) {
                 changeTheme,
                 mode,
                 setMode,
+                chatRefText,
+                chatRef,
+                multiChatRef,
             }}
         >
             {children}
@@ -82,7 +89,7 @@ export function useUser() {
     const context = useContext(UserContext);
     if (!context) throw new Error("useCount must be used within a CountProvider");
 
-    const { contactsOnline, countContactsOnline, userChats, getPerson, getUser, theme, changeTheme, mode, setMode } = context;
+    const { contactsOnline, countContactsOnline, userChats, getPerson, getUser, theme, changeTheme, mode, setMode, chatRefText, chatRef, multiChatRef } = context;
 
-    return { contactsOnline, countContactsOnline, userChats, getPerson, getUser, theme, changeTheme, mode, setMode };
+    return { contactsOnline, countContactsOnline, userChats, getPerson, getUser, theme, changeTheme, mode, setMode, chatRefText, chatRef, multiChatRef };
 }

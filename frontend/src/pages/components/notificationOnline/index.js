@@ -117,7 +117,7 @@ const NotificationOnline = () => {
     useEffect(() => {
         socket.on("socket connected notification", (data) => {
             setPerson(data);
-            ButtonnotificationSystem.current.click();
+            if (ButtonnotificationSystem) ButtonnotificationSystem.current.click();
         });
     }, []);
 
