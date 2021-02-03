@@ -31,8 +31,10 @@ const Header = () => {
 
     const handleChangeStatus = async (e) => {
         if (e.target.value === "online") {
-            let avatar = JSON.parse(localStorage.getItem("saveUser")).avatar; // pega o avatar que esta em local storage
-            socket.emit("socket connected notification", { avatar }); // faz um emit pro serivdor
+            if (JSON.parse(localStorage.getItem("saveUser"))) {
+                let avatar = JSON.parse(localStorage.getItem("saveUser")).avatar; // pega o avatar que esta em local storage
+                socket.emit("socket connected notification", { avatar }); // faz um emit pro serivdor
+            }
         }
         socket.emit("change status user", e.target.value);
     };

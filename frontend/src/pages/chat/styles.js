@@ -2,10 +2,17 @@ import { BiBluetooth } from "react-icons/bi";
 import styled from "styled-components";
 
 export const Container = styled.div`
-    height: 80vh;
+    height: 85vh;
     min-height: 450px;
-    width: 850px;
-    min-width: 580px;
+    width: 95vw;
+
+    @media (min-width: 600px) {
+        height: 80vh;
+        min-height: 450px;
+        width: 850px;
+        min-width: 580px;
+    }
+
     border: 1px solid;
     display: flex;
     flex-direction: column;
@@ -114,7 +121,16 @@ export const Container = styled.div`
         }
         #chat-conversation-right {
             padding-top: 10px;
-            width: 22%;
+
+            @media (max-width: 600px) {
+                width: 42%;
+                min-width: 42%;
+            }
+
+            @media (min-width: 600px) {
+                width: 22%;
+                max-width: 22%;
+            }
         }
     }
 `;
