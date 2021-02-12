@@ -76,7 +76,9 @@ $ git clone https://github.com/pablobion/msn-js
 **Instalando as dependências**
 
 ```bash
-$ yarn
+$ cd backend && yarn
+
+$ cd frontend && yarn
 ```
 
 **Iniciando**
