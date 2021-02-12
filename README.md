@@ -1,7 +1,7 @@
-<h1 align="center">Detector de fake news 📰</h1>
+<h1 align="center">Windows Live Messenger (MSN) JS 💬</h1>
 
 
-<h3 align="center" justify="center">🔎&nbsp;&nbsp;&nbsp;Identifique noticias falsas.</h3>
+<h3 align="center" justify="center">🔎&nbsp;&nbsp;&nbsp;A antiga rede de relacionamentos do windows.</h3>
 
 <p align="center">
   <a href="https://www.linkedin.com/in/pablobion/">
@@ -15,27 +15,37 @@
 &nbsp;
 &nbsp;
 &nbsp;
-### Mais imagens do projeto [Clique Aqui](https://github.com/pablobion/fake-news-detector/blob/master/frontend/README.md)
+### Demo: [Clique Aqui](https://msn-js.vercel.app/)
 &nbsp;
 &nbsp;
 &nbsp;
 
 ## 📽 Sobre o projeto
 
-Este foi um projeto em parceria com meu amigo Pedro, para faculdade.
+Projeto WEB responsivo para reproduzir o windows live messenger em web.
+O Windows live Messenger foi um dos mensageiro mais famosos da internet, que foi descontinuado em 15 de março de 2013.
 
-Projeto WEB responsivo para detecção de noticias falsas na internet.
+O MSN foi o mais usado no mundo com mais de 230 milhões de usuários. No Brasil, o serviço atingiu mais de 75% dos usuários da internet, que significava mais de 34 milhões de usuários no país.
 
-Consiste em coletar uma noticia, seja por meio de url ou texto e verificar se é veridica. Feito em React-js utilizando algumas bibliotecas disponiveis.
+Este projeto foi feito para relembrar o mensageiro e matar um pouco da saudade.
 
-Ferramentas:
+Ele foi feito com reactJS, node e socket.io.
 
-- Pesquisar noticia (validar se é verdadeira)
-- Pesquisar noticia por URL.
-- Criação de grupo (para que seus amigos sejam notificados por e-mail quando você identificar que uma notifcia é falsa)
-- Pagina para aceitar e recusar grupo.
-- Pagina de perfil (onde contém todo as noticias pesquisadas e a data emq ue foram pesquisadas.)
-- Pagina de sugestão, para que seja notificado que uma noticia é falsa.
+#### Funcionalidades
+- [X] Acesso ao msn
+- [X] Lista de contatos online
+- [X] Mostrar janelinha ao ficar online
+- [X] Mudar subnick
+- [X] Mudar Status
+- [X] Mudar avatar
+- [X] Mudar nome ao entrar
+- [X] Conversar com outras pessoas
+- [X] Mudar tema
+- [X] Chamar atenção
+- [X] Multi Chats
+- [X] Msn sounds
+- [X] Aumentar e mover a janela de chat
+- [ ] Winks 
 
 
 
@@ -44,14 +54,12 @@ Ferramentas:
 Tecnologias que usei para desenvolver esse projeto no front-end
 
 - [ReactJS](https://reactjs.org/)
-- [React Router DOM](https://reacttraining.com/react-router/)
 - [Styled Components](https://styled-components.com/)
-- [Axios](https://github.com/axios/axios)
-- [Polished](https://github.com/styled-components/polished)
 - [React icons](https://react-icons.github.io/react-icons/)
-- [React Alert](https://www.npmjs.com/package/react-alert)
 - [React Hook Form](https://react-hook-form.com/)
-- [React Lottie](https://www.npmjs.com/package/react-lottie)
+- [Socket.io](https://socket.io/)
+- [react-notification-system](https://www.npmjs.com/package/react-notification-system)
+- [interactjs](https://interactjs.io/)
 
 
 
@@ -61,9 +69,8 @@ Tecnologias que usei para desenvolver esse projeto no front-end
 **Clonando repositório e executando**
 
 ```bash
-$ git clone https://github.com/pablobion/fake-news-detector
- && cd fake-news-detector
-
+$ git clone https://github.com/pablobion/msn-js
+ && cd msn-js
 ```
 
 **Instalando as dependências**
@@ -75,7 +82,11 @@ $ yarn
 **Iniciando**
 
 ```bash
-$ yarn start
+
+$ cd backend && yarn start
+
+$ cd frontend && yarn start
+
 ```
 
 
