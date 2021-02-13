@@ -63,7 +63,7 @@ const Header = () => {
                 <NavBar />
                 <div id="profile">
                     <div id="left">
-                        {person ? <Borderavatar avatar={person.avatar} size="64" status={person.status} minus="19" top="2px" left="2px"></Borderavatar> : <Borderavatar avatar="https://i.imgur.com/hIbb87P.png" size="64" status="online" minus="19" top="2px" left="2px"></Borderavatar>}
+                        {person ? <Borderavatar avatar={person.avatar} size="64" status={person.status} minus="19" top="2px" left="2px"></Borderavatar> : <Borderavatar avatar="" size="64" status="online" minus="19" top="2px" left="2px"></Borderavatar>}
 
                         <ModalCropUpdate id="btn-edit-photo">
                             <button id="btn-edit-photo" onClick={() => <Crop />}>
@@ -73,7 +73,7 @@ const Header = () => {
                     </div>
                     <div id="right">
                         <span className="span-username">
-                            {person ? <p id="username">{person.username}</p> : <p id="username">n/a</p>}
+                            {person ? <p id="username">{person.username}</p> : <p id="username">Não informado</p>}
 
                             <small>
                                 <select onChange={(e) => handleChangeStatus(e)}>

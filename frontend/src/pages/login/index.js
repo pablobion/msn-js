@@ -44,12 +44,11 @@ const Login = () => {
     const onSubmit = (data) => {
         setGifLogin(true);
         setTimeout(() => {
-            if (!data.username || data.username === " ") {
+            if (!data.username || data.username === " " || data.username === "") {
                 alert("Você deve colocar o seu nome de usuário.");
+                setGifLogin(false);
                 return false;
             }
-
-            if (data.username === "") data.username = "Nome não disponivel";
 
             data.socketid = socket.id;
             data.remember = rememberIsChecked.current.checked;
@@ -149,9 +148,18 @@ const Login = () => {
                         <p>Entrar Automaticamente</p>
                     </div>
                     <div id="footer-buttons">
-                        <button type="submit" onClick={() => {}}>
-                            Entrar
-                        </button>
+                        {person ? (
+                            <button type="submit">Entrar</button>
+                        ) : (
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    alert("Não foi possivel conectar ao servidor, tente novamente!");
+                                }}
+                            >
+                                Entrar
+                            </button>
+                        )}
                     </div>
                 </form>
                 {gifLogin && (
