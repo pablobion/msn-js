@@ -100,3 +100,6 @@ Feito por Pablo Bion
 
  &nbsp;[Veja meu linkedin](https://www.linkedin.com/in/pablobion/)
 
+
+Agradecimentos ao @AndroidWG, samu obrigado pelos assets!
+
