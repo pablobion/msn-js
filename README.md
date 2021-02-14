@@ -10,7 +10,7 @@
 </p>
 
 
-<img  src="preview/preview-all.png" alt="preview">
+<img  src="preview-github/desktop-phone.png" alt="preview">
 
 &nbsp;
 &nbsp;
