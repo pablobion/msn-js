@@ -68,6 +68,8 @@ const Login = () => {
             if (JSON.parse(localStorage.getItem("saveUser"))) {
                 let avatar = JSON.parse(localStorage.getItem("saveUser")).avatar; // pega o avatar que esta em local storage
                 socket.emit("socket connected notification", { avatar }); // faz um emit pro serivdor
+            } else {
+                socket.emit("socket connected notification", { avatar: person.avatar }); // faz um emit pro serivdor
             }
 
             setMode("home"); //muda para home depois que clica.
