@@ -10,7 +10,7 @@
 </p>
 
 
-<img  src="preview/preview-all.png" alt="preview">
+<img  src="preview-github/desktop-phone.png" alt="preview">
 
 &nbsp;
 &nbsp;
@@ -96,6 +96,10 @@ $ cd frontend && yarn start
 
 ---
 
-Feito por Pedro Verani e Pablo Bion 
+Feito por Pablo Bion 
 
  &nbsp;[Veja meu linkedin](https://www.linkedin.com/in/pablobion/)
+
+
+Agradecimentos ao @AndroidWG, samu obrigado pelos assets!
+
