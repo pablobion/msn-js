@@ -21,14 +21,6 @@ const io = require("socket.io")(server, {
     },
 });
 
-app.get("/", (req, res) => {
-    res.send("Olá mundo ");
-});
-
-app.post("/teste", (req, res) => {
-    res.send("Olá mundo teste post ok");
-});
-
 app.get("/statusall", (req, res) => {
     return res.json({
         socketsConnected,
