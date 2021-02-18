@@ -26,11 +26,11 @@ const MultiChats = React.forwardRef((props, ref) => {
     });
 
     const openchat = (socketidperson) => {
+        const indexPersonChat = chatRefText.current.findIndex((elem) => elem.id === socketidperson);
+
         socket.emit("change visible chat", socketidperson);
         const elemento = document.getElementById(`${props.socketidperson}-multichat`);
         elemento.style = "background-color: white;";
-
-        const indexPersonChat = chatRefText.current.findIndex((elem) => elem.id === socketidperson);
 
         const inputDOMNode = chatRef.current[indexPersonChat];
         inputDOMNode.parentNode.appendChild(inputDOMNode); // faz puxar para frente ao clicar para abrir

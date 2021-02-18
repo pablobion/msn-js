@@ -40,10 +40,12 @@ const Contact = (props) => {
     const handleCustomClick = (socketidperson) => {
         socket.emit("click on chat", socketidperson);
 
-        const indexPersonChat = chatRefText.current.findIndex((elem) => elem.id === socketidperson);
-
-        const inputDOMNode = chatRef.current[indexPersonChat];
-        if (inputDOMNode) inputDOMNode.parentNode.appendChild(inputDOMNode); // faz puxar para frente ao clicar para abrir
+        if (chatRefText) {
+            const indexPersonChat = chatRefText.current.findIndex((elem) => {
+                if (!elem) return false;
+                if (elem.id === socketidperson) return socketidperson;
+            });
+        }
     };
 
     return (
