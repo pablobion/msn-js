@@ -83,6 +83,14 @@ $ cd frontend && yarn
 
 **Iniciando**
 
+Mude o ip em
+backend/server.js
+
+e em
+
+frontend/src/configs/config_connections.js
+
+
 ```bash
 
 $ cd backend && yarn start
