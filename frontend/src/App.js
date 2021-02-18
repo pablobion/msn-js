@@ -31,8 +31,6 @@ function App() {
         });
     }, []);
 
-    const doidera = () => {};
-
     return (
         <Container>
             <NotificationOnline />
