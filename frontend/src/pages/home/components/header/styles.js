@@ -62,9 +62,29 @@ export const Profile = styled.div`
             display: flex;
 
             #btn-edit-photo {
+                padding-top: 80px;
+                padding-left: 80px;
+                padding-right: 10px;
+                padding-bottom: 30px;
                 position: absolute;
-                top: 90px;
-                left: 70px;
+                margin-top: -56px;
+                margin-left: -108px;
+
+                height: 21px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: transparent;
+                border: none;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+            #btn-edit-photo-shadow {
+                position: absolute;
+                margin-top: 55px;
+                margin-left: 58px;
                 height: 21px;
                 display: flex;
                 justify-content: center;

@@ -66,10 +66,12 @@ const Header = () => {
                 <div id="profile">
                     <div id="left">
                         {person ? <Borderavatar avatar={person.avatar} size="64" status={person.status} minus="19" top="2px" left="2px"></Borderavatar> : <Borderavatar avatar="" size="64" status="online" minus="19" top="2px" left="2px"></Borderavatar>}
-
+                        <button id="btn-edit-photo-shadow">
+                            <BsPencil size={20} color="white" />
+                        </button>
                         <ModalCropUpdate id="btn-edit-photo">
                             <button id="btn-edit-photo" onClick={() => <Crop />}>
-                                <BsPencil size={15} color="white" />
+                                <BsPencil size={20} color="#454545" />
                             </button>
                         </ModalCropUpdate>
                     </div>
