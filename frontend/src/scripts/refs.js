@@ -5,11 +5,6 @@ import playsound from "./sounds/sounds";
 
 let timeout = false;
 
-const playSongNudge = (sound) => {
-    let audio = new Audio(sound);
-    audio.play();
-};
-
 export const sendmessage = ({ chatRefText, chatRef, multiChatRef, message, socketidUser, socketidPerson, chatopen, usernamesend }) => {
     if (!chatRefText.current) return false;
     if (!socketidUser) return alert("Houve um erro ao enviar sua mensaem.");
@@ -28,7 +23,18 @@ export const sendmessage = ({ chatRefText, chatRef, multiChatRef, message, socke
     if (chatopen === false) {
         //verificando se o chat estava aberto, se caso não, deixa ele laranja
         const indexPersonMultiChat = multiChatRef.current.findIndex((elem) => `${elem.id}` === `${socketidUser}-multichat`);
-        if (chatRefText.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: orange;";
+
+        const setOrange = setInterval(() => {
+            if (chatRefText.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: orange;";
+        }, 1000);
+        const setWhite = setInterval(() => {
+            if (chatRefText.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: white;";
+        }, 2000);
+
+        setTimeout(() => {
+            clearInterval(setOrange);
+            clearInterval(setWhite);
+        }, 10000);
         playsound("type");
     }
 };
@@ -51,15 +57,18 @@ export const drawAttention = ({ chatRefText, chatRef, multiChatRef, id, whosend,
             playsound("nudge");
             if (isend) socket.emit("change visible chat draw attention", { socketiduser: socket.id, socketidperson: id }); // faz um emit para mostrar o chat pra pessoa caso ela esteja com status online
             if (multiChatRef.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: tomato;animation: shake 0.5s;";
-            if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].style = `animation: shake 0.5s; width: ${styles.width}; height: ${styles.height}`;
-            console.log(styles.marginLeft);
+            if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].style = `animation: shake 0.5s; width: ${styles.width}; height: ${styles.height};`;
         }
 
         if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p>—————————</p><p id="chat-usarname">${whosend} acabou de chamar a atenção.</p><p>—————————</p>`);
         setTimeout(() => {
+            const marginLeft = +styles["margin-left"].match(/[+-]?([0-9]*[.])?[0-9]+/gi);
             if (multiChatRef.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: transparent;";
-            if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].style = `animation: none; width: ${styles.width}; height: ${styles.height}`;
+            if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].style = `animation: none; width: ${styles.width}; height: ${styles.height}; margin-top: ${Math.random() * (100 - 60) + 60}px; margin-left: ${Math.random() * (marginLeft + 50 - marginLeft) + marginLeft}px;`;
         }, 500);
+
+        const inputDOMNode = chatRef.current[indexPersonChat];
+        inputDOMNode.parentNode.appendChild(inputDOMNode); // faz puxar para frente ao chamar atenção
     } else {
         if (!isend) return false; // so manda a mensagem abaixo só para pessoa que esta clicando mais de uma vez.
         if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id='attention'>Você não pode pedir a atenção de alguém com tanta freqüência.</p>`);

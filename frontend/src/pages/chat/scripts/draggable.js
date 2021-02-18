@@ -48,7 +48,9 @@ export default (chatRefText) => {
         target.parentNode.appendChild(target); // faz puxar para frente ao mover...
 
         chatRefText.current.forEach((elem, index) => {
-            elem.scrollTop = elem.scrollHeight;
+            if (elem) {
+                if (elem.scrollTop) elem.scrollTop = elem.scrollHeight;
+            }
         });
 
         // translate the element
