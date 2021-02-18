@@ -63,7 +63,7 @@ export const drawAttention = ({ chatRefText, chatRef, multiChatRef, id, whosend,
         if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p>—————————</p><p id="chat-usarname">${whosend} acabou de chamar a atenção.</p><p>—————————</p>`);
         setTimeout(() => {
             const marginLeft = +styles["margin-left"].match(/[+-]?([0-9]*[.])?[0-9]+/gi);
-            if (multiChatRef.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: transparent;";
+            if (multiChatRef.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: white;";
             if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].style = `animation: none; width: ${styles.width}; height: ${styles.height}; margin-top: ${Math.random() * (100 - 60) + 60}px; margin-left: ${Math.random() * (marginLeft + 50 - marginLeft) + marginLeft}px;`;
         }, 500);
 

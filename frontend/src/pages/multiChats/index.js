@@ -36,8 +36,15 @@ const MultiChats = React.forwardRef((props, ref) => {
         inputDOMNode.parentNode.appendChild(inputDOMNode); // faz puxar para frente ao clicar para abrir
     };
 
+    const changeColorOnHover = (mode) => {
+        const elemento = document.getElementById(`${props.socketidperson}-multichat`);
+
+        if (mode === "over") elemento.style = `background-color: gainsboro`;
+        if (mode === "out") elemento.style = `background-color: white`;
+    };
+
     return (
-        <Container onClick={() => openchat(props.socketidperson)} ref={ref} id={`${props.socketidperson}-multichat`}>
+        <Container onClick={() => openchat(props.socketidperson)} ref={ref} id={`${props.socketidperson}-multichat`} onMouseOver={() => changeColorOnHover("over")} onMouseOut={() => changeColorOnHover("out")}>
             <img id="image-balloon-multichats" src={balloon} alt="" />
             {contact ? (
                 <p>{contact.username}</p>
