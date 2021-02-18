@@ -81,6 +81,9 @@ const Header = () => {
 
                             <small>
                                 <select onChange={(e) => handleChangeStatus(e)}>
+                                    <option value="" disabled selected>
+                                        (Mude seu status)
+                                    </option>
                                     <option value="online">(Online)</option>
                                     <option value="busy">(Ocupado)</option>
                                     <option value="away">(Ausente)</option>

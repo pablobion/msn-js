@@ -131,7 +131,6 @@ const Login = () => {
                     <div id="login-status">
                         <p>Entrar como:</p>
                         <select ref={register} name="status" onChange={(e) => setChangeStatusBorder(e.target.value)}>
-                            <option value="online">Selecione</option>
                             <option value="online">Online (Padrão)</option>
                             <option value="busy">Ocupado</option>
                             <option value="away">Ausente</option>
