@@ -96,7 +96,7 @@ $ cd frontend && yarn start
 
 ---
 
-Feito por Pablo Bion 
+Feito por Pablo Bion.
 
  &nbsp;[Veja meu linkedin](https://www.linkedin.com/in/pablobion/)
 
