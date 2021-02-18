@@ -14,7 +14,12 @@ import AeroButton from "../../../../../components/aeroButton/index";
 //configs
 import { socket } from "../../../../../../configs/socket_export";
 
+//context
+import { useUser } from "../../../../../context/allusers";
+
 const Contact = (props) => {
+    const { chatRef, chatRefText } = useUser();
+
     let status;
     switch (props.status) {
         case "online":
@@ -34,6 +39,11 @@ const Contact = (props) => {
 
     const handleCustomClick = (socketidperson) => {
         socket.emit("click on chat", socketidperson);
+
+        const indexPersonChat = chatRefText.current.findIndex((elem) => elem.id === socketidperson);
+
+        const inputDOMNode = chatRef.current[indexPersonChat];
+        if (inputDOMNode) inputDOMNode.parentNode.appendChild(inputDOMNode); // faz puxar para frente ao clicar para abrir
     };
 
     return (
