@@ -43,7 +43,12 @@ function App() {
 
                     {userChats && userChats.map((elem, index) => <Chat key={elem.socketidperson} chatRefText={chatRefText} ref={{ chatRefText: (el) => (chatRefText.current[index] = el), chatRef: (el) => (chatRef.current[index] = el) }} socketidperson={elem.socketidperson} visible={elem.visible} />)}
 
-                    <div id="multi-chats">{userChats && userChats.map((elem, index) => <MultiChats key={elem.socketidperson} ref={(el) => (multiChatRef.current[index] = el)} socketidperson={elem.socketidperson} />)}</div>
+                    <div id="multi-chats">
+                        {userChats &&
+                            userChats.map((elem, index) => (
+                                <MultiChats key={elem.socketidperson} chatRefProps={{ chatRefText: (el) => (chatRefText.current[index] = el), chatRef: (el) => (chatRef.current[index] = el) }} ref={(el) => (multiChatRef.current[index] = el)} socketidperson={elem.socketidperson} />
+                            ))}
+                    </div>
                 </>
             )}
 

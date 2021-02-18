@@ -12,7 +12,7 @@ import { useUser } from "../../pages/context/allusers";
 import { socket } from "../../configs/socket_export";
 
 const MultiChats = React.forwardRef((props, ref) => {
-    const { getPerson } = useUser();
+    const { getPerson, chatRef, chatRefText } = useUser();
 
     const [contact, setContact] = useState();
     const [username, setUsername] = useState();
@@ -29,6 +29,10 @@ const MultiChats = React.forwardRef((props, ref) => {
         socket.emit("change visible chat", socketidperson);
         const elemento = document.getElementById(`${props.socketidperson}-multichat`);
         elemento.style = "background-color: white;";
+
+        const indexPersonChat = chatRefText.current.findIndex((elem) => elem.id === socketidperson);
+        const inputDOMNode = chatRef.current[indexPersonChat];
+        inputDOMNode.parentNode.appendChild(inputDOMNode); // faz puxar para frente ao clicar para abrir
     };
 
     return (

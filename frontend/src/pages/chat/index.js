@@ -31,7 +31,7 @@ const ChatUser = React.forwardRef((props, ref) => {
 
     const x = window.innerWidth;
 
-    const minimizeChat = (socketidperson) => {
+    const MinimizeChat = (socketidperson) => {
         socket.emit("change visible chat", socketidperson);
     };
 
@@ -53,7 +53,7 @@ const ChatUser = React.forwardRef((props, ref) => {
     return (
         <Container className={x < 600 ? "" : "draggable-chat"} visible={props.visible} ref={chatRef}>
             <div id="header-chat-top">
-                <button className="header-chat-top-buttons" onClick={() => minimizeChat(props.socketidperson)}>
+                <button className="header-chat-top-buttons" onClick={() => MinimizeChat(props.socketidperson)}>
                     <VscChromeMinimize />
                 </button>
                 <button className="header-chat-top-buttons" onClick={() => closeChat(props.socketidperson)}>
