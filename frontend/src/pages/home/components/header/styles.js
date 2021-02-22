@@ -141,21 +141,40 @@ export const Profile = styled.div`
                     }
                 }
             }
-            #sub-nick {
-                width: 90%;
-                padding: 0px;
-                margin-bottom: 10px;
-                input {
-                    color: #b9dde7;
-                    background: transparent;
-                    width: 100%;
-                    font-size: 7pt;
-                    border: 1px transparent;
-                    height: 100%;
-                    padding: 5px;
-                    &:focus {
-                        background: white;
-                        color: black;
+
+            #div-subnick {
+                display: flex;
+                align-items: center;
+                margin-left: 5px;
+                margin-right: 10px;
+                margin-top: 10px;
+
+                select {
+                    margin-bottom: 10px;
+                    width: 20px;
+                    height: 20px;
+                }
+
+                #sub-nick {
+                    width: 90%;
+
+                    padding: 0px;
+                    margin-bottom: 10px;
+                    margin-left: 5px;
+
+                    input {
+                        color: #b9dde7;
+                        background: transparent;
+                        width: 100%;
+                        font-size: 7pt;
+                        border: 1px transparent;
+                        height: 100%;
+                        padding: 5px;
+                        border-radius: 5px;
+                        &:focus {
+                            background: rgb(255, 255, 255, 0.5);
+                            color: black;
+                        }
                     }
                 }
             }

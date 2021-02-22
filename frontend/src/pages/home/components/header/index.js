@@ -25,6 +25,10 @@ import { socket } from "../../../../configs/socket_export";
 //context
 import { useUser } from "../../../context/allusers";
 
+//configs
+import { config } from "../../../../configs/config_connections";
+const configs = config();
+
 const Header = () => {
     const { getUser, theme, changeTheme } = useUser();
     const [person, setPerson] = useState();
@@ -59,6 +63,19 @@ const Header = () => {
         })();
     });
 
+    const menuSubnick = async (e) => {
+        // const my_client_id = "3e7faf2a2ea6459586e73226950e4644";
+        // const linkurl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${my_client_id}&scope=user-read-currently-playing&redirect_uri=http://localhost/routes/spotify/callback`;
+        console.log(socket.id);
+
+        window.open(`${configs.ipServer}/routes/spotify/login`, "_blank", "location=yes,height=570,width=520,scrollbars=yes,status=yes");
+
+        // fetch("http://localhost/routes/spotify/login").then((response) => {
+        //     window.open(response.url, "_blank", "location=yes,height=570,width=520,scrollbars=yes,status=yes");
+        //     console.log(response);
+        // });
+    };
+
     return (
         <>
             <Profile color={theme}>
@@ -91,11 +108,17 @@ const Header = () => {
                                 </select>
                             </small>
                         </span>
-                        <AeroButton id="sub-nick">
-                            <form onSubmit={(e) => sendSubnick(e)}>
-                                <input type="text" id="myInput-subnick" onBlur={(e) => sendSubnick(e)}></input>
-                            </form>
-                        </AeroButton>
+                        <div id="div-subnick">
+                            <select onChange={(e) => menuSubnick(e)}>
+                                <option value="avatar">Mostrar o que estou escutando no spotify</option>
+                                <option value="spotify">Parar reprodução spotify</option>
+                            </select>
+                            <AeroButton id="sub-nick">
+                                <form onSubmit={(e) => sendSubnick(e)}>
+                                    <input type="text" id="myInput-subnick" onBlur={(e) => sendSubnick(e)}></input>
+                                </form>
+                            </AeroButton>
+                        </div>
                     </div>
                 </div>
             </Profile>
