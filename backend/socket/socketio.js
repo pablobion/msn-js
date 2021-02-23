@@ -5,6 +5,7 @@ module.exports = function (io) {
         console.log("a user connected: " + socket.id);
 
         addUser(socket.id); //Adicionando o usuario que entrou na lista de sockets online
+
         io.emit("socketsConnected", socketsConnected); // Mandando para os clientes que o socket entrou e atualizando as listas de sockets
 
         socket.on("socket connected notification", ({ avatar }) => {

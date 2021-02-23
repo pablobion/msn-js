@@ -201,9 +201,6 @@ const socketAddMusic = ({ socketid, name, author, url }) => {
         socketsConnected[indexperson].music.name = name;
         socketsConnected[indexperson].music.author = author;
         socketsConnected[indexperson].music.url = url;
-        // console.log(socketsConnected[indexperson].music);
-
-        console.log("spotify connected.");
     }
 };
 
