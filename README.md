@@ -85,7 +85,7 @@ $ cd frontend && yarn
 
 Configurando ips.
  <details>
- Bom há duas parametrizações a serem consideradas, é necessário mudar o ip nas configurações do frontend e backend.
+ Há duas parametrizações a serem consideradas, é necessário mudar o ip nas configurações do frontend e backend.
  
 Frontend/src/configs/config_connections.js
   Dentro desse arquivo terá o campo de colocar o ip, no caso é o ip do servidor, onde ele está hospedado.
@@ -100,10 +100,10 @@ Há também uma confiuração para fazer a sincronização com o spotify funcion
 
   Também é necessário configurar o redirecionamento de url, colocando a url onde está hospedado seu servidor.
   Exemplo.
-    ```
+   
       http://localhost:80/routes/spotify/callback
       http://msn-js.herokuapp.com/routes/spotify/callback
-    ```
+    
   Feito isso, será necessário colocar o client_id e o client_secret no arquivo de configuração na pasta do backend
   
   Backend/configs/config.js
