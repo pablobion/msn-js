@@ -1,5 +1,5 @@
 module.exports = () => {
-    const ipServer = "localhost:80";
+    const ipServer = "msn-js.herokuapp.com";
     // ipServer: "msn-js.herokuapp.com";
     // ipServer: "localhost:80";
 
