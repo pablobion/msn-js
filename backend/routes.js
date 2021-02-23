@@ -5,6 +5,7 @@ const querystring = require("querystring");
 const config = require("./configs/configs")();
 
 const { socketAddMusic, socketsConnected } = require("./models");
+const { setInterval } = require("timers");
 
 const client_id = config.client_id; // Your client id
 const client_secret = config.client_secret; // Your secret
@@ -27,6 +28,7 @@ var generateRandomString = function (length) {
 
 var stateKey = "spotify_auth_state";
 let socketid;
+let repeat;
 
 var returnRouter = function (io) {
     router.get("/spotify/status", async (req, res) => {
@@ -84,11 +86,6 @@ var returnRouter = function (io) {
                 var access_token = body.access_token,
                     refresh_token = body.refresh_token;
 
-                // res.json({
-                //     access_token,
-                //     refresh_token,
-                // });
-
                 var options = {
                     url: "https://api.spotify.com/v1/me/player/currently-playing?market=ES&additional_types=episode",
                     headers: { Authorization: "Bearer " + access_token },
@@ -97,23 +94,28 @@ var returnRouter = function (io) {
 
                 //use the access token to access the Spotify Web API
 
-                request.get(options, async function (error, response, body) {
-                    if (body) {
-                        socketAddMusic({ socketid, name: body.item.name, author: body.item.artists[0].name, url: body.item.external_urls.spotify });
+                clearInterval(repeat); //Limpa o repeat, basicamente limpa o ultimo interval feito, para que não fique alternando as musicas.
 
-                        res.send(`<div>
-                                <h6 id='music'>Você está ouvindo: ${body.item.name}</h6>
-                                <h6>De: ${body.item.artists[0].name}</h6>
-                                <a href='${body.item.external_urls.spotify}' target="_blank" >Link: ${body.item.external_urls.spotify}</a>
-                                <a>${access_token}</a>
+                repeat = setInterval(() => {
+                    //Faz um interval para que quando a pessoa libere 1x, ele fique atualizando as musicas.
+                    request.get(options, async function (error, response, body) {
+                        if (body) {
+                            socketAddMusic({ socketid, name: body.item.name, author: body.item.artists[0].name, url: body.item.external_urls.spotify });
 
-                            </div>`);
-                    } else {
-                        res.send(`<div>
-                                <h6 id='music'>No momento não está tocando musica no seu spotify.</h6>
-                            </div>`);
-                    }
-                });
+                            // res.send(`<div>
+                            //         <h6 id='music'>Você está ouvindo: ${body.item.name}</h6>
+                            //         <h6>De: ${body.item.artists[0].name}</h6>
+                            //         <a href='${body.item.external_urls.spotify}' target="_blank" >Link: ${body.item.external_urls.spotify}</a>
+                            //         <a>${access_token}</a>
+
+                            //     </div>`);
+                        } else {
+                            // res.send(`<div style=''>
+                            //         <h6 id='music'>No momento não está tocando musica no seu spotify.</h6>
+                            //     </div>`);
+                        }
+                    });
+                }, 3000);
             } else {
                 res.redirect(
                     "/#" +
