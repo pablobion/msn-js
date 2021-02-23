@@ -39,10 +39,10 @@ const Contacts = () => {
                         {contactsOnline &&
                             contactsOnline.map((elem) => {
                                 if (socket.id == elem.socketid) {
-                                    return <Contact username={elem.username} status={elem.status} subnick={elem.subnick} socketid={elem.socketid} key={elem.socketid} music={elem.music} disabled={false} />;
+                                    return <Contact username={elem.username} status={elem.status} subnick={elem.subnick} socketid={elem.socketid} key={elem.socketid} music={elem.music} disabled={true} />;
                                 }
                                 if (elem.status !== "invisible") {
-                                    return <Contact username={elem.username} status={elem.status} subnick={elem.subnick} socketid={elem.socketid} key={elem.socketid} music={elem.music} disabled={true} />;
+                                    return <Contact username={elem.username} status={elem.status} subnick={elem.subnick} socketid={elem.socketid} key={elem.socketid} music={elem.music} disabled={false} />;
                                 }
                             })}
                         <small style={{ color: "darkgray", height: "100%" }}>* Usuários onlines aparecerão nesta lista.</small>
