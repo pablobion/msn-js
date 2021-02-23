@@ -65,7 +65,7 @@ const Header = () => {
     });
 
     const menuSubnick = async (e) => {
-        const child = window.open(`http://google.com`, "_blank", "location=yes,height=570,width=520,scrollbars=yes,status=yes");
+        const child = window.open(`http://${configs.ipServer}/routes/spotify/login?socketid=${socket.id}`, "_blank", "location=yes,height=570,width=520,scrollbars=yes,status=yes");
 
         // const refresh = setInterval(() => {
         //     child.location.href = "http://localhost/routes/spotify/login";
