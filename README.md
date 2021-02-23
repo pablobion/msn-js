@@ -33,19 +33,17 @@ Ele foi feito com reactJS, node e socket.io.
 
 #### Funcionalidades
 - [X] Acesso ao msn
-- [X] Lista de contatos online
-- [X] Mostrar janelinha ao ficar online
-- [X] Mudar subnick
-- [X] Mudar Status
-- [X] Mudar avatar
-- [X] Mudar nome ao entrar
 - [X] Conversar com outras pessoas
+- [X] Mostrar janelinha ao ficar online
+- [X] Mostre o que você está ouvindo no spotify (New!)
+- [X] Mudar subnick, Status, avatar
 - [X] Mudar tema
 - [X] Chamar atenção
 - [X] Multi Chats
 - [X] Msn sounds
 - [X] Aumentar e mover a janela de chat
 - [ ] Winks 
+- [ ] Emoticons
 
 
 
@@ -66,7 +64,7 @@ Tecnologias que usei para desenvolver esse projeto no front-end
 ## 💻 Como começar 
 
 
-**Clonando repositório e executando**
+**Clonando repositório**
 
 ```bash
 $ git clone https://github.com/pablobion/msn-js
@@ -82,13 +80,8 @@ $ cd frontend && yarn
 ```
 
 **Iniciando**
-
-Mude o ip em
-backend/server.js
-
-e em
-
-frontend/src/configs/config_connections.js
+ <details>
+ </details>
 
 
 ```bash
