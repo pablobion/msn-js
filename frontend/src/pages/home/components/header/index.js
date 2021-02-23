@@ -10,6 +10,7 @@ import navbarContacts from "./assets/navbar/navbar-contacts.png";
 
 //icons
 import { BsPencil } from "react-icons/bs";
+import { FaSpotify } from "react-icons/fa";
 
 //components
 import AeroButton from "../../../components/aeroButton/index";
@@ -64,15 +65,13 @@ const Header = () => {
         })();
     });
 
-    const menuSubnick = async (e) => {
+    const menuSubnick = async () => {
         const child = window.open(`http://${configs.ipServer}/routes/spotify/login?socketid=${socket.id}`, "_blank", "location=yes,height=570,width=520,scrollbars=yes,status=yes");
 
-        // const refresh = setInterval(() => {
-        //     child.location.href = "http://localhost/routes/spotify/login";
-        // }, 4000);
-        // console.log(child);
-
-        // console.log(child.location.href);
+        setTimeout(() => {
+            child.close();
+            alert("Spotify Conectado");
+        }, 1000);
     };
 
     return (
@@ -108,13 +107,13 @@ const Header = () => {
                             </small>
                         </span>
                         <div id="div-subnick">
-                            <select onChange={(e) => menuSubnick(e)}>
-                                <option value="avatar">Mostrar o que estou escutando no spotify</option>
-                                <option value="spotify">Parar reprodução spotify</option>
-                            </select>
+                            <AeroButton onCustomClick={() => menuSubnick()}>
+                                <FaSpotify size="20" color="white" />
+                                <p style={{ color: "white" }}>Conectar</p>
+                            </AeroButton>
                             <AeroButton id="sub-nick">
                                 <form onSubmit={(e) => sendSubnick(e)}>
-                                    <input type="text" id="myInput-subnick" onBlur={(e) => sendSubnick(e)}></input>
+                                    <input placeholder="Insira seu subnick aqui" type="text" id="myInput-subnick" onBlur={(e) => sendSubnick(e)}></input>
                                 </form>
                             </AeroButton>
                         </div>

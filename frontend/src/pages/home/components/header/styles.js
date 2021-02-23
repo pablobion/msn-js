@@ -147,7 +147,7 @@ export const Profile = styled.div`
                 align-items: center;
                 margin-left: 5px;
                 margin-right: 10px;
-                margin-top: 10px;
+                margin-top: 15px;
 
                 select {
                     margin-bottom: 10px;
@@ -160,7 +160,10 @@ export const Profile = styled.div`
 
                     padding: 0px;
                     margin-bottom: 10px;
-                    margin-left: 5px;
+                    margin-top: 10px;
+                    margin-left: 10px;
+                    background: rgb(255, 255, 255, 0.1);
+                    border: 1px solid gainsboro;
 
                     input {
                         color: #b9dde7;
@@ -172,8 +175,13 @@ export const Profile = styled.div`
                         padding: 5px;
                         border-radius: 5px;
                         &:focus {
-                            background: rgb(255, 255, 255, 0.5);
+                            background: rgb(255, 255, 255, 0.9);
                             color: black;
+                        }
+
+                        &::placeholder {
+                            color: gainsboro;
+                            opacity: 1; /* Firefox */
                         }
                     }
                 }
