@@ -26,4 +26,10 @@ export const Container = styled.div`
         color: gray;
         margin-top: 1px;
     }
+    #contact-music {
+        margin-left: 5px;
+        font-size: 12px;
+        margin-top: 1px;
+        color: rgb(0, 136, 228);
+    }
 `;

@@ -22,7 +22,11 @@ export default function UserProvider({ children }) {
         });
 
         socket.on("socketsConnectedCounter", (data) => {
-            setCountContactsOnline(data - 1);
+            if (data - 1 < 0) {
+                setCountContactsOnline(0);
+            } else {
+                setCountContactsOnline(data - 1);
+            }
         });
 
         socket.on("refresh multi chats", (data) => {
