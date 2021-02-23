@@ -38,7 +38,7 @@ const Contacts = () => {
                     <div id="contacts-group-list-contacts">
                         {contactsOnline &&
                             contactsOnline.map((elem) => {
-                                if (socket.id !== elem.socketid) {
+                                if (socket.id == elem.socketid) {
                                     return <Contact username={elem.username} status={elem.status} subnick={elem.subnick} socketid={elem.socketid} key={elem.socketid} music={elem.music} disabled={false} />;
                                 }
                                 if (elem.status !== "invisible") {
