@@ -27,6 +27,7 @@ import { useUser } from "../../../context/allusers";
 
 //configs
 import { config } from "../../../../configs/config_connections";
+
 const configs = config();
 
 const Header = () => {
@@ -64,16 +65,14 @@ const Header = () => {
     });
 
     const menuSubnick = async (e) => {
-        // const my_client_id = "3e7faf2a2ea6459586e73226950e4644";
-        // const linkurl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${my_client_id}&scope=user-read-currently-playing&redirect_uri=http://localhost/routes/spotify/callback`;
-        console.log(socket.id);
+        const child = window.open(`${configs.ipServer}/routes/spotify/login?socketid=${socket.id}`, "_blank", "location=yes,height=570,width=520,scrollbars=yes,status=yes");
 
-        window.open(`${configs.ipServer}/routes/spotify/login`, "_blank", "location=yes,height=570,width=520,scrollbars=yes,status=yes");
+        // const refresh = setInterval(() => {
+        //     child.location.href = "http://localhost/routes/spotify/login";
+        // }, 4000);
+        // console.log(child);
 
-        // fetch("http://localhost/routes/spotify/login").then((response) => {
-        //     window.open(response.url, "_blank", "location=yes,height=570,width=520,scrollbars=yes,status=yes");
-        //     console.log(response);
-        // });
+        // console.log(child.location.href);
     };
 
     return (

@@ -18,6 +18,11 @@ const addUser = (socketid) => {
         subnick: "",
         chats: [],
         avatar: "",
+        music: {
+            name: "",
+            author: "",
+            url: "",
+        },
     });
 };
 
@@ -190,6 +195,18 @@ const socketsConnectedCounter = () => {
     return counter;
 };
 
+const socketAddMusic = ({ socketid, name, author, url }) => {
+    const indexperson = getIndex(socketid); // pega index da pessoa que vai receber o change visible chat
+    if (socketsConnected[indexperson]) {
+        socketsConnected[indexperson].music.name = name;
+        socketsConnected[indexperson].music.author = author;
+        socketsConnected[indexperson].music.url = url;
+        // console.log(socketsConnected[indexperson].music);
+
+        console.log("spotify connected.");
+    }
+};
+
 module.exports = {
     addUser,
     changeVisibleChat,
@@ -206,4 +223,5 @@ module.exports = {
     changeUsername,
     getPerson,
     socketsConnectedCounter,
+    socketAddMusic,
 };
