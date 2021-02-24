@@ -98,10 +98,11 @@ var returnRouter = function (io) {
 
                 // repeat = setInterval(() => {
                 //Faz um interval para que quando a pessoa libere 1x, ele fique atualizando as musicas.
-                io.emit("socketsConnected", socketsConnected);
+
                 request.get(options, async function (error, response, body) {
                     if (body.item.name) {
                         socketAddMusic({ socketid, name: body.item.name, author: body.item.artists[0].name, url: body.item.external_urls.spotify });
+                        io.emit("socketsConnected", socketsConnected);
 
                         // res.send(`<div>
                         //         <h6 id='music'>Você está ouvindo: ${body.item.name}</h6>
