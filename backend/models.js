@@ -122,9 +122,9 @@ const changeSubnick = (socketid, subnick) => {
     const indexuser = getIndex(socketid);
     if (socketsConnected[indexuser]) {
         socketsConnected[indexuser].subnick = `${subnick}`;
-        socketsConnected[indexperson].music.name = "";
-        socketsConnected[indexperson].music.author = "";
-        socketsConnected[indexperson].music.url = "";
+        socketsConnected[indexuser].music.name = "";
+        socketsConnected[indexuser].music.author = "";
+        socketsConnected[indexuser].music.url = "";
     }
 
     return socketsConnected[indexuser].subnick;
