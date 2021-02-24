@@ -18,6 +18,10 @@ import { socket } from "./configs/socket_export";
 //refs
 import { sendmessage, drawAttention } from "./scripts/refs";
 
+//configs
+import { config } from "./configs/config_connections";
+const configs = config();
+
 function App() {
     const { userChats, mode, chatRefText, chatRef, multiChatRef } = useUser();
 
@@ -31,6 +35,15 @@ function App() {
         });
     }, []);
 
+    const menuSubnick = async () => {
+        const child = window.open(`http://${configs.ipServer}/routes/spotify/login?socketid=${socket.id}`, "_blank", "location=yes,height=570,width=520,scrollbars=yes,status=yes");
+
+        setTimeout(() => {
+            child.close();
+            alert("Spotify Conectado");
+        }, 1000);
+    };
+
     return (
         <Container>
             <NotificationOnline />
@@ -39,6 +52,7 @@ function App() {
                 <Login />
             ) : (
                 <>
+                    <button onClick={menuSubnick}>ss</button>
                     <Home />
 
                     {userChats && userChats.map((elem, index) => <Chat key={elem.socketidperson} chatRefText={chatRefText} ref={{ chatRefText: (el) => (chatRefText.current[index] = el), chatRef: (el) => (chatRef.current[index] = el) }} socketidperson={elem.socketidperson} visible={elem.visible} />)}

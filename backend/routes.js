@@ -94,29 +94,29 @@ var returnRouter = function (io) {
 
                 //use the access token to access the Spotify Web API
 
-                clearInterval(repeat); //Limpa o repeat, basicamente limpa o ultimo interval feito, para que não fique alternando as musicas.
+                //clearInterval(repeat); //Limpa o repeat, basicamente limpa o ultimo interval feito, para que não fique alternando as musicas.
 
-                repeat = setInterval(() => {
-                    //Faz um interval para que quando a pessoa libere 1x, ele fique atualizando as musicas.
-                    io.emit("socketsConnected", socketsConnected);
-                    request.get(options, async function (error, response, body) {
-                        if (body.item.name) {
-                            socketAddMusic({ socketid, name: body.item.name, author: body.item.artists[0].name, url: body.item.external_urls.spotify });
+                // repeat = setInterval(() => {
+                //Faz um interval para que quando a pessoa libere 1x, ele fique atualizando as musicas.
+                io.emit("socketsConnected", socketsConnected);
+                request.get(options, async function (error, response, body) {
+                    if (body.item.name) {
+                        socketAddMusic({ socketid, name: body.item.name, author: body.item.artists[0].name, url: body.item.external_urls.spotify });
 
-                            // res.send(`<div>
-                            //         <h6 id='music'>Você está ouvindo: ${body.item.name}</h6>
-                            //         <h6>De: ${body.item.artists[0].name}</h6>
-                            //         <a href='${body.item.external_urls.spotify}' target="_blank" >Link: ${body.item.external_urls.spotify}</a>
-                            //         <a>${access_token}</a>
+                        // res.send(`<div>
+                        //         <h6 id='music'>Você está ouvindo: ${body.item.name}</h6>
+                        //         <h6>De: ${body.item.artists[0].name}</h6>
+                        //         <a href='${body.item.external_urls.spotify}' target="_blank" >Link: ${body.item.external_urls.spotify}</a>
+                        //         <a>${access_token}</a>
 
-                            //     </div>`);
-                        } else {
-                            // res.send(`<div style=''>
-                            //         <h6 id='music'>No momento não está tocando musica no seu spotify.</h6>
-                            //     </div>`);
-                        }
-                    });
-                }, 5000);
+                        //     </div>`);
+                    } else {
+                        // res.send(`<div style=''>
+                        //         <h6 id='music'>No momento não está tocando musica no seu spotify.</h6>
+                        //     </div>`);
+                    }
+                });
+                // }, 5000);
             } else {
                 res.redirect(
                     "/#" +
