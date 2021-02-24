@@ -11,6 +11,7 @@ import navbarContacts from "./assets/navbar/navbar-contacts.png";
 //icons
 import { BsPencil } from "react-icons/bs";
 import { FaSpotify } from "react-icons/fa";
+import { BsMusicNoteBeamed } from "react-icons/bs";
 
 //components
 import AeroButton from "../../../components/aeroButton/index";
@@ -109,7 +110,10 @@ const Header = () => {
                         <div id="div-subnick">
                             <AeroButton onCustomClick={() => menuSubnick()}>
                                 <FaSpotify size="20" color="white" />
-                                <p style={{ color: "white" }}>Conectar</p>
+                                <p style={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                    Conectar
+                                    <BsMusicNoteBeamed size={15} style={{ marginLeft: 5 }} />
+                                </p>
                             </AeroButton>
                             <AeroButton id="sub-nick">
                                 <form onSubmit={(e) => sendSubnick(e)}>
