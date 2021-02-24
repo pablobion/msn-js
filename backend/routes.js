@@ -46,6 +46,7 @@ var returnRouter = function (io) {
         var scope = "user-read-currently-playing";
 
         socketid = req.query.socketid;
+        console.log("chegou no login");
 
         res.redirect(
             "https://accounts.spotify.com/authorize?" +
@@ -98,6 +99,7 @@ var returnRouter = function (io) {
 
                 // repeat = setInterval(() => {
                 //Faz um interval para que quando a pessoa libere 1x, ele fique atualizando as musicas.
+                console.log("chegou no callback");
 
                 request.get(options, async function (error, response, body) {
                     if (body.item.name) {
