@@ -8,6 +8,9 @@ import navbarColors from "./assets/navbar/navbar-colors.png";
 import navbarMail from "./assets/navbar/navbar-mail.png";
 import navbarContacts from "./assets/navbar/navbar-contacts.png";
 
+//tooltip
+import ReactTooltip from "react-tooltip";
+
 //icons
 import { BsPencil } from "react-icons/bs";
 import { FaSpotify } from "react-icons/fa";
@@ -77,6 +80,7 @@ const Header = () => {
 
     return (
         <>
+            <ReactTooltip multiline="true" />
             <Profile color={theme}>
                 <NavBar />
                 <div id="profile">
@@ -108,7 +112,7 @@ const Header = () => {
                             </small>
                         </span>
                         <div id="div-subnick">
-                            <AeroButton onCustomClick={() => menuSubnick()}>
+                            <AeroButton datatip="Clique para inserir a musica<br /> que está ouvindo agora no spotify." onCustomClick={() => menuSubnick()}>
                                 <FaSpotify size="20" color="white" />
                                 <p style={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center" }}>
                                     Conectar

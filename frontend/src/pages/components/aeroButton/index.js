@@ -2,9 +2,9 @@ import React from "react";
 
 import { Button } from "./styles";
 
-const AeroButton = ({ children, id, className, onCustomClick, disabled }) => {
+const AeroButton = ({ children, id, className, onCustomClick, disabled, datatip }) => {
     return (
-        <Button id={id} className={className} onClick={onCustomClick} disabled={disabled}>
+        <Button data-tip={datatip} id={id} className={className} onClick={onCustomClick} disabled={disabled}>
             {children}
         </Button>
     );
