@@ -106,17 +106,18 @@ var returnRouter = function (io) {
                         socketAddMusic({ socketid, name: body.item.name, author: body.item.artists[0].name, url: body.item.external_urls.spotify });
                         io.emit("socketsConnected", socketsConnected);
 
-                        // res.send(`<div>
-                        //         <h6 id='music'>Você está ouvindo: ${body.item.name}</h6>
-                        //         <h6>De: ${body.item.artists[0].name}</h6>
-                        //         <a href='${body.item.external_urls.spotify}' target="_blank" >Link: ${body.item.external_urls.spotify}</a>
-                        //         <a>${access_token}</a>
+                        res.send(`<div>
+                                <h6 id='music'>Você está ouvindo: ${body.item.name}</h6>
+                                <h6>De: ${body.item.artists[0].name}</h6>
+                                <a href='${body.item.external_urls.spotify}' target="_blank" >Link: ${body.item.external_urls.spotify}</a>
+                                <a>${access_token}</a>
+                                <script>window.close()</script>
 
-                        //     </div>`);
+                            </div>`);
                     } else {
-                        // res.send(`<div style=''>
-                        //         <h6 id='music'>No momento não está tocando musica no seu spotify.</h6>
-                        //     </div>`);
+                        res.send(`<div style=''>
+                                <h6 id='music'>No momento não está tocando musica no seu spotify.</h6>
+                            </div>`);
                     }
                 });
                 // }, 5000);
