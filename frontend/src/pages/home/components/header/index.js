@@ -68,10 +68,10 @@ const Header = () => {
     const menuSubnick = async () => {
         const child = window.open(`http://${configs.ipServer}/routes/spotify/login?socketid=${socket.id}`, "_blank", "location=yes,height=570,width=520,scrollbars=yes,status=yes");
 
-        setTimeout(() => {
-            child.close();
-            alert("Spotify Conectado");
-        }, 1000);
+        // setTimeout(() => {
+        //     child.close();
+        //     alert("Spotify Conectado");
+        // }, 1000);
     };
 
     return (
