@@ -9,7 +9,6 @@ module.exports = function (io) {
         io.emit("socketsConnected", socketsConnected); // Mandando para os clientes que o socket entrou e atualizando as listas de sockets
 
         socket.on("socket connected notification", ({ avatar }) => {
-            if (getPerson(socket.id).status === "invisible") return false;
             io.emit("socket connected notification", { username: getPerson(socket.id).username, avatar }); // mandando o cliente que entoru para notificação...
             io.emit("socketsConnectedCounter", socketsConnectedCounter()); // Quantidade de pessoas online...
         });
