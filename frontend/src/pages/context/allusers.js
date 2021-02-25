@@ -10,6 +10,7 @@ export default function UserProvider({ children }) {
     const [userChats, setUserChats] = useState([]);
     const [theme, setTheme] = useState("blue");
     const [mode, setMode] = useState("login");
+    const [language, setLanguage] = useState("br");
 
     const chatRefText = useRef([]);
     const chatRef = useRef([]);
@@ -48,6 +49,11 @@ export default function UserProvider({ children }) {
         }
     };
 
+    const changeLanguage = (language) => {
+        setLanguage(language);
+        localStorage.setItem("msn-language", language);
+    };
+
     const changeTheme = () => {
         if (theme === "blue") {
             setTheme("pink");
@@ -82,6 +88,8 @@ export default function UserProvider({ children }) {
                 chatRefText,
                 chatRef,
                 multiChatRef,
+                language,
+                changeLanguage,
             }}
         >
             {children}
@@ -93,7 +101,7 @@ export function useUser() {
     const context = useContext(UserContext);
     if (!context) throw new Error("useCount must be used within a CountProvider");
 
-    const { contactsOnline, countContactsOnline, userChats, getPerson, getUser, theme, changeTheme, mode, setMode, chatRefText, chatRef, multiChatRef } = context;
+    const { contactsOnline, countContactsOnline, userChats, getPerson, getUser, theme, changeTheme, mode, setMode, chatRefText, chatRef, multiChatRef, language, changeLanguage } = context;
 
-    return { contactsOnline, countContactsOnline, userChats, getPerson, getUser, theme, changeTheme, mode, setMode, chatRefText, chatRef, multiChatRef };
+    return { contactsOnline, countContactsOnline, userChats, getPerson, getUser, theme, changeTheme, mode, setMode, chatRefText, chatRef, multiChatRef, language, changeLanguage };
 }

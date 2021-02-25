@@ -12,6 +12,10 @@ import ModalCropUpdate from "../components/modalCropUpdate";
 //icons
 import { BsPencil, BsTrash } from "react-icons/bs";
 
+//images
+import brasil from "./assets/brazil.svg";
+import eua from "./assets/united-states.svg";
+
 //gif
 import loading from "./assets/loading.gif";
 
@@ -24,7 +28,7 @@ import { useUser } from "../context/allusers";
 const Login = () => {
     const { register, handleSubmit } = useForm();
 
-    const { getUser, setMode } = useUser();
+    const { getUser, setMode, language, changeLanguage } = useUser();
     const [username, setUsername] = useState("");
     const [person, setPerson] = useState();
     const [gifLogin, setGifLogin] = useState(false);
@@ -45,7 +49,7 @@ const Login = () => {
         setGifLogin(true);
         setTimeout(() => {
             if (!data.username || data.username === " " || data.username === "") {
-                alert("Você deve colocar o seu nome de usuário.");
+                alert(language === "br" ? "Você deve colocar o seu nome de usuário." : "You must enter your username.");
                 setGifLogin(false);
                 return false;
             }
@@ -99,7 +103,7 @@ const Login = () => {
         localStorage.removeItem("saveUser");
         setUsername("");
         socket.emit("change avatar", "");
-        alert("Informações limpas");
+        alert(language === "br" ? "Informações limpas" : "Information deleted.");
     };
 
     (async function () {
@@ -125,44 +129,48 @@ const Login = () => {
                 <ModalCropUpdate className="change-photo-button">
                     <BsPencil size={15} color="black" />
                 </ModalCropUpdate>
+                <div id="div-country-flag">
+                    <img onClick={() => changeLanguage("br")} className="country-flag" src={brasil} />
+                    <img onClick={() => changeLanguage("en")} className="country-flag" src={eua} />
+                </div>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="div-input-login">
-                        <p>Nome de usuario:</p>
+                        <p>{language === "br" ? "Nome de usuario:" : "Username:"}</p>
                         <input id="login-input-email" ref={register} name="username" type="text" value={username} onChange={handleChangeUsername} />
                     </div>
 
                     <div id="login-status">
-                        <p>Entrar como:</p>
+                        <p>{language === "br" ? "Entrar como:" : "Sign in as:"}</p>
                         <select ref={register} name="status" onChange={(e) => setChangeStatusBorder(e.target.value)}>
-                            <option value="online">Online (Padrão)</option>
-                            <option value="busy">Ocupado</option>
-                            <option value="away">Ausente</option>
+                            <option value="online">{language === "br" ? "Online (Padrão)" : "Online (Default)"}</option>
+                            <option value="busy">{language === "br" ? "Ocupado" : "Busy"}</option>
+                            <option value="away">{language === "br" ? "Ausente" : "Away"}</option>
                             <option value="invisible">Offline</option>
                         </select>
                     </div>
                     <div className="checkbox-buttons-login">
                         <input type="checkbox" ref={rememberIsChecked} onChange={handleVerifyRememberInput}></input>
-                        <p>Lembrar-me</p>
+                        <p>{language === "br" ? "Lembrar-me" : "Remember-me"}</p>
                         <button type="button" onClick={clearSaveUser}>
                             <BsTrash />
                         </button>
                     </div>
                     <div className="checkbox-buttons-login">
                         <input disabled type="checkbox" ref={autoLoginIsChecked}></input>
-                        <p>Entrar Automaticamente</p>
+                        <p>{language === "br" ? "Entrar Automaticamente" : "Sign me in automatically"}</p>
                     </div>
                     <div id="footer-buttons">
                         {person ? (
-                            <button type="submit">Entrar</button>
+                            <button type="submit">{language === "br" ? "Entrar" : "Sign in"}</button>
                         ) : (
                             <button
                                 type="button"
                                 onClick={() => {
-                                    alert("Não foi possivel conectar ao servidor, tente novamente!");
+                                    alert(language === "br" ? "Não foi possivel conectar ao servidor, tente novamente!" : "Unable to connect to the server, try again!");
                                 }}
                             >
-                                Entrar
+                                {language === "br" ? "Entrar" : "Sign in"}
                             </button>
                         )}
                     </div>

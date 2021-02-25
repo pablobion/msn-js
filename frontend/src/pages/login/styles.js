@@ -18,6 +18,19 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
 
+    #div-country-flag {
+        display: flex;
+        margin-top: 10px;
+        .country-flag {
+            width: 40px;
+            cursor: pointer;
+        }
+
+        img + img {
+            margin-left: 10px;
+        }
+    }
+
     .change-photo-button {
         margin-top: 20px;
         border: 1px solid #000;

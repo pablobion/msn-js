@@ -28,7 +28,7 @@ const NotificationOnline = () => {
     const notificationSystem = useRef();
     const ButtonnotificationSystem = useRef();
 
-    const { getUser } = useUser();
+    const { language } = useUser();
 
     const stylemsn = {
         Containers: {
@@ -105,8 +105,8 @@ const NotificationOnline = () => {
                         {person ? <ModalBorder avatar={person.avatar} size="32" minus="12" left="4px" top="4px" /> : <ModalBorder avatar="" size="32" minus="12" left="4px" top="4px" />}
 
                         <div id="body-username">
-                            <p>{person ? person.username : "Alguém"}</p>
-                            <p>acabou de entrar.</p>
+                            <p>{person ? person.username : language === "br" ? "Alguém" : "Somebody"}</p>
+                            <p>{language === "br" ? "acabou de entrar." : "has just signed in."}</p>
                         </div>
                     </div>
                 </Container>

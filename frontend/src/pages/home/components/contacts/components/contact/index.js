@@ -19,7 +19,7 @@ import { socket } from "../../../../../../configs/socket_export";
 import { useUser } from "../../../../../context/allusers";
 
 const Contact = (props) => {
-    const { chatRef, chatRefText } = useUser();
+    const { chatRefText, language } = useUser();
 
     let status;
     switch (props.status) {
@@ -53,7 +53,7 @@ const Contact = (props) => {
         <Container>
             <AeroButton id="button" onCustomClick={(e) => handleCustomClick(props.socketid)} disabled={props.disabled}>
                 <img src={status} alt="" />
-                {props.disabled === true && <p>(você)</p>}
+                {props.disabled === true && <p>{language === "br" ? "(você)" : "(You)"}</p>}
                 {props.username && <p id="contact-username">{props.username}</p>}
                 {props.music.name ? (
                     props.music.name ? (

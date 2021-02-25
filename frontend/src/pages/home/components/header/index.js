@@ -36,7 +36,7 @@ import { config } from "../../../../configs/config_connections";
 const configs = config();
 
 const Header = () => {
-    const { getUser, theme, changeTheme } = useUser();
+    const { getUser, theme, changeTheme, language, setLanguage } = useUser();
     const [person, setPerson] = useState();
 
     const handleChangeStatus = async (e) => {
@@ -102,26 +102,26 @@ const Header = () => {
                             <small>
                                 <select onChange={(e) => handleChangeStatus(e)}>
                                     <option value="" disabled selected>
-                                        (Mude seu status)
+                                        {language === "br" ? "(Mude seu status)" : "(Change your status)"}
                                     </option>
                                     <option value="online">(Online)</option>
-                                    <option value="busy">(Ocupado)</option>
-                                    <option value="away">(Ausente)</option>
+                                    <option value="busy">{language === "br" ? "(Ocupado)" : "(Busy)"}</option>
+                                    <option value="away">{language === "br" ? "(Ausente)" : "(Away)"}</option>
                                     <option value="invisible">(Offline)</option>
                                 </select>
                             </small>
                         </span>
                         <div id="div-subnick">
-                            <AeroButton datatip="Clique para inserir a musica<br /> que está ouvindo agora no spotify." onCustomClick={() => menuSubnick()}>
+                            <AeroButton datatip={language === "br" ? "Clique para inserir a musica<br /> que está ouvindo agora no spotify." : "Click to insert the song <br /> you are listening to now on spotify."} onCustomClick={() => menuSubnick()}>
                                 <FaSpotify size="20" color="white" />
                                 <p style={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                    Conectar
+                                    {language === "br" ? "Conectar" : "Connect"}
                                     <BsMusicNoteBeamed size={15} style={{ marginLeft: 5 }} />
                                 </p>
                             </AeroButton>
                             <AeroButton id="sub-nick">
                                 <form onSubmit={(e) => sendSubnick(e)}>
-                                    <input placeholder="Insira seu subnick aqui" type="text" id="myInput-subnick" onBlur={(e) => sendSubnick(e)}></input>
+                                    <input placeholder={language === "br" ? "Insira seu subnick aqui" : "Insert your subnick here"} type="text" id="myInput-subnick" onBlur={(e) => sendSubnick(e)}></input>
                                 </form>
                             </AeroButton>
                         </div>

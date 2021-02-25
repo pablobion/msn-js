@@ -3,9 +3,9 @@ import { socket } from "../configs/socket_export";
 //sounds
 import playsound from "./sounds/sounds";
 
-let timeout = false;
+let timeout = false; //Time out para o limite de chamar atenção
 
-export const sendmessage = ({ chatRefText, chatRef, multiChatRef, message, socketidUser, socketidPerson, chatopen, usernamesend }) => {
+export const sendmessage = ({ chatRefText, multiChatRef, message, socketidUser, socketidPerson, chatopen, usernamesend }) => {
     if (!chatRefText.current) return false;
     if (!socketidUser) return alert("Houve um erro ao enviar sua mensaem.");
     const indexPersonChat = chatRefText.current.findIndex((elem) => elem.id === socketidPerson);
@@ -59,8 +59,12 @@ export const drawAttention = ({ chatRefText, chatRef, multiChatRef, id, whosend,
             if (multiChatRef.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: tomato;animation: shake 0.5s;";
             if (chatRef.current[indexPersonChat]) chatRef.current[indexPersonChat].style = `animation: shake 0.5s; width: ${styles.width}; height: ${styles.height};`;
         }
+        if (localStorage.getItem("msn-language") === "br") {
+            if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p>—————————</p><p id="chat-usarname">${whosend} acabou de chamar a atenção!</p><p>—————————</p>`);
+        } else {
+            if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p>—————————</p><p id="chat-usarname">${whosend} have just sent a Nudge!</p><p>—————————</p>`);
+        }
 
-        if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p>—————————</p><p id="chat-usarname">${whosend} acabou de chamar a atenção.</p><p>—————————</p>`);
         setTimeout(() => {
             const marginLeft = +styles["margin-left"].match(/[+-]?([0-9]*[.])?[0-9]+/gi);
             if (multiChatRef.current[indexPersonMultiChat]) multiChatRef.current[indexPersonMultiChat].style = "background-color: white;";
@@ -71,6 +75,10 @@ export const drawAttention = ({ chatRefText, chatRef, multiChatRef, id, whosend,
         inputDOMNode.parentNode.appendChild(inputDOMNode); // faz puxar para frente ao chamar atenção
     } else {
         if (!isend) return false; // so manda a mensagem abaixo só para pessoa que esta clicando mais de uma vez.
-        if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id='attention'>Você não pode pedir a atenção de alguém com tanta freqüência.</p>`);
+        if (localStorage.getItem("msn-language") === "br") {
+            if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id='attention'>Você não pode pedir a atenção de alguém com tanta freqüência.</p>`);
+        } else {
+            if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id='attention'>You can't get someone's attention often.</p>`);
+        }
     }
 };

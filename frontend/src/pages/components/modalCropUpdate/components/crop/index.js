@@ -8,13 +8,16 @@ import { Container, Button, SelectFile } from "./styles";
 //socket
 import { socket } from "../../../../../configs/socket_export";
 
+//context
+import { useUser } from "../../../../context/allusers";
+
 export default function App(props) {
     const [upImg, setUpImg] = useState();
     const imgRef = useRef(null);
     const previewCanvasRef = useRef(null);
     const [crop, setCrop] = useState({ unit: "%", width: 30, aspect: 1 });
     const [completedCrop, setCompletedCrop] = useState(null);
-    const [photo, setPhoto] = useState();
+    const { language } = useUser();
 
     const upload = (photo) => {
         const file = photo;
@@ -117,7 +120,7 @@ export default function App(props) {
 
     return (
         <Container>
-            <h3>Selecione um arquivo abaixo para fazer o recorte e salvar.</h3>
+            <h3>{language === "br" ? "Selecione um arquivo abaixo para fazer o recorte e salvar." : "Select a image below to cut and save."}</h3>
             <div id="button-select-photo">
                 <SelectFile type="file" accept="image/*" onChange={onSelectFile} />
             </div>
@@ -147,7 +150,7 @@ export default function App(props) {
                     props.close();
                 }}
             >
-                Salvar
+                {language === "br" ? "Salvar" : "Save"}
             </Button>
         </Container>
     );

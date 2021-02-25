@@ -16,7 +16,7 @@ import { useUser } from "../../../context/allusers";
 import { socket } from "../../../../configs/socket_export";
 
 const Contacts = () => {
-    const { contactsOnline, countContactsOnline } = useUser();
+    const { contactsOnline, countContactsOnline, language } = useUser();
 
     return (
         <Container>
@@ -45,7 +45,7 @@ const Contacts = () => {
                                     return <Contact username={elem.username} status={elem.status} subnick={elem.subnick} socketid={elem.socketid} key={elem.socketid} music={elem.music} disabled={false} />;
                                 }
                             })}
-                        <small style={{ color: "darkgray", height: "100%" }}>* Usuários onlines aparecerão nesta lista.</small>
+                        <small style={{ color: "darkgray", height: "100%" }}>{language === "br" ? "* Usuários onlines aparecerão nesta lista." : "* Online users will appear in this list."}</small>
                     </div>
                 </details>
             </div>
