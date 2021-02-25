@@ -106,7 +106,7 @@ export const Profile = styled.div`
                 color: white;
                 display: flex;
                 align-items: center;
-                padding-left: 5px;
+                padding-left: 11px;
                 background: transparent;
                 display: flex;
                 justify-content: space-between;
