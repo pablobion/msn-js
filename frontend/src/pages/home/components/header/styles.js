@@ -108,37 +108,48 @@ export const Profile = styled.div`
                 align-items: center;
                 padding-left: 5px;
                 background: transparent;
+                display: flex;
+                justify-content: space-between;
 
-                #username {
-                    font-weight: 550;
-                    font-size: 14px;
-                }
+                div {
+                    display: flex;
 
-                img {
-                    width: 13px;
-                    margin-left: 10px;
-                }
+                    #username {
+                        font-weight: 550;
+                        font-size: 14px;
+                    }
 
-                small {
-                    margin-left: 10px;
-                    color: MintCream;
-                    color: #b9dde7;
+                    img {
+                        width: 13px;
+                        margin-left: 10px;
+                    }
 
-                    select {
-                        background: transparent;
-                        border: none;
-                        color: white;
-                        & option {
-                            margin: 40px;
-                            background: rgba(0, 0, 0, 0.3);
-                            color: #fff;
-                            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-                        }
+                    small {
+                        margin-left: 10px;
+                        color: MintCream;
+                        color: #b9dde7;
 
-                        &:hover {
-                            border: white;
+                        select {
+                            background: transparent;
+                            border: none;
+                            color: white;
+                            & option {
+                                margin: 40px;
+                                background: rgba(0, 0, 0, 0.3);
+                                color: #fff;
+                                text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+                            }
+
+                            &:hover {
+                                border: white;
+                            }
                         }
                     }
+                }
+
+                .country-flag {
+                    width: 30px;
+                    cursor: pointer;
                 }
             }
 

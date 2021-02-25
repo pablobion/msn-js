@@ -8,6 +8,10 @@ import navbarColors from "./assets/navbar/navbar-colors.png";
 import navbarMail from "./assets/navbar/navbar-mail.png";
 import navbarContacts from "./assets/navbar/navbar-contacts.png";
 
+//images
+import brasil from "./assets/brazil.svg";
+import usa from "./assets/united-states.svg";
+
 //tooltip
 import ReactTooltip from "react-tooltip";
 
@@ -36,7 +40,7 @@ import { config } from "../../../../configs/config_connections";
 const configs = config();
 
 const Header = () => {
-    const { getUser, theme, changeTheme, language, setLanguage } = useUser();
+    const { getUser, theme, changeTheme, language, changeLanguage } = useUser();
     const [person, setPerson] = useState();
 
     const handleChangeStatus = async (e) => {
@@ -97,20 +101,27 @@ const Header = () => {
                     </div>
                     <div id="right">
                         <span className="span-username">
-                            {person ? <p id="username">{person.username}</p> : <p id="username">Não informado</p>}
+                            <div>
+                                {person ? <p id="username">{person.username}</p> : <p id="username">Não informado</p>}
 
-                            <small>
-                                <select onChange={(e) => handleChangeStatus(e)}>
-                                    <option value="" disabled selected>
-                                        {language === "br" ? "(Mude seu status)" : "(Change your status)"}
-                                    </option>
-                                    <option value="online">(Online)</option>
-                                    <option value="busy">{language === "br" ? "(Ocupado)" : "(Busy)"}</option>
-                                    <option value="away">{language === "br" ? "(Ausente)" : "(Away)"}</option>
-                                    <option value="invisible">(Offline)</option>
-                                </select>
-                            </small>
+                                <small>
+                                    <select onChange={(e) => handleChangeStatus(e)}>
+                                        <option value="" disabled selected>
+                                            {language === "br" ? "(Mude seu status)" : "(Change your status)"}
+                                        </option>
+                                        <option value="online">(Online)</option>
+                                        <option value="busy">{language === "br" ? "(Ocupado)" : "(Busy)"}</option>
+                                        <option value="away">{language === "br" ? "(Ausente)" : "(Away)"}</option>
+                                        <option value="invisible">(Offline)</option>
+                                    </select>
+                                </small>
+                            </div>
+                            <div>
+                                <img onClick={() => changeLanguage("br")} className="country-flag" src={brasil} alt="" />
+                                <img onClick={() => changeLanguage("en")} className="country-flag" src={usa} alt="" />
+                            </div>
                         </span>
+
                         <div id="div-subnick">
                             <AeroButton datatip={language === "br" ? "Clique para inserir a musica<br /> que está ouvindo agora no spotify." : "Click to insert the song <br /> you are listening to now on spotify."} onCustomClick={() => menuSubnick()}>
                                 <FaSpotify size="20" color="white" />

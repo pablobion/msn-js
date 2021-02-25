@@ -14,7 +14,7 @@ import { BsPencil, BsTrash } from "react-icons/bs";
 
 //images
 import brasil from "./assets/brazil.svg";
-import eua from "./assets/united-states.svg";
+import usa from "./assets/united-states.svg";
 
 //gif
 import loading from "./assets/loading.gif";
@@ -118,6 +118,9 @@ const Login = () => {
             rememberIsChecked.current.checked = true;
             autoLoginIsChecked.current.disabled = false;
         }
+        if (localStorage.getItem("msn-language")) {
+            changeLanguage(localStorage.getItem("msn-language"));
+        }
     }, []);
 
     return (
@@ -131,7 +134,7 @@ const Login = () => {
                 </ModalCropUpdate>
                 <div id="div-country-flag">
                     <img onClick={() => changeLanguage("br")} className="country-flag" src={brasil} />
-                    <img onClick={() => changeLanguage("en")} className="country-flag" src={eua} />
+                    <img onClick={() => changeLanguage("en")} className="country-flag" src={usa} />
                 </div>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
