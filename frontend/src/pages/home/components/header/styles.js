@@ -113,6 +113,7 @@ export const Profile = styled.div`
 
                 div {
                     display: flex;
+                    align-items: center;
 
                     #username {
                         font-weight: 550;
