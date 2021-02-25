@@ -72,8 +72,6 @@ const Contact = (props) => {
                 ) : (
                     <p id="contact-subnick"></p>
                 )}
-                {/* {props.subnick ? <p id="contact-subnick">- {props.subnick}</p> : <p id="contact-subnick"></p>} */}
-                {/* {props.subnick ? <p id="contact-subnick">- {props.subnick}</p> : <p id="contact-subnick"></p>} */}
             </AeroButton>
         </Container>
     );

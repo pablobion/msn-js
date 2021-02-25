@@ -62,7 +62,7 @@ const ChatUser = React.forwardRef((props, ref) => {
                 {props.children}
             </div>
             <div id="chat-top">
-                <Header username={person ? person.username : `${oldPerson.username}`} subnick={person ? person.subnick : `${oldPerson.subnick}`} status={person ? person.status : "invisible"} />
+                <Header username={person ? person.username : `${oldPerson.username}`} subnick={person ? person.subnick : `${oldPerson.subnick}`} status={person ? person.status : "invisible"} music={person.music} />
             </div>
             <div id="chat-conversation">
                 <div id="chat-conversation-left">
