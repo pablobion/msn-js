@@ -39,8 +39,6 @@ const Contact = (props) => {
     }
 
     const handleCustomClick = (socketidperson) => {
-        console.log(props.music);
-
         socket.emit("click on chat", socketidperson);
 
         if (chatRefText) {

@@ -1,6 +1,8 @@
 import interact from "interactjs";
 
-export default (chatRefText) => {
+export default (chatRefText, socketidUser) => {
+    const indexUserChat = chatRefText.current.findIndex((elem) => elem.id === socketidUser);
+
     interact(".draggable-chat")
         .draggable({
             // enable inertial throwing
@@ -46,6 +48,7 @@ export default (chatRefText) => {
         var y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
 
         target.parentNode.appendChild(target); // faz puxar para frente ao mover...
+        chatRefText.current[indexUserChat].scrollTop = chatRefText.current[indexUserChat].scrollHeight; //move o scroll para baixo
 
         chatRefText.current.forEach((elem, index) => {
             if (elem) {
