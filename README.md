@@ -42,6 +42,7 @@ Ele foi feito com reactJS, node e socket.io.
 - [X] Multi Chats
 - [X] Msn sounds
 - [X] Aumentar e mover a janela de chat
+- [X] Troque de idioma
 - [ ] Winks 
 - [ ] Emoticons
 
