@@ -32,7 +32,7 @@ const Contact = (props) => {
         case "away":
             status = away;
             break;
-        case "offline":
+        case "invisible":
             status = invisible;
             break;
         default:
