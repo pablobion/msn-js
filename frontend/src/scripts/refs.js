@@ -5,11 +5,22 @@ import playsound from "./sounds/sounds";
 
 let timeout = false; //Time out para o limite de chamar atenção
 
-export const sendmessage = ({ chatRefText, multiChatRef, message, socketidUser, socketidPerson, chatopen, usernamesend }) => {
+export const sendmessage = ({ chatRefText, multiChatRef, chatRef, message, socketidUser, socketidPerson, chatopen, usernamesend }) => {
     if (!chatRefText.current) return false;
     if (!socketidUser) return alert("Houve um erro ao enviar sua mensaem.");
-    const indexPersonChat = chatRefText.current.findIndex((elem) => elem.id === socketidPerson);
-    const indexUserChat = chatRefText.current.findIndex((elem) => elem.id === socketidUser);
+
+    if (!chatRefText.current) return false;
+    const indexPersonChat = chatRefText.current.findIndex((elem) => {
+        if (elem) {
+            if (elem.id === socketidPerson) return socketidPerson;
+        }
+    });
+
+    const indexUserChat = chatRefText.current.findIndex((elem) => {
+        if (elem) {
+            if (elem.id === socketidUser) return socketidUser;
+        }
+    }); //s
 
     if (chatRefText.current[indexUserChat]) {
         chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname" style="color: black; font-size: 14px;">${usernamesend} diz:</p><p id="chat-textmessage" style="margin-left: 10px; margin-bottom: 5px;">${message}</p>`);

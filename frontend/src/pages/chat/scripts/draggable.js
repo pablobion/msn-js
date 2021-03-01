@@ -48,7 +48,7 @@ export default (chatRefText, socketidUser) => {
         var y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
 
         target.parentNode.appendChild(target); // faz puxar para frente ao mover...
-        chatRefText.current[indexUserChat].scrollTop = chatRefText.current[indexUserChat].scrollHeight; //move o scroll para baixo
+        if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].scrollTop = chatRefText.current[indexUserChat].scrollHeight; //move o scroll para baixo
 
         chatRefText.current.forEach((elem, index) => {
             if (elem) {
