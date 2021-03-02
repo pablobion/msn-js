@@ -4,6 +4,7 @@ import { socket } from "../../../../configs/socket_export";
 //components
 import AeroButton from "../../../components/aeroButton/index";
 import emotions from "./assets/emoticon.png";
+import Audio from "../../../components/audioRecorder/index";
 //images
 import points from "./assets/points.png";
 import tilt from "./assets/tilt.png";
@@ -13,6 +14,7 @@ import { Container, HeaderChat, MultiPoints, Sender } from "./styles";
 
 const Chat = (props) => {
     const [messageText, setMessageText] = useState();
+    const [record, setRecord] = useState();
 
     const handleChangeMessageText = (event) => {
         setMessageText(event.target.value);
@@ -61,7 +63,7 @@ const Chat = (props) => {
                     <img src={voice} alt="" />
                 </AeroButton>
             </HeaderChat>
-
+            {/* <Audio /> */}
             <Container>
                 <textarea onKeyPress={handleUserKeyPress} value={messageText} onChange={(e) => handleChangeMessageText(e)} cols="30" rows="10"></textarea>
             </Container>
