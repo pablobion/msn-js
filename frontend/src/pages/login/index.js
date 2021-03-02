@@ -1,29 +1,22 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import ReactLoading from "react-loading";
-
-import { Main, Container } from "./styles";
-
-//components
-import Navbar from "../components/navbar/index";
-import Borderavatar from "../components/modalBorder/index";
-import ModalCropUpdate from "../components/modalCropUpdate";
-
 //icons
 import { BsPencil, BsTrash } from "react-icons/bs";
-
-//images
-import brasil from "./assets/brazil.svg";
-import usa from "./assets/united-states.svg";
-
-//gif
-import loading from "./assets/loading.gif";
-
+import ReactLoading from "react-loading";
 //configs
 import { socket } from "../../configs/socket_export";
-
+import Borderavatar from "../components/modalBorder/index";
+import ModalCropUpdate from "../components/modalCropUpdate";
+//components
+import Navbar from "../components/navbar/index";
 //context
 import { useUser } from "../context/allusers";
+//images
+import brasil from "./assets/brazil.svg";
+//gif
+import loading from "./assets/loading.gif";
+import usa from "./assets/united-states.svg";
+import { Container, Main } from "./styles";
 
 const Login = () => {
     const { register, handleSubmit } = useForm();
@@ -71,11 +64,11 @@ const Login = () => {
 
             if (JSON.parse(localStorage.getItem("saveUser"))) {
                 let avatar = JSON.parse(localStorage.getItem("saveUser")).avatar; // pega o avatar que esta em local storage
-                if (changeStatusBorder != "invisible") {
+                if (changeStatusBorder !== "invisible") {
                     socket.emit("socket connected notification", { avatar }); // faz um emit pro serivdor
                 }
             } else {
-                if (changeStatusBorder != "invisible") {
+                if (changeStatusBorder !== "invisible") {
                     socket.emit("socket connected notification", { avatar: person.avatar }); // faz um emit pro serivdor
                 }
             }

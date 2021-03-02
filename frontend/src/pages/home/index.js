@@ -1,14 +1,11 @@
 import React from "react";
-import { Container } from "./styles";
-
+//images
+import ad from "./assets/ad.png";
+import Contacts from "./components/contacts";
 //components
 import Header from "./components/header/index";
 import SideBar from "./components/sidebar";
-import Contacts from "./components/contacts";
-
-//images
-
-import ad from "./assets/ad.png";
+import { Container } from "./styles";
 
 const Home = React.forwardRef((props, ref) => {
     return (

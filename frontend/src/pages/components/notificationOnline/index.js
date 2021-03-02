@@ -1,30 +1,21 @@
-import React, { useEffect, useState, useRef } from "react";
-
-import { Container } from "./styles";
-
-import NotificationSystem from "react-notification-system";
-
-//components sounds
-import playsound from "../../../scripts/sounds/sounds";
-
-//images
-import msnLogo from "./assets/msn-logo.png";
-
+import React, { useEffect, useRef, useState } from "react";
 //icons
 import { AiOutlineClose } from "react-icons/ai";
-
+import NotificationSystem from "react-notification-system";
+//configs
+import { socket } from "../../../configs/socket_export";
+//components sounds
+import playsound from "../../../scripts/sounds/sounds";
 //components
 import ModalBorder from "../../components/modalBorder/index";
-
-//configs
-import { socket, connect } from "../../../configs/socket_export";
-
 //context
 import { useUser } from "../../context/allusers";
+//images
+import msnLogo from "./assets/msn-logo.png";
+import { Container } from "./styles";
 
 const NotificationOnline = () => {
     const [person, setPerson] = useState();
-    const [statusUser, setStatusUser] = useState();
     const notificationSystem = useRef();
     const ButtonnotificationSystem = useRef();
 

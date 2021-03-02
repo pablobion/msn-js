@@ -1,5 +1,4 @@
 import { socket } from "../configs/socket_export";
-
 //sounds
 import playsound from "./sounds/sounds";
 
@@ -22,13 +21,15 @@ export const sendmessage = ({ chatRefText, multiChatRef, chatRef, message, socke
         }
     }); //s
 
+    if (chatRefText.current[indexPersonChat]) {
+        //esse é o que aparece para quem manda
+        chatRefText.current[indexPersonChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname" style="color: red; font-size: 14px;"  >${usernamesend} diz:</p><p id="chat-textmessage"style="margin-left: 10px; margin-bottom: 5px;">${message}</p>`);
+        chatRefText.current[indexPersonChat].scrollTop = chatRefText.current[indexPersonChat].scrollHeight; //move o scroll para baixo
+    }
     if (chatRefText.current[indexUserChat]) {
+        // esse é o que aparece para quem recebe
         chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname" style="color: black; font-size: 14px;">${usernamesend} diz:</p><p id="chat-textmessage" style="margin-left: 10px; margin-bottom: 5px;">${message}</p>`);
         chatRefText.current[indexUserChat].scrollTop = chatRefText.current[indexUserChat].scrollHeight; //move o scroll para baixo
-    }
-    if (chatRefText.current[indexPersonChat]) {
-        chatRefText.current[indexPersonChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname" style="color: black; font-size: 14px;" >${usernamesend} diz:</p><p id="chat-textmessage"style="margin-left: 10px; margin-bottom: 5px;">${message}</p>`);
-        chatRefText.current[indexPersonChat].scrollTop = chatRefText.current[indexPersonChat].scrollHeight; //move o scroll para baixo
     }
 
     if (chatopen === false) {

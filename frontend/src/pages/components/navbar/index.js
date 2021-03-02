@@ -1,10 +1,8 @@
 import React from "react";
-
-import { Container } from "./styles";
-
 //images profile
 import Logo from "./assets/live-logo.png";
 import TitleText from "./assets/title-text.png";
+import { Container } from "./styles";
 
 const navbar = () => {
     return (

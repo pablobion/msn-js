@@ -1,41 +1,30 @@
 import React, { useEffect, useState } from "react";
-
-import { Profile, Navbar } from "./styles";
-
-//images navbar
-import navbarNews from "./assets/navbar/navbar-news.png";
-import navbarColors from "./assets/navbar/navbar-colors.png";
-import navbarMail from "./assets/navbar/navbar-mail.png";
-import navbarContacts from "./assets/navbar/navbar-contacts.png";
-
-//images
-import brasil from "./assets/brazil.svg";
-import usa from "./assets/united-states.svg";
-
+//icons
+import { BsMusicNoteBeamed, BsPencil } from "react-icons/bs";
+import { FaSpotify } from "react-icons/fa";
 //tooltip
 import ReactTooltip from "react-tooltip";
-
-//icons
-import { BsPencil } from "react-icons/bs";
-import { FaSpotify } from "react-icons/fa";
-import { BsMusicNoteBeamed } from "react-icons/bs";
-
+//configs
+import { config } from "../../../../configs/config_connections";
+//socket
+import { socket } from "../../../../configs/socket_export";
 //components
 import AeroButton from "../../../components/aeroButton/index";
 import Borderavatar from "../../../components/modalBorder/index";
-import NavBar from "../../../components/navbar/index";
 import ModalCropUpdate from "../../../components/modalCropUpdate";
-
 import Crop from "../../../components/modalCropUpdate/components/crop/index";
-
-//socket
-import { socket } from "../../../../configs/socket_export";
-
+import NavBar from "../../../components/navbar/index";
 //context
 import { useUser } from "../../../context/allusers";
-
-//configs
-import { config } from "../../../../configs/config_connections";
+//images
+import brasil from "./assets/brazil.svg";
+import navbarColors from "./assets/navbar/navbar-colors.png";
+import navbarContacts from "./assets/navbar/navbar-contacts.png";
+import navbarMail from "./assets/navbar/navbar-mail.png";
+//images navbar
+import navbarNews from "./assets/navbar/navbar-news.png";
+import usa from "./assets/united-states.svg";
+import { Navbar, Profile } from "./styles";
 
 const configs = config();
 
@@ -74,12 +63,7 @@ const Header = () => {
     });
 
     const menuSubnick = async () => {
-        const child = window.open(`http://${configs.ipServer}/routes/spotify/login?socketid=${socket.id}`, "_blank", "location=yes,height=570,width=520,scrollbars=yes,status=yes");
-
-        // setTimeout(() => {
-        //     child.close();
-        //     alert("Spotify Conectado");
-        // }, 1000);
+        window.open(`http://${configs.ipServer}/routes/spotify/login?socketid=${socket.id}`, "_blank", "location=yes,height=570,width=520,scrollbars=yes,status=yes");
     };
 
     return (

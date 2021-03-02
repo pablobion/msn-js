@@ -1,19 +1,15 @@
 import React, { useState } from "react";
-
-import { MultiPoints, HeaderChat, Container, Sender } from "./styles";
-
-//images
-import points from "./assets/points.png";
-import emotions from "./assets/emoticon.png";
-import winks from "./assets/winks.png";
-import tilt from "./assets/tilt.png";
-import voice from "./assets/voice.png";
-
-//components
-import AeroButton from "../../../components/aeroButton/index";
-
 //configs
 import { socket } from "../../../../configs/socket_export";
+//components
+import AeroButton from "../../../components/aeroButton/index";
+import emotions from "./assets/emoticon.png";
+//images
+import points from "./assets/points.png";
+import tilt from "./assets/tilt.png";
+import voice from "./assets/voice.png";
+import winks from "./assets/winks.png";
+import { Container, HeaderChat, MultiPoints, Sender } from "./styles";
 
 const Chat = (props) => {
     const [messageText, setMessageText] = useState();

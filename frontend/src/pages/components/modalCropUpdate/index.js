@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-
-import { Container, Buttons } from "./styles";
-
 //components
 import Crop from "./components/crop";
 import PhotoHistory from "./components/photoHistory";
+import { Buttons, Container } from "./styles";
 
 const ModalCropUpdate = (props) => {
     const [deafult, setDefault] = useState(true);

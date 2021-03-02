@@ -1,4 +1,3 @@
-import { BiBluetooth } from "react-icons/bi";
 import styled from "styled-components";
 
 export const Container = styled.div`

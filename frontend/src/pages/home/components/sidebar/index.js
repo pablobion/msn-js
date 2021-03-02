@@ -1,15 +1,11 @@
 import React from "react";
-
-import { Container } from "./styles";
-
-//images
-import msnLogo from "./assets/msn-logo.png";
-
-//components
-import AeroButton from "../../../components/aeroButton/index";
-
 //icons
 import { AiFillGithub, AiFillLinkedin, AiOutlineInstagram } from "react-icons/ai";
+//components
+import AeroButton from "../../../components/aeroButton/index";
+//images
+import msnLogo from "./assets/msn-logo.png";
+import { Container } from "./styles";
 
 const sidebar = () => {
     return (

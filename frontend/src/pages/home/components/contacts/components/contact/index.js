@@ -1,22 +1,17 @@
 import React from "react";
-
-import { Container } from "./styles";
-
-//images
-import online from "./assets/online.png";
-import invisible from "./assets/invisible.png";
-import busy from "./assets/busy.png";
-import away from "./assets/away.png";
-import listen from "./assets/listen-music.png";
-
-//components
-import AeroButton from "../../../../../components/aeroButton/index";
-
 //configs
 import { socket } from "../../../../../../configs/socket_export";
-
+//components
+import AeroButton from "../../../../../components/aeroButton/index";
 //context
 import { useUser } from "../../../../../context/allusers";
+import away from "./assets/away.png";
+import busy from "./assets/busy.png";
+import invisible from "./assets/invisible.png";
+import listen from "./assets/listen-music.png";
+//images
+import online from "./assets/online.png";
+import { Container } from "./styles";
 
 const Contact = (props) => {
     const { chatRefText, language } = useUser();

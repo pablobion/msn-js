@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from "react";
-
-import { Container } from "./styles";
-
-//images
-import balloon from "./assets/balloon.ico";
-
-//context
-import { useUser } from "../../pages/context/allusers";
-
+import React, { useEffect, useState } from "react";
 //configs
 import { socket } from "../../configs/socket_export";
+//context
+import { useUser } from "../../pages/context/allusers";
+//images
+import balloon from "./assets/balloon.ico";
+import { Container } from "./styles";
 
 const MultiChats = React.forwardRef((props, ref) => {
     const { getPerson, chatRef, chatRefText } = useUser();

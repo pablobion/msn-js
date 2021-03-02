@@ -1,26 +1,20 @@
-import React, { useEffect, useRef } from "react";
-import { Container } from "./styles";
-import GlobalStyle from "./styles/global";
-
+import React, { useEffect } from "react";
 //components
 import MultiChats from "../src/pages/multiChats/index";
-import { NotificationOnline } from "./pages/components/notificationOnline/index";
-
-//pages
-import Home from "./pages/home/index";
-import Chat from "./pages/chat/index";
-import Login from "./pages/login/index";
-
-//context
-import { useUser } from "./pages/context/allusers";
-import { socket } from "./configs/socket_export";
-
-//refs
-import { sendmessage, drawAttention } from "./scripts/refs";
-
 //configs
 import { config } from "./configs/config_connections";
-const configs = config();
+import { socket } from "./configs/socket_export";
+import Chat from "./pages/chat/index";
+import { NotificationOnline } from "./pages/components/notificationOnline/index";
+//context
+import { useUser } from "./pages/context/allusers";
+//pages
+import Home from "./pages/home/index";
+import Login from "./pages/login/index";
+//refs
+import { drawAttention, sendmessage } from "./scripts/refs";
+import { Container } from "./styles";
+import GlobalStyle from "./styles/global";
 
 function App() {
     const { userChats, mode, chatRefText, chatRef, multiChatRef } = useUser();

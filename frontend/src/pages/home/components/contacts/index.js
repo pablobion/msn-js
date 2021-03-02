@@ -1,19 +1,15 @@
 import React from "react";
-
-import { Container } from "./styles";
-
 //icons and images
 import { BiSearch } from "react-icons/bi";
-import addcontact from "./assets/add-contact.png";
-import sortContacts from "./assets/sort-contacts.png";
-
+import { socket } from "../../../../configs/socket_export";
 //components
 import AeroButton from "../../../components/aeroButton/index";
-import Contact from "./components/contact/index";
-
 //context
 import { useUser } from "../../../context/allusers";
-import { socket } from "../../../../configs/socket_export";
+import addcontact from "./assets/add-contact.png";
+import sortContacts from "./assets/sort-contacts.png";
+import Contact from "./components/contact/index";
+import { Container } from "./styles";
 
 const Contacts = () => {
     const { contactsOnline, countContactsOnline, language } = useUser();
@@ -38,7 +34,7 @@ const Contacts = () => {
                     <div id="contacts-group-list-contacts">
                         {contactsOnline &&
                             contactsOnline.map((elem) => {
-                                if (socket.id == elem.socketid) {
+                                if (socket.id === elem.socketid) {
                                     return <Contact username={elem.username} status={elem.status} subnick={elem.subnick} socketid={elem.socketid} key={elem.socketid} music={elem.music} disabled={true} />;
                                 }
                                 if (elem.status !== "invisible") {

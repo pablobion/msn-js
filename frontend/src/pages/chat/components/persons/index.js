@@ -1,14 +1,11 @@
 import React from "react";
-
-import { Container } from "./styles";
-
+//icons
+import { BsPencil } from "react-icons/bs";
 //components
 import ModalBorder from "../../../components/modalBorder/index";
 import ModalCropUpdate from "../../../components/modalCropUpdate";
 import Crop from "../../../components/modalCropUpdate/components/crop/index";
-
-//icons
-import { BsPencil } from "react-icons/bs";
+import { Container } from "./styles";
 
 const Persons = (props) => {
     return (

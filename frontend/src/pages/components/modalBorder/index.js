@@ -1,16 +1,9 @@
 import React from "react";
-
-import { Container } from "./styles";
-
-//images
-
-import avatarDefault from "./assets/avatar-default.png";
-
-import invisible from "./assets/invisible.png";
-import online from "./assets/online.png";
 import away from "./assets/away.png";
 import busy from "./assets/busy.png";
-
+import invisible from "./assets/invisible.png";
+import online from "./assets/online.png";
+import { Container } from "./styles";
 //scripts
 import { verifyAvatarDefault } from "./verifyAvatarDefault.js";
 
