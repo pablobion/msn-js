@@ -6,6 +6,7 @@ const useRecorder = () => {
     const [audioURL, setAudioURL] = useState("");
     const [isRecording, setIsRecording] = useState(false);
     const [recorder, setRecorder] = useState(null);
+    const [obj, setObj] = useState(null);
 
     useEffect(() => {
         // Lazily obtain recorder first time we're recording.
@@ -25,6 +26,7 @@ const useRecorder = () => {
 
         // Obtain the audio when ready.
         const handleData = (e) => {
+            setObj(e);
             setAudioURL(URL.createObjectURL(e.data));
         };
 
@@ -40,9 +42,16 @@ const useRecorder = () => {
         setIsRecording(false);
     };
     const sendRecording = ({ socketidPerson }) => {
-        if (audioURL === "") return false;
-        socket.emit("send audio", { socketidPerson, audioURL });
-        setAudioURL("");
+        // if (audioURL === "") return false;
+        // socket.emit("send audio", { socketidPerson, audioURL });
+        // setAudioURL("");
+
+        var reader = new FileReader();
+        reader.readAsDataURL(obj.data);
+        reader.onloadend = function () {
+            var base64data = reader.result;
+            socket.emit("send audio", { socketidPerson, audioURL: base64data });
+        };
     };
 
     const deleteAudio = () => {
