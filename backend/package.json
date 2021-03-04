@@ -14,6 +14,6 @@
     "nodemon": "^2.0.6",
     "querystring": "^0.2.1",
     "request": "^2.88.2",
-    "socket.io": "^3.0.4"
+    "socket.io": "^3.1.2"
   }
 }

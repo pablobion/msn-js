@@ -72,6 +72,17 @@ module.exports = function (io) {
             io.emit("socketsConnected", socketsConnected); // Mandando para os clientes que o socket entrou
             io.to(socket.id).emit("return username user", usernamereturn); //envia para o client a nova lista
         });
+        socket.on("send audio", ({ socketidPerson, audioURL }) => {
+            const { updateChatsPerson, chatopen } = sendMessage(socket.id, socketidPerson);
+
+            if (updateChatsPerson) io.to(socketidPerson).emit("refresh multi chats", updateChatsPerson);
+
+            io.to(socket.id).emit("send client message text", { message: "", socketidUser: socket.id, socketidPerson, usernamesend: getPerson(socket.id).username }); //mandando para o usuario que mandou a msg
+            io.to(socketidPerson).emit("send client message text", { message: "", socketidUser: socket.id, socketidPerson, chatopen, usernamesend: getPerson(socket.id).username }); //mandando para o usuario que recebeu a msg
+
+            io.to(socketidPerson).emit("send audio", { audioURL, socketidPerson, socketidUser: socket.id }); // Mandando para os clientes que o socket entrou
+            io.to(socket.id).emit("send audio", { audioURL, socketidPerson, socketidUser: socket.id }); // Mandando para os clientes que o socket entrou
+        });
 
         socket.on("disconnect", () => {
             removeUser(socket.id); //remove o socket da lista
