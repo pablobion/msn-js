@@ -1,20 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 //configs
 import { socket } from "../../../../configs/socket_export";
 //components
 import AeroButton from "../../../components/aeroButton/index";
 import emotions from "./assets/emoticon.png";
 import Audio from "../../../components/audioRecorder/index";
+
 //images
 import points from "./assets/points.png";
 import tilt from "./assets/tilt.png";
 import voice from "./assets/voice.png";
 import winks from "./assets/winks.png";
-import { Container, HeaderChat, MultiPoints, Sender } from "./styles";
+import { Container, HeaderChat, MultiPoints, Sender, DivRecordVoice } from "./styles";
 
 const Chat = (props) => {
     const [messageText, setMessageText] = useState();
     const [record, setRecord] = useState();
+
+    const DivRecordVoiceRef = useRef(null);
 
     const handleChangeMessageText = (event) => {
         setMessageText(event.target.value);
@@ -44,26 +47,39 @@ const Chat = (props) => {
         }
     };
 
+    const openVoice = () => {
+        let style = DivRecordVoiceRef.current.style;
+
+        // DivRecordVoiceRef.current.style = `animation: changewidth 0.5s;`;
+
+        // setTimeout(() => {
+        //     DivRecordVoiceRef.current.style = `animation: none, width: 280px;`;
+        // }, 1000);
+    };
+
     return (
         <>
             <MultiPoints>
-                <img src={points} alt="" />
+                <img src={points} alt="icon-points" />
             </MultiPoints>
             <HeaderChat>
                 <AeroButton disabled={true}>
-                    <img src={emotions} alt="" />
+                    <img src={emotions} alt="icon-emotions" />
                 </AeroButton>
                 <AeroButton disabled={true}>
-                    <img src={winks} alt="" />
+                    <img src={winks} alt="icon-winks" />
                 </AeroButton>
                 <AeroButton onCustomClick={handleClickDrawAttention}>
-                    <img src={tilt} alt="" />
+                    <img src={tilt} alt="icon-tilt" />
                 </AeroButton>
-                <AeroButton disabled={true}>
-                    <img src={voice} alt="" />
-                </AeroButton>
+                <DivRecordVoice ref={DivRecordVoiceRef}>
+                    <AeroButton onCustomClick={openVoice}>
+                        <img src={voice} alt="icon-voice" style={{ margin: 0, padding: 0, marginTop: 2, height: 14 }} />
+                    </AeroButton>
+                    <Audio audioURL={record} socketidPerson={props.socketidPerson} />
+                </DivRecordVoice>
             </HeaderChat>
-            {/* <Audio /> */}
+
             <Container>
                 <textarea onKeyPress={handleUserKeyPress} value={messageText} onChange={(e) => handleChangeMessageText(e)} cols="30" rows="10"></textarea>
             </Container>

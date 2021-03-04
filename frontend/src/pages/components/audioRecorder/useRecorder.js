@@ -38,10 +38,18 @@ const useRecorder = () => {
 
     const stopRecording = () => {
         setIsRecording(false);
-        socket.emit("send audio", audioURL);
+    };
+    const sendRecording = ({ socketidPerson }) => {
+        if (audioURL === "") return false;
+        socket.emit("send audio", { socketidPerson, audioURL });
+        setAudioURL("");
     };
 
-    return [audioURL, isRecording, startRecording, stopRecording];
+    const deleteAudio = () => {
+        setAudioURL("");
+    };
+
+    return [audioURL, isRecording, startRecording, stopRecording, sendRecording, deleteAudio];
 };
 
 async function requestRecorder() {

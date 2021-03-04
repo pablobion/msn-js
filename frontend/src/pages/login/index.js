@@ -48,8 +48,8 @@ const Login = () => {
             }
 
             data.socketid = socket.id;
-            if (rememberIsChecked) data.remember = rememberIsChecked.current.checked;
-            if (autoLoginIsChecked) data.autologin = autoLoginIsChecked.current.checked;
+            if (rememberIsChecked.current) data.remember = rememberIsChecked.current.checked;
+            if (autoLoginIsChecked.current) data.autologin = autoLoginIsChecked.current.checked;
 
             sendSocketEmitStatus(data.status); // troca status ao entrar.
             sendSocketEmitUsername(data.username); // troca username ao entrar

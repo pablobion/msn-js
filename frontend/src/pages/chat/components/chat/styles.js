@@ -13,12 +13,31 @@ export const HeaderChat = styled.div`
     border: thin solid #bed6e0;
     height: 30px;
     background: linear-gradient(180deg, rgb(248, 253, 255) 30%, rgb(234, 244, 247) 60%, rgb(248, 253, 255) 70%);
+    display: flex;
+    align-items: center;
     button {
         margin-left: 5px;
     }
+`;
 
-    button + button {
-        margin-left: 10px;
+export const DivRecordVoice = styled.div`
+    display: flex;
+    width: 35px;
+    align-items: center;
+    overflow: hidden;
+
+    &:hover {
+        width: 210px;
+        animation: changewidth 0.5s;
+    }
+
+    @keyframes changewidth {
+        from {
+            width: 100px;
+        }
+        to {
+            width: 210px;
+        }
     }
 `;
 
@@ -43,12 +62,14 @@ export const Container = styled.div`
 
     textarea {
         border: none;
+        height: 400px;
     }
 `;
 
 export const Sender = styled.div`
     display: flex;
     justify-content: flex-end;
+    margin-bottom: 20px;
     button {
         font-size: 14px;
         border-radius: 3px;

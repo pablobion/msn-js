@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 //components
 import MultiChats from "../src/pages/multiChats/index";
+import Scripts from "./scripts/ref";
+
 //configs
-import { config } from "./configs/config_connections";
 import { socket } from "./configs/socket_export";
 import Chat from "./pages/chat/index";
 import { NotificationOnline } from "./pages/components/notificationOnline/index";
@@ -12,20 +13,25 @@ import { useUser } from "./pages/context/allusers";
 import Home from "./pages/home/index";
 import Login from "./pages/login/index";
 //refs
-import { drawAttention, sendmessage } from "./scripts/refs";
 import { Container } from "./styles";
 import GlobalStyle from "./styles/global";
 
 function App() {
     const { userChats, mode, chatRefText, chatRef, multiChatRef } = useUser();
+    let [drawAttention, sendMessage, sendAudio] = Scripts();
 
     useEffect(() => {
         socket.on("send client message text", ({ message, socketidUser, socketidPerson, chatopen, usernamesend }) => {
-            sendmessage({ chatRefText, chatRef, multiChatRef, message, socketidUser, socketidPerson, chatopen, usernamesend });
+            sendMessage({ chatRefText, chatRef, multiChatRef, message, socketidUser, socketidPerson, chatopen, usernamesend });
         });
 
         socket.on("Draw AttenAttention", ({ id, whosend, isend, statusperson }) => {
+            //drawAttention({ chatRefText, chatRef, multiChatRef, id, whosend, isend, statusperson });
             drawAttention({ chatRefText, chatRef, multiChatRef, id, whosend, isend, statusperson });
+        });
+
+        socket.on("send audio", ({ audioURL, socketidPerson, socketidUser }) => {
+            sendAudio({ audioURL, socketidPerson, socketidUser, chatRefText, chatRef, multiChatRef });
         });
     }, []);
 
