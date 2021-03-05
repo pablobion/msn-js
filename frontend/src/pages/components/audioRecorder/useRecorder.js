@@ -42,15 +42,14 @@ const useRecorder = () => {
         setIsRecording(false);
     };
     const sendRecording = ({ socketidPerson }) => {
-        // if (audioURL === "") return false;
-        // socket.emit("send audio", { socketidPerson, audioURL });
-        // setAudioURL("");
+        if (audioURL === "") return false;
 
         var reader = new FileReader();
         reader.readAsDataURL(obj.data);
         reader.onloadend = function () {
             var base64data = reader.result;
             socket.emit("send audio", { socketidPerson, audioURL: base64data });
+            setAudioURL("");
         };
     };
 
