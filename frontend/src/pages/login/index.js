@@ -27,7 +27,6 @@ const Login = () => {
     const [username, setUsername] = useState("");
     const [person, setPerson] = useState();
     const [gifLogin, setGifLogin] = useState(false);
-    const [cancelLogin, setCancelLogin] = useState(false);
 
     const [changeStatusBorder, setChangeStatusBorder] = useState();
 
@@ -107,6 +106,8 @@ const Login = () => {
     const clearSaveUser = () => {
         localStorage.removeItem("saveUser");
         setUsername("");
+        rememberIsChecked.current.checked = false;
+        autoLoginIsChecked.current.checked = false;
         socket.emit("change avatar", "");
         alert(language === "br" ? "Informações limpas" : "Information deleted.");
     };
