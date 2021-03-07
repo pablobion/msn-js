@@ -80,7 +80,7 @@ export const Container = styled.div`
         display: flex;
         align-items: center;
         width: 250px;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
         p {
             margin-left: 10px;
         }
@@ -131,6 +131,23 @@ export const Container = styled.div`
             &:active {
                 background-image: linear-gradient(rgb(224, 240, 248), rgb(176, 224, 248));
                 box-shadow: inset 1px 1px 2px gray;
+            }
+        }
+    }
+
+    #div-gif-singin {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        p {
+            margin-top: 10px;
+            color: #454545;
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
             }
         }
     }

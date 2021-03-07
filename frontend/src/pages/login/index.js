@@ -18,6 +18,8 @@ import loading from "./assets/loading.gif";
 import usa from "./assets/united-states.svg";
 import { Container, Main } from "./styles";
 
+let timetologin;
+
 const Login = () => {
     const { register, handleSubmit } = useForm();
 
@@ -25,10 +27,13 @@ const Login = () => {
     const [username, setUsername] = useState("");
     const [person, setPerson] = useState();
     const [gifLogin, setGifLogin] = useState(false);
+    const [cancelLogin, setCancelLogin] = useState(false);
 
     const [changeStatusBorder, setChangeStatusBorder] = useState();
+
     const rememberIsChecked = useRef();
     const autoLoginIsChecked = useRef();
+    const buttonLogin = useRef();
 
     const sendSocketEmitStatus = (status) => {
         socket.emit("change status user", status);
@@ -40,7 +45,8 @@ const Login = () => {
 
     const onSubmit = (data) => {
         setGifLogin(true);
-        setTimeout(() => {
+        buttonLogin.current.disabled = true;
+        timetologin = setTimeout(() => {
             if (!data.username || data.username === " " || data.username === "") {
                 alert(language === "br" ? "Você deve colocar o seu nome de usuário." : "You must enter your username.");
                 setGifLogin(false);
@@ -74,7 +80,13 @@ const Login = () => {
             }
 
             setMode("home"); //muda para home depois que clica.
-        }, 2000);
+        }, 3500);
+    };
+
+    const handleCancelLogin = () => {
+        clearInterval(timetologin);
+        setGifLogin(false);
+        buttonLogin.current.disabled = false;
     };
 
     const handleChangeUsername = (e) => {
@@ -110,11 +122,16 @@ const Login = () => {
             socket.emit("change avatar", infos.avatar);
             rememberIsChecked.current.checked = true;
             autoLoginIsChecked.current.disabled = false;
+            autoLoginIsChecked.current.checked = infos.autologin;
+
+            if (autoLoginIsChecked.current.checked === true && person) {
+                buttonLogin.current.click();
+            }
         }
         if (localStorage.getItem("msn-language")) {
             changeLanguage(localStorage.getItem("msn-language"));
         }
-    }, []);
+    }, person);
 
     return (
         <Main>
@@ -158,10 +175,13 @@ const Login = () => {
                     </div>
                     <div id="footer-buttons">
                         {person ? (
-                            <button type="submit">{language === "br" ? "Entrar" : "Sign in"}</button>
+                            <button ref={buttonLogin} type="submit">
+                                {language === "br" ? "Entrar" : "Sign in"}
+                            </button>
                         ) : (
                             <button
                                 type="button"
+                                ref={buttonLogin}
                                 onClick={() => {
                                     alert(language === "br" ? "Não foi possivel conectar ao servidor, tente novamente!" : "Unable to connect to the server, try again!");
                                 }}
@@ -172,8 +192,9 @@ const Login = () => {
                     </div>
                 </form>
                 {gifLogin && (
-                    <div>
-                        <img src={loading} alt="" />
+                    <div id="div-gif-singin">
+                        <img src={loading} alt="gif-singin" />
+                        <p onClick={handleCancelLogin}>Cancelar</p>
                     </div>
                 )}
             </Container>
