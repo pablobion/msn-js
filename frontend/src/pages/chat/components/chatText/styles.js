@@ -11,7 +11,7 @@ export const Container = styled.div`
     height: 150%;
     padding: 5px;
     resize: vertical;
-    cursor: pointer;
+    cursor: default;
 
     .chat-textmessage {
         margin: 2px 0px 8px 10px;

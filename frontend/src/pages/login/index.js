@@ -195,7 +195,7 @@ const Login = () => {
                 {gifLogin && (
                     <div id="div-gif-singin">
                         <img src={loading} alt="gif-singin" />
-                        <p onClick={handleCancelLogin}>Cancelar</p>
+                        <p onClick={handleCancelLogin}>{language === "br" ? "Cancelar" : "Cancel"}</p>
                     </div>
                 )}
             </Container>

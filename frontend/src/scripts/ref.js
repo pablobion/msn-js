@@ -1,11 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 
 //sockets
 import { socket } from "../configs/socket_export";
 //sounds
 import playsound from "./sounds/sounds";
-//components
-import Audio from "../pages/components/audioRecorder/index";
 
 let timeout = false; //Time out para o limite de chamar atenção
 
@@ -76,6 +74,22 @@ const Scripts = () => {
         }
     };
 
+    const SendWink = ({ wink, socketidPerson, socketidUser, chatRefText, usernamesend }) => {
+        const indexUserChat = chatRefText.current.findIndex((elem) => {
+            if (elem && elem.id === socketidUser) return socketidUser;
+        }); //s
+
+        if (chatRefText.current[indexUserChat]) {
+            //esse é o que aparece para quem manda
+            chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname" style="color: black; font-size: 14px;">${usernamesend} envia um wink:</p>`);
+
+            chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname" onclick={document.getElementById('play-wink-${wink}-${socketidUser}').click()} style="color: #075af5; font-size: 18px; margin-left: 15px; cursor: pointer; text-decoration: underline">Reproduzir "${wink}"</p>`);
+        }
+
+        playsound("type");
+        if (document.getElementById(`play-wink-${wink}-${socketidUser}`)) document.getElementById(`play-wink-${wink}-${socketidUser}`).click();
+    };
+
     const drawAttention = ({ chatRefText, chatRef, multiChatRef, id, whosend, isend, statusperson }) => {
         const indexPersonMultiChat = multiChatRef.current.findIndex((elem) => `${elem.id}` === `${id}-multichat`);
         const indexPersonChat = chatRefText.current.findIndex((elem) => elem.id === id);
@@ -120,7 +134,7 @@ const Scripts = () => {
         }
     };
 
-    return [drawAttention, sendMessage, sendAudio];
+    return [drawAttention, sendMessage, sendAudio, SendWink];
 };
 
 export default Scripts;

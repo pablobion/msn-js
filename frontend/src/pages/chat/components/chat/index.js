@@ -5,6 +5,7 @@ import { socket } from "../../../../configs/socket_export";
 import AeroButton from "../../../components/aeroButton/index";
 import emotions from "./assets/emoticon.png";
 import Audio from "../../../components/audioRecorder/index";
+import SendWinks from "./components/sendWinks";
 
 //images
 import points from "./assets/points.png";
@@ -13,9 +14,13 @@ import voice from "./assets/voice.png";
 import winks from "./assets/winks.png";
 import { Container, HeaderChat, MultiPoints, Sender, DivRecordVoice } from "./styles";
 
+//winks
+import Winks from "./components/sendWinks/components/winks/index";
+
 const Chat = (props) => {
     const [messageText, setMessageText] = useState();
     const [record, setRecord] = useState();
+    const [visibleSendWinks, setVisibleSendWinks] = useState(false);
 
     const DivRecordVoiceRef = useRef(null);
 
@@ -47,14 +52,8 @@ const Chat = (props) => {
         }
     };
 
-    const openVoice = () => {
-        let style = DivRecordVoiceRef.current.style;
-
-        // DivRecordVoiceRef.current.style = `animation: changewidth 0.5s;`;
-
-        // setTimeout(() => {
-        //     DivRecordVoiceRef.current.style = `animation: none, width: 280px;`;
-        // }, 1000);
+    const handleClickSendWinks = () => {
+        visibleSendWinks ? setVisibleSendWinks(false) : setVisibleSendWinks(true);
     };
 
     return (
@@ -62,18 +61,21 @@ const Chat = (props) => {
             <MultiPoints>
                 <img src={points} alt="icon-points" />
             </MultiPoints>
+            <Winks socketidPerson={props.socketidPerson}></Winks>
+
             <HeaderChat>
                 <AeroButton disabled={true}>
                     <img src={emotions} alt="icon-emotions" />
                 </AeroButton>
-                <AeroButton disabled={true}>
+                <AeroButton onCustomClick={handleClickSendWinks}>
                     <img src={winks} alt="icon-winks" />
+                    <SendWinks socketidPerson={props.socketidPerson} visible={visibleSendWinks} />
                 </AeroButton>
                 <AeroButton onCustomClick={handleClickDrawAttention}>
                     <img src={tilt} alt="icon-tilt" />
                 </AeroButton>
                 <DivRecordVoice ref={DivRecordVoiceRef}>
-                    <AeroButton onCustomClick={openVoice}>
+                    <AeroButton>
                         <img src={voice} alt="icon-voice" style={{ margin: 0, padding: 0, marginTop: 2, height: 14 }} />
                     </AeroButton>
                     <Audio audioURL={record} socketidPerson={props.socketidPerson} />
