@@ -5,16 +5,16 @@ import { BsPencil, BsTrash } from "react-icons/bs";
 import ReactLoading from "react-loading";
 //configs
 import { socket } from "../../configs/socket_export";
-import Borderavatar from "../components/modalBorder/index";
-import ModalCropUpdate from "../components/modalCropUpdate";
 //components
 import Navbar from "../components/navbar/index";
+import Borderavatar from "../components/modalBorder/index";
+import ModalCropUpdate from "../components/modalCropUpdate";
 //context
 import { useUser } from "../context/allusers";
 //images
 import brasil from "./assets/brazil.svg";
 //gif
-import loading from "./assets/loading.gif";
+import loading from "./assets/login_loading.gif";
 import usa from "./assets/united-states.svg";
 import { Container, Main } from "./styles";
 
@@ -48,6 +48,7 @@ const Login = () => {
         timetologin = setTimeout(() => {
             if (!data.username || data.username === " " || data.username === "") {
                 alert(language === "br" ? "Você deve colocar o seu nome de usuário." : "You must enter your username.");
+                buttonLogin.current.disabled = false;
                 setGifLogin(false);
                 return false;
             }
@@ -194,6 +195,7 @@ const Login = () => {
                 </form>
                 {gifLogin && (
                     <div id="div-gif-singin">
+                        <small>{language === "br" ? "Entrando..." : "Signing in..."}</small>
                         <img src={loading} alt="gif-singin" />
                         <p onClick={handleCancelLogin}>{language === "br" ? "Cancelar" : "Cancel"}</p>
                     </div>

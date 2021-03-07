@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 //icons
 import { BsMusicNoteBeamed, BsPencil } from "react-icons/bs";
 import { FaSpotify } from "react-icons/fa";
+import { ImExit } from "react-icons/im";
 //tooltip
 import ReactTooltip from "react-tooltip";
 //configs
@@ -29,7 +30,7 @@ import { Navbar, Profile } from "./styles";
 const configs = config();
 
 const Header = () => {
-    const { getUser, theme, changeTheme, language, changeLanguage } = useUser();
+    const { getUser, theme, changeTheme, language, changeLanguage, setMode } = useUser();
     const [person, setPerson] = useState();
 
     const handleChangeStatus = async (e) => {
@@ -42,6 +43,16 @@ const Header = () => {
             }
         }
         socket.emit("change status user", e.target.value);
+    };
+    const logout = () => {
+        if (localStorage.getItem("saveUser")) {
+            let infos = JSON.parse(localStorage.getItem("saveUser"));
+            const username = infos.username;
+            const avatar = infos.avatar;
+            localStorage.setItem("saveUser", JSON.stringify({ username: username, avatar, autologin: false }));
+        }
+        socket.emit("change status user", "invisible");
+        setMode("login");
     };
 
     const sendSubnick = (event) => {
@@ -103,6 +114,9 @@ const Header = () => {
                             <div>
                                 <img onClick={() => changeLanguage("br")} className="country-flag" src={brasil} alt="" />
                                 <img onClick={() => changeLanguage("en")} className="country-flag" src={usa} alt="" />
+                                <div style={{ marginLeft: 30, cursor: "pointer" }}>
+                                    <ImExit onClick={logout} size={30} />
+                                </div>
                             </div>
                         </span>
 
