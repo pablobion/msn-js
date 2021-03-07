@@ -84,6 +84,24 @@ module.exports = function (io) {
             io.to(socket.id).emit("send audio", { audioURL, socketidPerson, socketidUser: socket.id }); // Mandando para os clientes que o socket entrou
         });
 
+        socket.on("send wink", ({ socketidPerson, wink }) => {
+            console.log("chegou no server wink: " + wink);
+
+            const { updateChatsPerson, chatopen } = sendMessage(socket.id, socketidPerson);
+            if (updateChatsPerson) io.to(socketidPerson).emit("refresh multi chats", updateChatsPerson);
+
+            // io.to(socket.id).emit("send client message text", { message: " ", socketidUser: socket.id, socketidPerson, usernamesend: getPerson(socket.id).username }); //mandando para o usuario que mandou a msg
+            // io.to(socketidPerson).emit("send client message text", { message: " ", socketidUser: socket.id, socketidPerson, chatopen, usernamesend: getPerson(socket.id).username }); //mandando para o usuario que recebeu a msg
+
+            setTimeout(() => {
+                const personChats = changeVisibleChatAttention({ socketiduser: socket.id, socketidperson: socketidPerson }); // troca o visible de true para false e ao contrario também, e pega os chats novamente
+                io.to(socketidPerson).emit("refresh multi chats", personChats); //manda os chats com o atributo do visible atualizado
+
+                io.to(socketidPerson).emit("send wink", { wink, socketidUser: socket.id, socketidPerson, usernamesend: getPerson(socket.id).username }); //envia wink para a pessoa q vai receber
+                io.to(socket.id).emit("send wink", { wink, socketidUser: socketidPerson, socketidPerson: socket.id, usernamesend: getPerson(socket.id).username }); //Envia o emit para a pessoa que cliccou para enviar, os valores estão trocados para que quando ele receba reproduza o wink
+            }, 1000);
+        });
+
         socket.on("disconnect", () => {
             removeUser(socket.id); //remove o socket da lista
             io.emit("socketsConnected", socketsConnected); //envia para o client a nova lista
