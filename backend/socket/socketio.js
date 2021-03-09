@@ -11,6 +11,7 @@ module.exports = function (io) {
 
         socket.on("socket connected notification", ({ avatar }) => {
             io.emit("socket connected notification", { username: getPerson(socket.id).username, avatar }); // mandando o cliente que entoru para notificação...
+            io.emit("socketsConnectedCounter", socketsConnectedCounter()); // Quantidade de pessoas online...
         });
 
         socket.on("change avatar", (avatarlink) => {
