@@ -45,6 +45,8 @@ const Login = () => {
     const onSubmit = (data) => {
         setGifLogin(true);
         buttonLogin.current.disabled = true;
+
+        sendSocketEmitUsername(data.username); // troca username ao entrar
         timetologin = setTimeout(() => {
             if (!data.username || data.username === " " || data.username === "") {
                 alert(language === "br" ? "Você deve colocar o seu nome de usuário." : "You must enter your username.");
@@ -53,12 +55,11 @@ const Login = () => {
                 return false;
             }
 
+            sendSocketEmitStatus(data.status); // troca status ao entrar.
+
             data.socketid = socket.id;
             if (rememberIsChecked.current) data.remember = rememberIsChecked.current.checked;
             if (autoLoginIsChecked.current) data.autologin = autoLoginIsChecked.current.checked;
-
-            sendSocketEmitStatus(data.status); // troca status ao entrar.
-            sendSocketEmitUsername(data.username); // troca username ao entrar
 
             //se o input estiver selecionado, irá as informações.
             if (data.remember) {
