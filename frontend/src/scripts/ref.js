@@ -6,6 +6,7 @@ import { socket } from "../configs/socket_export";
 import playsound from "./sounds/sounds";
 
 let timeout = false; //Time out para o limite de chamar atenção
+let timeoutwinks = false; //Time out para o limite de chamar atenção
 
 const Scripts = () => {
     const sendMessage = ({ chatRefText, multiChatRef, chatRef, message, socketidUser, socketidPerson, chatopen, usernamesend }) => {
@@ -79,15 +80,29 @@ const Scripts = () => {
             if (elem && elem.id === socketidUser) return socketidUser;
         }); //s
 
-        if (chatRefText.current[indexUserChat]) {
-            //esse é o que aparece para quem manda
-            chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname" style="color: black; font-size: 14px;">${usernamesend} envia um wink:</p>`);
+        if (!timeoutwinks) {
+            timeoutwinks = true;
+            setTimeout(() => {
+                timeoutwinks = false;
+            }, 5000);
 
-            chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname" onclick={document.getElementById('play-wink-${wink}-${socketidUser}').click()} style="color: #075af5; font-size: 18px; margin-left: 15px; cursor: pointer; text-decoration: underline">Reproduzir "${wink}"</p>`);
+            if (chatRefText.current[indexUserChat]) {
+                //esse é o que aparece para quem manda
+                chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname" style="color: black; font-size: 14px;">${usernamesend} envia um wink:</p>`);
+
+                // chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<img src="../pages/chat/components/chat/components/sendWinks/assets/kiss.png" id="chat-usarname" onclick={document.getElementById('play-wink-${wink}-${socketidUser}').click()} style="color: #075af5; font-size: 18px; margin-left: 15px; cursor: pointer; text-decoration: underline">Reproduzir "${wink}"</img>`);
+                chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname" onclick={document.getElementById('play-wink-${wink}-${socketidUser}').click()} style="color: #075af5; font-size: 18px; margin-left: 15px; cursor: pointer; text-decoration: underline">Reproduzir "${wink}"</p>`);
+            }
+
+            playsound("type");
+            if (document.getElementById(`play-wink-${wink}-${socketidUser}`)) document.getElementById(`play-wink-${wink}-${socketidUser}`).click();
+        } else {
+            if (localStorage.getItem("msn-language") === "br") {
+                if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id='attention'>Você não pode enviar winks com tanta freqüência.</p>`);
+            } else {
+                if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id='attention'>You cannot send winks as often.</p>`);
+            }
         }
-
-        playsound("type");
-        if (document.getElementById(`play-wink-${wink}-${socketidUser}`)) document.getElementById(`play-wink-${wink}-${socketidUser}`).click();
     };
 
     const drawAttention = ({ chatRefText, chatRef, multiChatRef, id, whosend, isend, statusperson }) => {
