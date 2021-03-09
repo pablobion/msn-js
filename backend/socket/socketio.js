@@ -7,10 +7,10 @@ module.exports = function (io) {
         addUser(socket.id); //Adicionando o usuario que entrou na lista de sockets online
 
         io.emit("socketsConnected", socketsConnected); // Mandando para os clientes que o socket entrou e atualizando as listas de sockets
+        io.emit("socketsConnectedCounter", socketsConnectedCounter()); // Quantidade de pessoas online...
 
         socket.on("socket connected notification", ({ avatar }) => {
             io.emit("socket connected notification", { username: getPerson(socket.id).username, avatar }); // mandando o cliente que entoru para notificação...
-            io.emit("socketsConnectedCounter", socketsConnectedCounter()); // Quantidade de pessoas online...
         });
 
         socket.on("change avatar", (avatarlink) => {
