@@ -7,7 +7,8 @@ export const Container = styled.div`
     flex-direction: column;
     font-size: 14px;
     color: gray;
-    overflow: auto;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    overflow-y: scroll; /* Add vertical scrollbar */
     height: 150%;
     padding: 5px;
     resize: vertical;

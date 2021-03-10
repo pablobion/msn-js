@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+
+import ContentEditable from "react-contenteditable";
 //configs
 import { socket } from "../../../../configs/socket_export";
 //components
@@ -6,6 +8,7 @@ import AeroButton from "../../../components/aeroButton/index";
 import emotions from "./assets/emoticon.png";
 import Audio from "../../../components/audioRecorder/index";
 import SendWinks from "./components/sendWinks";
+import SendEmoticon from "./components/sendEmoticons";
 
 //images
 import points from "./assets/points.png";
@@ -18,42 +21,35 @@ import { Container, HeaderChat, MultiPoints, Sender, DivRecordVoice } from "./st
 import Winks from "./components/sendWinks/components/winks/index";
 
 const Chat = (props) => {
-    const [messageText, setMessageText] = useState();
     const [record, setRecord] = useState();
     const [visibleSendWinks, setVisibleSendWinks] = useState(false);
+    const [visibleSendEmoticons, setVisibleSendEmoticon] = useState(false);
 
     const DivRecordVoiceRef = useRef(null);
-
-    const handleChangeMessageText = (event) => {
-        setMessageText(event.target.value);
-    };
-
-    const sendMessageText = () => {
-        if (!messageText || messageText === "" || messageText === " " || messageText === "") return false;
-
-        setMessageText("");
-        if (props.socketidUser && props.socketidPerson) {
-            const socketidUser = props.socketidUser;
-            const socketidPerson = props.socketidPerson;
-
-            socket.emit("send server message text", { message: messageText, socketidUser, socketidPerson });
-        }
-    };
 
     const handleClickDrawAttention = () => {
         const socketidPerson = props.socketidPerson;
         socket.emit("Draw AttenAttention", socketidPerson);
     };
 
-    const handleUserKeyPress = (e) => {
+    const refContentEditable = useRef("");
+
+    const [texto, setTexto] = useState("");
+
+    const handleSend = (e) => {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
-            sendMessageText();
-        }
-    };
 
-    const handleClickSendWinks = () => {
-        visibleSendWinks ? setVisibleSendWinks(false) : setVisibleSendWinks(true);
+            if (!refContentEditable.current.lastHtml || refContentEditable.current.lastHtml === "" || refContentEditable.current.lastHtml === " " || refContentEditable.current.lastHtml === "") return false;
+
+            if (props.socketidUser && props.socketidPerson) {
+                const socketidUser = props.socketidUser;
+                const socketidPerson = props.socketidPerson;
+
+                socket.emit("send server message text", { message: refContentEditable.current.lastHtml, socketidUser, socketidPerson });
+                setTexto("");
+            }
+        }
     };
 
     return (
@@ -64,10 +60,11 @@ const Chat = (props) => {
             <Winks socketidPerson={props.socketidPerson}></Winks>
 
             <HeaderChat>
-                <AeroButton disabled={true}>
+                <AeroButton onCustomClick={() => (visibleSendEmoticons ? setVisibleSendEmoticon(false) : setVisibleSendEmoticon(true))}>
                     <img src={emotions} alt="icon-emotions" />
+                    <SendEmoticon socketidPerson={props.socketidPerson} visible={visibleSendEmoticons} ref={refContentEditable} />
                 </AeroButton>
-                <AeroButton onCustomClick={handleClickSendWinks}>
+                <AeroButton onCustomClick={() => (visibleSendWinks ? setVisibleSendWinks(false) : setVisibleSendWinks(true))}>
                     <img src={winks} alt="icon-winks" />
                     <SendWinks socketidPerson={props.socketidPerson} visible={visibleSendWinks} />
                 </AeroButton>
@@ -83,10 +80,19 @@ const Chat = (props) => {
             </HeaderChat>
 
             <Container>
-                <textarea onKeyPress={handleUserKeyPress} value={messageText} onChange={(e) => handleChangeMessageText(e)} cols="30" rows="10"></textarea>
+                {/* <textarea onKeyPress={handleUserKeyPress} value={messageText} onChange={(e) => handleChangeMessageText(e)} cols="30" rows="10"></textarea> */}
+                <ContentEditable id="text-area" html={texto} onChange={(e) => setTexto(e.target.value)} onKeyDown={handleSend} ref={refContentEditable} />
             </Container>
+            {/* <button
+                onClick={() => {
+                    console.log(refContentEditable.current.lastHtml);
+                    setTexto("");
+                }}
+            >
+                sla
+            </button> */}
             <Sender>
-                <button onClick={sendMessageText}>Enviar</button>
+                <button onClick={handleSend}>Enviar</button>
             </Sender>
         </>
     );

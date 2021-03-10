@@ -64,6 +64,12 @@ export const Container = styled.div`
         border: none;
         height: 400px;
     }
+
+    #text-area {
+        font-size: 15px;
+        height: 100%;
+        cursor: text;
+    }
 `;
 
 export const Sender = styled.div`
