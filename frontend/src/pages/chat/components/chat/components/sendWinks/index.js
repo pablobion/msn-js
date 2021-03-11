@@ -9,7 +9,6 @@ const SendWinks = (props) => {
     const winks = ["dancing_pig", "kiss", "bola", "bow", "cartao", "fartguy", "frog", "guitar_smash", "heartkey", "knock", "laughing_girl", "notes", "water_balloon", "yawning_moon"];
 
     const handleSendWink = (wink) => {
-        console.log("handle wink " + wink);
         socket.emit("send wink", { socketidPerson: props.socketidPerson, wink });
     };
 

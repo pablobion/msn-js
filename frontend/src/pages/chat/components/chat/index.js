@@ -9,6 +9,7 @@ import emotions from "./assets/emoticon.png";
 import Audio from "../../../components/audioRecorder/index";
 import SendWinks from "./components/sendWinks";
 import SendEmoticon from "./components/sendEmoticons";
+import preventChat from "./components/identifyEmoticonChat/index";
 
 //images
 import points from "./assets/points.png";
@@ -28,16 +29,20 @@ const Chat = (props) => {
     const [record, setRecord] = useState();
     const [visibleSendWinks, setVisibleSendWinks] = useState(false);
     const [visibleSendEmoticons, setVisibleSendEmoticon] = useState(false);
-
     const DivRecordVoiceRef = useRef(null);
+    const refContentEditable = useRef(""); // referencia do textArea de digitar
+    const [texto, setTexto] = useState(""); // state que coleta o que esta sendo escrito
+    let [preventEmoticons, eastereggschat] = preventChat(); //essas funções verificam o que esta sendo escrito no chat antes de enviar, e faz alguma ação se o que esta sendo escrito for algo especifico.
 
     const handleClickDrawAttention = () => {
         const socketidPerson = props.socketidPerson;
         socket.emit("Draw AttenAttention", socketidPerson);
     };
 
-    const refContentEditable = useRef(""); // referencia do textArea de digitar
-    const [texto, setTexto] = useState("");
+    useEffect(() => {
+        preventEmoticons({ texto: refContentEditable.current.lastHtml, setTexto });
+        eastereggschat({ texto: refContentEditable.current.lastHtml, setTexto });
+    }, [refContentEditable.current.lastHtml]);
 
     const handleSend = (e) => {
         if (!refContentEditable.current.lastHtml || refContentEditable.current.lastHtml === "" || refContentEditable.current.lastHtml === " " || refContentEditable.current.lastHtml === "") return false;

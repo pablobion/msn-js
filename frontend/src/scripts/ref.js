@@ -90,7 +90,7 @@ const Scripts = () => {
                 //esse é o que aparece para quem manda
                 chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname" style="color: black; font-size: 14px;">${usernamesend} envia um wink:</p>`);
 
-                // chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<img src="../pages/chat/components/chat/components/sendWinks/assets/kiss.png" id="chat-usarname" onclick={document.getElementById('play-wink-${wink}-${socketidUser}').click()} style="color: #075af5; font-size: 18px; margin-left: 15px; cursor: pointer; text-decoration: underline">Reproduzir "${wink}"</img>`);
+                chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<img src=${require(`../pages/chat/components/chat/components/sendWinks/assets/${wink}.png`).default} onclick={document.getElementById('play-wink-${wink}-${socketidUser}').click()} style="margin-left: 15px; cursor: pointer; text-decoration: underline; width: 70px; "/>`);
                 chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id="chat-usarname" onclick={document.getElementById('play-wink-${wink}-${socketidUser}').click()} style="color: #075af5; font-size: 18px; margin-left: 15px; cursor: pointer; text-decoration: underline">Reproduzir "${wink}"</p>`);
             }
 
