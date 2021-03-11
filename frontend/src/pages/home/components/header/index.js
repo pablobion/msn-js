@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 //icons
 import { BsMusicNoteBeamed, BsPencil } from "react-icons/bs";
 import { FaSpotify } from "react-icons/fa";
@@ -32,6 +32,7 @@ const configs = config();
 const Header = () => {
     const { getUser, theme, changeTheme, language, changeLanguage, setMode } = useUser();
     const [person, setPerson] = useState();
+    const selectstatus = useRef();
 
     const handleChangeStatus = async (e) => {
         if (e.target.value === "online") {
@@ -63,6 +64,9 @@ const Header = () => {
     };
 
     useEffect(() => {
+        if (person) {
+            selectstatus.current.value = person.status;
+        }
         socket.on("return subnick user", (data) => {
             const input = document.getElementById("myInput-subnick");
             input.value = data;
@@ -79,7 +83,7 @@ const Header = () => {
 
     return (
         <>
-            <ReactTooltip multiline="true" />
+            <ReactTooltip multiline={true} />
             <Profile color={theme}>
                 <NavBar />
                 <div id="profile">
@@ -100,10 +104,7 @@ const Header = () => {
                                 {person ? <p id="username">{person.username}</p> : <p id="username">Não informado</p>}
 
                                 <small>
-                                    <select onChange={(e) => handleChangeStatus(e)}>
-                                        <option value="" disabled selected>
-                                            {language === "br" ? "(Mude seu status)" : "(Change your status)"}
-                                        </option>
+                                    <select onChange={(e) => handleChangeStatus(e)} ref={selectstatus}>
                                         <option value="online">(Online)</option>
                                         <option value="busy">{language === "br" ? "(Ocupado)" : "(Busy)"}</option>
                                         <option value="away">{language === "br" ? "(Ausente)" : "(Away)"}</option>

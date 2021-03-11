@@ -38,8 +38,8 @@ export const Container = styled.div`
         max-height: 90%;
         overflow: auto;
 
-        .contacts-group-list summary::-webkit-details-marker {
-            display: none;
+        summary {
+            list-style-type: none;
         }
         summary {
             font-size: 12px;

@@ -9,6 +9,8 @@ import { Container } from "./styles";
 //context
 import { useUser } from "../context/allusers";
 
+const preventf5 = false;
+
 const Home = React.forwardRef((props, ref) => {
     const { language } = useUser();
 
@@ -20,7 +22,7 @@ const Home = React.forwardRef((props, ref) => {
     };
 
     useEffect(() => {
-        window.addEventListener("keydown", (e) => preventf5(e));
+        if (!preventf5) window.addEventListener("keydown", (e) => preventf5(e));
     }, []);
 
     return (
