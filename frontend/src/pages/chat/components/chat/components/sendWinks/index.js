@@ -15,8 +15,8 @@ const SendWinks = (props) => {
 
     const images = winks.map((elem) => {
         return (
-            <button>
-                <img key={elem} src={require(`./assets/${elem}.png`).default} alt="image-pig" onClick={() => handleSendWink(elem)} />
+            <button key={elem}>
+                <img src={require(`./assets/${elem}.png`).default} alt="image-pig" onClick={() => handleSendWink(elem)} />
             </button>
         );
     });

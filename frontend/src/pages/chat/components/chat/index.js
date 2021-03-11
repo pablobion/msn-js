@@ -62,7 +62,7 @@ const Chat = (props) => {
             <HeaderChat>
                 <AeroButton onCustomClick={() => (visibleSendEmoticons ? setVisibleSendEmoticon(false) : setVisibleSendEmoticon(true))}>
                     <img src={emotions} alt="icon-emotions" />
-                    <SendEmoticon socketidPerson={props.socketidPerson} visible={visibleSendEmoticons} ref={refContentEditable} />
+                    <SendEmoticon socketidPerson={props.socketidPerson} visible={visibleSendEmoticons} ref={refContentEditable} setTexto={setTexto} texto={texto} />
                 </AeroButton>
                 <AeroButton onCustomClick={() => (visibleSendWinks ? setVisibleSendWinks(false) : setVisibleSendWinks(true))}>
                     <img src={winks} alt="icon-winks" />

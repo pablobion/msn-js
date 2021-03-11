@@ -46,7 +46,7 @@ const FancyWinks = React.forwardRef((props, ref) => {
             {/* botões que so reproduzem */}
 
             {winks.map((elem, index) => {
-                return <button className="actions-buttons-play-winks" id={`play-wink-${elem}-${props.socketidPerson}`} onClick={() => handlePlayVideo(index)} />;
+                return <button key={elem} className="actions-buttons-play-winks" id={`play-wink-${elem}-${props.socketidPerson}`} onClick={() => handlePlayVideo(index)} />;
             })}
             {/* fim dos botoes que so reproduzem */}
 
@@ -56,7 +56,7 @@ const FancyWinks = React.forwardRef((props, ref) => {
             </button>
             {winks.map((elem, index) => {
                 return (
-                    <video width={500} ref={(el) => (videoRef.current[index] = el)}>
+                    <video key={elem} width={500} ref={(el) => (videoRef.current[index] = el)}>
                         <source src={require(`./videos/${elem}.mp4`).default} type="video/mp4" />
                     </video>
                 );
