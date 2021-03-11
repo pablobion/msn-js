@@ -17,10 +17,14 @@ import voice from "./assets/voice.png";
 import winks from "./assets/winks.png";
 import { Container, HeaderChat, MultiPoints, Sender, DivRecordVoice } from "./styles";
 
+//context
+import { useUser } from "../../../context/allusers";
+
 //winks
 import Winks from "./components/sendWinks/components/winks/index";
 
 const Chat = (props) => {
+    const { language } = useUser();
     const [record, setRecord] = useState();
     const [visibleSendWinks, setVisibleSendWinks] = useState(false);
     const [visibleSendEmoticons, setVisibleSendEmoticon] = useState(false);
@@ -32,23 +36,26 @@ const Chat = (props) => {
         socket.emit("Draw AttenAttention", socketidPerson);
     };
 
-    const refContentEditable = useRef("");
-
+    const refContentEditable = useRef(""); // referencia do textArea de digitar
     const [texto, setTexto] = useState("");
 
     const handleSend = (e) => {
+        if (!refContentEditable.current.lastHtml || refContentEditable.current.lastHtml === "" || refContentEditable.current.lastHtml === " " || refContentEditable.current.lastHtml === "") return false;
+
+        if (props.socketidUser && props.socketidPerson) {
+            const socketidUser = props.socketidUser;
+            const socketidPerson = props.socketidPerson;
+
+            socket.emit("send server message text", { message: refContentEditable.current.lastHtml, socketidUser, socketidPerson });
+            setTexto("");
+        }
+    };
+
+    const onPressEnter = (e) => {
+        //Essa função serve para quando a pessoa quiser mandar por enter... caso ela clique no botão de enviar ela nem passa por aqui.
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
-
-            if (!refContentEditable.current.lastHtml || refContentEditable.current.lastHtml === "" || refContentEditable.current.lastHtml === " " || refContentEditable.current.lastHtml === "") return false;
-
-            if (props.socketidUser && props.socketidPerson) {
-                const socketidUser = props.socketidUser;
-                const socketidPerson = props.socketidPerson;
-
-                socket.emit("send server message text", { message: refContentEditable.current.lastHtml, socketidUser, socketidPerson });
-                setTexto("");
-            }
+            handleSend();
         }
     };
 
@@ -80,19 +87,10 @@ const Chat = (props) => {
             </HeaderChat>
 
             <Container>
-                {/* <textarea onKeyPress={handleUserKeyPress} value={messageText} onChange={(e) => handleChangeMessageText(e)} cols="30" rows="10"></textarea> */}
-                <ContentEditable id="text-area" html={texto} onChange={(e) => setTexto(e.target.value)} onKeyDown={handleSend} ref={refContentEditable} />
+                <ContentEditable id="text-area" html={texto} onChange={(e) => setTexto(e.target.value)} onKeyDown={onPressEnter} ref={refContentEditable} />
             </Container>
-            {/* <button
-                onClick={() => {
-                    console.log(refContentEditable.current.lastHtml);
-                    setTexto("");
-                }}
-            >
-                sla
-            </button> */}
             <Sender>
-                <button onClick={handleSend}>Enviar</button>
+                <button onClick={handleSend}>{language === "br" ? "Enviar" : "Send"}</button>
             </Sender>
         </>
     );
