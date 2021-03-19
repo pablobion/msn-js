@@ -111,10 +111,41 @@ Há também uma confiuração para fazer a sincronização com o spotify funcion
     Dentro desse arquivo terá o campo de colocar o ip, no caso é o ip do servidor, onde ele está hospedado. E informar as duas chaves.
   
 </details>
+
+
+Configuração na vercel e heroku
+<details>
+
+## Vercel
+
+Framework preset React
+
+Build Command
+CI= npm run build
+
+Root Directory
+frontend
+
+
+## Heroku
+
+Buildpacks (Settings)
+'heroku/nodejs'
+
+Config vars
+key
+PROJECT_PATH
+
+value 
+backend
+
+</details>
   
   
  </details>
 
+
+## Iniciando a aplicação
 
 ```bash
 
