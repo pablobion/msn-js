@@ -47,7 +47,6 @@ Ele foi feito com reactJS, node e socket.io.
 - [X] Emoticons
 
 
-
 ## 🚀 Tecnologias
 
 Tecnologias que usei para desenvolver esse projeto no front-end
