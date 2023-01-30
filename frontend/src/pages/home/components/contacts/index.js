@@ -11,6 +11,8 @@ import sortContacts from "./assets/sort-contacts.png";
 import Contact from "./components/contact/index";
 import { Container } from "./styles";
 
+import languages from "../../../../configs/languages";
+
 const Contacts = () => {
     const { contactsOnline, countContactsOnline, language } = useUser();
 
@@ -41,7 +43,7 @@ const Contacts = () => {
                                     return <Contact username={elem.username} status={elem.status} subnick={elem.subnick} socketid={elem.socketid} key={elem.socketid} music={elem.music} disabled={false} />;
                                 }
                             })}
-                        <small style={{ color: "darkgray", height: "100%" }}>{language === "br" ? "* Usuários onlines aparecerão nesta lista." : "* Online users will appear in this list."}</small>
+                        <small style={{ color: "darkgray", height: "100%" }}>{languages[language].online_users_appear}</small>
                     </div>
                 </details>
             </div>

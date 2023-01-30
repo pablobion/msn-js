@@ -5,6 +5,8 @@ import { Container } from "./styles";
 //context
 import { useUser } from "../../../../../../../context/allusers";
 
+import languages from "../../../../../../../../configs/languages";
+
 let isplaying;
 
 const FancyWinks = React.forwardRef((props, ref) => {
@@ -52,7 +54,7 @@ const FancyWinks = React.forwardRef((props, ref) => {
 
             {/* winks */}
             <button ref={buttonStop} id="stop-video-winks" onClick={handleStopVideo}>
-                {language === "br" ? "Parar" : "Stop"}
+            {languages[language].stop}
             </button>
             {winks.map((elem, index) => {
                 return (

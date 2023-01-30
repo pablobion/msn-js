@@ -24,6 +24,8 @@ import { useUser } from "../../../context/allusers";
 //winks
 import Winks from "./components/sendWinks/components/winks/index";
 
+import languages from "../../../../configs/languages";
+
 const Chat = (props) => {
     const { language } = useUser();
     const [record, setRecord] = useState();
@@ -95,7 +97,7 @@ const Chat = (props) => {
                 <ContentEditable id="text-area" html={texto} onChange={(e) => setTexto(e.target.value)} onKeyDown={onPressEnter} ref={refContentEditable} />
             </Container>
             <Sender>
-                <button onClick={handleSend}>{language === "br" ? "Enviar" : "Send"}</button>
+                <button onClick={handleSend}>{languages[language].send}</button>
             </Sender>
         </>
     );

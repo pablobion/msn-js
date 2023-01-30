@@ -7,6 +7,7 @@ import { ImExit } from "react-icons/im";
 import ReactTooltip from "react-tooltip";
 //configs
 import { config } from "../../../../configs/config_connections";
+import languages from "../../../../configs/languages";
 //socket
 import { socket } from "../../../../configs/socket_export";
 //components
@@ -19,6 +20,7 @@ import NavBar from "../../../components/navbar/index";
 import { useUser } from "../../../context/allusers";
 //images
 import brasil from "./assets/brazil.svg";
+import turkiye from "./assets/turkiye.png";
 import navbarColors from "./assets/navbar/navbar-colors.png";
 import navbarContacts from "./assets/navbar/navbar-contacts.png";
 import navbarMail from "./assets/navbar/navbar-mail.png";
@@ -106,14 +108,15 @@ const Header = () => {
                                 <small>
                                     <select onChange={(e) => handleChangeStatus(e)} ref={selectstatus}>
                                         <option value="online">(Online)</option>
-                                        <option value="busy">{language === "br" ? "(Ocupado)" : "(Busy)"}</option>
-                                        <option value="away">{language === "br" ? "(Ausente)" : "(Away)"}</option>
+                                        <option value="busy">{languages[language].busy_p}</option>
+                                        <option value="away">{languages[language].away_p}</option>
                                         <option value="invisible">(Offline)</option>
                                     </select>
                                 </small>
                             </div>
                             <div>
                                 <img onClick={() => changeLanguage("br")} className="country-flag" src={brasil} alt="" />
+                                <img onClick={() => changeLanguage("tr")} className="country-flag" src={turkiye} alt="" />
                                 <img onClick={() => changeLanguage("en")} className="country-flag" src={usa} alt="" />
                                 <div style={{ marginLeft: 30, cursor: "pointer" }}>
                                     <ImExit onClick={logout} size={30} />
@@ -122,16 +125,16 @@ const Header = () => {
                         </span>
 
                         <div id="div-subnick">
-                            <AeroButton datatip={language === "br" ? "Clique para inserir a musica<br /> que está ouvindo agora no spotify." : "Click to insert the song <br /> you are listening to now on spotify."} onCustomClick={() => menuSubnick()}>
+                            <AeroButton datatip={languages[language].click_to_spotify} onCustomClick={() => menuSubnick()}>
                                 <FaSpotify size="20" color="white" />
                                 <p style={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                    {language === "br" ? "Conectar" : "Connect"}
+                                {languages[language].connect}
                                     <BsMusicNoteBeamed size={15} style={{ marginLeft: 5 }} />
                                 </p>
                             </AeroButton>
                             <AeroButton id="sub-nick">
                                 <form onSubmit={(e) => sendSubnick(e)}>
-                                    <input placeholder={language === "br" ? "Insira seu subnick aqui" : "Insert your subnick here"} type="text" id="myInput-subnick" onBlur={(e) => sendSubnick(e)}></input>
+                                    <input placeholder={languages[language].insert_subnick} type="text" id="myInput-subnick" onBlur={(e) => sendSubnick(e)}></input>
                                 </form>
                             </AeroButton>
                         </div>

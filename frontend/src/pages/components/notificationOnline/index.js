@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 //icons
 import { AiOutlineClose } from "react-icons/ai";
 import NotificationSystem from "react-notification-system";
+import languages from "../../../configs/languages";
 //configs
 import { socket } from "../../../configs/socket_export";
 //components sounds
@@ -13,6 +14,7 @@ import { useUser } from "../../context/allusers";
 //images
 import msnLogo from "./assets/msn-logo.png";
 import { Container } from "./styles";
+
 
 const NotificationOnline = () => {
     const [person, setPerson] = useState();
@@ -96,8 +98,8 @@ const NotificationOnline = () => {
                         {person ? <ModalBorder avatar={person.avatar} size="32" minus="12" left="4px" top="4px" /> : <ModalBorder avatar="" size="32" minus="12" left="4px" top="4px" />}
 
                         <div id="body-username">
-                            <p>{person ? person.username : language === "br" ? "Alguém" : "Somebody"}</p>
-                            <p>{language === "br" ? "acabou de entrar." : "has just signed in."}</p>
+                            <p>{person ? person.username : languages[language].somebody}</p>
+                            <p>{languages[language].has_just_signed}</p>
                         </div>
                     </div>
                 </Container>

@@ -6,17 +6,19 @@ import ReactLoading from "react-loading";
 //configs
 import { socket } from "../../configs/socket_export";
 //components
-import Navbar from "../components/navbar/index";
 import Borderavatar from "../components/modalBorder/index";
 import ModalCropUpdate from "../components/modalCropUpdate";
+import Navbar from "../components/navbar/index";
 //context
 import { useUser } from "../context/allusers";
 //images
 import brasil from "./assets/brazil.svg";
+import turkiye from "./assets/turkiye.png";
 //gif
 import loading from "./assets/login_loading.gif";
 import usa from "./assets/united-states.svg";
 import { Container, Main } from "./styles";
+import languages from "../../configs/languages";
 
 let timetologin;
 
@@ -49,7 +51,8 @@ const Login = () => {
         sendSocketEmitUsername(data.username); // troca username ao entrar
         timetologin = setTimeout(() => {
             if (!data.username || data.username === " " || data.username === "") {
-                alert(language === "br" ? "Você deve colocar o seu nome de usuário." : "You must enter your username.");
+                
+                alert(languages[language].enter_username);
                 buttonLogin.current.disabled = false;
                 setGifLogin(false);
                 return false;
@@ -111,7 +114,7 @@ const Login = () => {
         rememberIsChecked.current.checked = false;
         autoLoginIsChecked.current.checked = false;
         socket.emit("change avatar", "");
-        alert(language === "br" ? "Informações limpas" : "Information deleted.");
+        alert( languages[language].info_deleted);
     };
 
     (async function () {
@@ -147,58 +150,59 @@ const Login = () => {
                 </ModalCropUpdate>
                 <div id="div-country-flag">
                     <img onClick={() => changeLanguage("br")} className="country-flag" src={brasil} />
+                    <img onClick={() => changeLanguage("tr")} className="country-flag" src={turkiye} />
                     <img onClick={() => changeLanguage("en")} className="country-flag" src={usa} />
                 </div>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="div-input-login">
-                        <p>{language === "br" ? "Nome de usuario:" : "Username:"}</p>
+                        <p>{languages[language].user_name}</p>
                         <input id="login-input-email" ref={register} name="username" type="text" value={username} onChange={handleChangeUsername} />
                     </div>
 
                     <div id="login-status">
-                        <p>{language === "br" ? "Entrar como:" : "Sign in as:"}</p>
+                        <p>{languages[language].sign_as}</p>
                         <select ref={register} name="status" onChange={(e) => setChangeStatusBorder(e.target.value)}>
-                            <option value="online">{language === "br" ? "Online (Padrão)" : "Online (Default)"}</option>
-                            <option value="busy">{language === "br" ? "Ocupado" : "Busy"}</option>
-                            <option value="away">{language === "br" ? "Ausente" : "Away"}</option>
+                            <option value="online">{languages[language].online}</option>
+                            <option value="busy">{languages[language].busy}</option>
+                            <option value="away">{languages[language].away}</option>
                             <option value="invisible">Offline</option>
                         </select>
                     </div>
                     <div className="checkbox-buttons-login">
                         <input type="checkbox" ref={rememberIsChecked} onChange={handleVerifyRememberInput}></input>
-                        <p>{language === "br" ? "Lembrar-me" : "Remember-me"}</p>
+                        <p>{languages[language].remember_me}</p>
                         <button type="button" onClick={clearSaveUser}>
                             <BsTrash />
                         </button>
                     </div>
                     <div className="checkbox-buttons-login">
                         <input disabled type="checkbox" ref={autoLoginIsChecked}></input>
-                        <p>{language === "br" ? "Entrar Automaticamente" : "Sign me in automatically"}</p>
+                        <p>{languages[language].sign_auto}</p>
                     </div>
                     <div id="footer-buttons">
                         {person ? (
                             <button ref={buttonLogin} type="submit">
-                                {language === "br" ? "Entrar" : "Sign in"}
+                               {languages[language].sign_in}
                             </button>
                         ) : (
                             <button
                                 type="button"
                                 ref={buttonLogin}
                                 onClick={() => {
-                                    alert(language === "br" ? "Não foi possivel conectar ao servidor, tente novamente!" : "Unable to connect to the server, try again!");
+                                    alert(languages[language].unable_connect_server);
                                 }}
                             >
-                                {language === "br" ? "Entrar" : "Sign in"}
+                                {languages[language].sign_in}
                             </button>
                         )}
                     </div>
                 </form>
                 {gifLogin && (
                     <div id="div-gif-singin">
-                        <small>{language === "br" ? "Entrando..." : "Signing in..."}</small>
+                        <small>{languages[language].signing_in}</small>
                         <img src={loading} alt="gif-singin" />
-                        <p onClick={handleCancelLogin}>{language === "br" ? "Cancelar" : "Cancel"}</p>
+                        <p onClick={handleCancelLogin}>{languages[language].cancel}</p>
                     </div>
                 )}
             </Container>

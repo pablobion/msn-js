@@ -13,6 +13,8 @@ import listen from "./assets/listen-music.png";
 import online from "./assets/online.png";
 import { Container } from "./styles";
 
+import languages from "../../../../../../configs/languages";
+
 const Contact = (props) => {
     const { chatRefText, language } = useUser();
 
@@ -48,7 +50,7 @@ const Contact = (props) => {
         <Container>
             <AeroButton id="button" onCustomClick={(e) => handleCustomClick(props.socketid)} disabled={props.disabled}>
                 <img src={status} alt="" />
-                {props.disabled === true && <p>{language === "br" ? "(você)" : "(You)"}</p>}
+                {props.disabled === true && <p>{languages[language].you_p}</p>}
                 {props.username && <p id="contact-username">{props.username}</p>}
                 {props.music.name ? (
                     props.music.name ? (
