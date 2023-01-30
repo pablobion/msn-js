@@ -10,7 +10,7 @@ export default function UserProvider({ children }) {
     const [userChats, setUserChats] = useState([]);
     const [theme, setTheme] = useState("blue");
     const [mode, setMode] = useState("login");
-    const [language, setLanguage] = useState("br");
+    const [language, setLanguage] = useState("en");
 
     const chatRefText = useRef([]);
     const chatRef = useRef([]);

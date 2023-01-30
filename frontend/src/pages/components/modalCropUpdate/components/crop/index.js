@@ -11,6 +11,8 @@ import { socket } from "../../../../../configs/socket_export";
 //context
 import { useUser } from "../../../../context/allusers";
 
+import languages from "../../../../../configs/languages";
+
 export default function App(props) {
     const [upImg, setUpImg] = useState();
     const imgRef = useRef(null);
@@ -120,7 +122,7 @@ export default function App(props) {
 
     return (
         <Container>
-            <h3>{language === "br" ? "Selecione um arquivo abaixo para fazer o recorte e salvar." : "Select a image below to cut and save."}</h3>
+            <h3>{languages[language].select_image_below}</h3>
             <div id="button-select-photo">
                 <SelectFile type="file" accept="image/*" onChange={onSelectFile} />
             </div>
@@ -150,7 +152,7 @@ export default function App(props) {
                     props.close();
                 }}
             >
-                {language === "br" ? "Salvar" : "Save"}
+                {languages[language].save}
             </Button>
         </Container>
     );

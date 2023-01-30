@@ -99,7 +99,11 @@ const Scripts = () => {
         } else {
             if (localStorage.getItem("msn-language") === "br") {
                 if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id='attention'>Você não pode enviar winks com tanta freqüência.</p>`);
-            } else {
+            } else if(localStorage.getItem("msn-language") === "en" )  {
+                if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id='attention'>You cannot send winks as often.</p>`);
+            }else if(localStorage.getItem("msn-language") === "tr")  {
+                if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id='attention'>Göz kırpmaları o kadar sık gönderemezsiniz.</p>`);
+            }else{
                 if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id='attention'>You cannot send winks as often.</p>`);
             }
         }
@@ -127,7 +131,9 @@ const Scripts = () => {
             }
             if (localStorage.getItem("msn-language") === "br") {
                 if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p>—————————</p><p id="chat-usarname">${whosend} acabou de chamar a atenção!</p><p>—————————</p>`);
-            } else {
+            } else if (localStorage.getItem("msn-language") === "tr") {
+                if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p>—————————</p><p id="chat-usarname">${whosend} seni dürttü!</p><p>—————————</p>`);
+            }  else {
                 if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p>—————————</p><p id="chat-usarname">${whosend} have just sent a Nudge!</p><p>—————————</p>`);
             }
 
@@ -143,6 +149,8 @@ const Scripts = () => {
             if (!isend) return false; // so manda a mensagem abaixo só para pessoa que esta clicando mais de uma vez.
             if (localStorage.getItem("msn-language") === "br") {
                 if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id='attention'>Você não pode pedir a atenção de alguém com tanta freqüência.</p>`);
+            }else  if (localStorage.getItem("msn-language") === "tr") {
+                if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id='attention'>Sürekli insanların dikkatini çekemezsiniz.</p>`);
             } else {
                 if (chatRefText.current[indexUserChat]) chatRefText.current[indexUserChat].insertAdjacentHTML("beforeend", `<p id='attention'>You can't get someone's attention often.</p>`);
             }

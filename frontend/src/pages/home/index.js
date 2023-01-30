@@ -9,6 +9,8 @@ import { Container } from "./styles";
 //context
 import { useUser } from "../context/allusers";
 
+import languages from "../../configs/languages";
+
 const preventf5 = false;
 
 const Home = React.forwardRef((props, ref) => {
@@ -17,7 +19,7 @@ const Home = React.forwardRef((props, ref) => {
     const preventf5 = (e) => {
         if (e.keyCode == 116) {
             e.preventDefault();
-            language === "br" ? alert("Não é possivel atualizar essa pagina pelo teclado.") : alert("It is not possible to update this page from the keyboard.");
+            alert(languages[language].cant_update_from_keyboard)
         }
     };
 
